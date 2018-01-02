@@ -8,6 +8,7 @@
    * [The Correction Framework](AliPhysicsAndGrid/corrframework.md)
 
 ## Cocktail Running and External Input
-* [Cocktail Framework](Cocktail/cocktail.md)
-
+* [Cocktail Framework Overview](Cocktail/cocktailOverview.md)
+* [Cocktail Framework Intro](Cocktail/cocktail.md)
+* [Link collection from other PWGs](Cocktail/ExternalLinks.md)
 ## Afterburner implementation
