@@ -4,7 +4,7 @@
 * [Introduction](Introduction/generalIntro.md)
 
 ## AliPhysics Implementation and Grid Running
-   * [Integration of new Monte Carlo Simulations][AliPhysicsAndGrid/jetjet-mc.md] 
+   * [Integration of new Monte Carlo Simulations](AliPhysicsAndGrid/jetjet-mc.md)
 
 ## Cocktail Running and External Input
 * [Cocktail Framework](Cocktail/cocktail.md)
