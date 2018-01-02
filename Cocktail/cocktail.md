@@ -145,5 +145,19 @@ The interpolations are handled by CalculateReference.C in the AnalysisSoftware r
 
 `CombinedResultsPaperPP2760GeV_2017_04_19_FrediV2Clusterizer.root    0    Pi02.76TeV/graphInvCrossSectionPi0PCM2760GeVStatErr    0    Pi02.76TeV/graphInvCrossSectionPi0PCM2760GeVSysErr 2.76TeV 2760    1 bla bla SystematicsInputOtherEnergies/SystematicErrorAveragedSinglePCM_Pi0_2_76TeV_2016_12_14.dat    ExternalInput/Theory/TheoryCompilationPP.root histoInvSecPythia8Monash2013LegoPi02760GeV`
 
-For each energy, a separate line in the above format has to be provided starting with the root file first, followed by a switch \(0:histogram, 1:graph\) and the name for the statistical error input \(full path in root file including folder\). Afterwards the same is given for the systematic errors. Then the center of mass energy in two forms is given \(once in the standard format for our framework e.g. 900GeV, 7TeV, ... and once in units of GeV e.g. 900, 7000, ...\). The following three arguments are usually set as "1 bla bla" followed by a systematic uncertainty input file and the corresponding theory curve.
+  
+		@page { margin: 0.79in }  
+		p { margin-bottom: 0.1in; line-height: 120% }  
+		a:link { so-language: zxx }  
+	
+
+For each energy, a separate line in the above format has to be provided starting with the root file first, followed by a switch \(0:histogram, 1:graph\) and the name for the statistical error input \(full path in root file including folder\). Afterwards the same is given for the systematic errors. Then the center of mass energy in two forms is given \(once in the standard format for our framework e.g. 900GeV, 7TeV, ... and once in units of GeV e.g. 900, 7000, ...\). The following three arguments are usually set as "1 bla bla" followed by a systematic uncertainty input file \(or also “bla”\) and the corresponding theory curve.
+
+The inter- or extrapolation can be made as soon as two or more energies are defined. It is run via:
+
+root -b -x -q -l 'CalculateReference.C+\("configInterPolationPi0Comb.txt", 3,"Pi0" ,"pdf","5TeV",5023,20,kTRUE,"5TeV","","","",1000,"oHag"\)'
+
+The arguments of CalculateReference.C are first the configuration file that contains the different energies, the number of defined energies in the file, the meson \(here “Pi0”, but many others are already defined\), the figure suffix, the energy string followed by the energy in GeV. The mode for the reference spectrum \(e.g. 20 for a combined spectrum\), a switch to use a special binning \(should always be kTRUE\), the energy from which that binning should be taken \(see ExtractSignalBinning.h\), three empty strings \(not relevant for now\), the number of trials \(default=1000\) and the fit function that should be used \(here a modified hagedorn is used\) are set after that.
+
+Running the macro will now interpolate a spectrum at 5023 GeV from the input spectra defined in the text file. This is done by a binwise powerlaw fit. Figures are written to the folder pdf/2017\_month\_day/CalculateReference. After the first running, the fits need to be checked which can be done with for example input\_Pi0EMCpp2760GeV\_withFit\_ratio.pdf which is created for each energy individually. If all fits looks good, then the figures for the binwise statistical and systematic inter/extrapolation can be checked \(Pi0\_EMC\_Stat\_Pt\_vs\_Sqrts.pdf and Pi0\_EMC\_Syst\_Pt\_vs\_Sqrts.pdf\). If problems at low or high pT are observed in these binwise plots, then the starting bin, the total amount of bins or the binning itself need to be adjusted inExtractSignalBinning.h.The remaining figures provide information about the resulting spectrum, its systematics and how it compares to the input spectra. The final result can be found in Interpolation.root.
 
