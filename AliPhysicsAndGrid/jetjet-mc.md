@@ -18,7 +18,7 @@ In order to get further information about the generator PWGGA:EPOSLHC\_Pythia\_G
 
 In this repository, the used generator config can be found in AliDPG/MC/CustomGenerators/PWGGA/EPOSLHC\_Pythia\_GammaTriggerAndJet.C where the setting for the process "Pythia8Jets" are set. The process itself is defined in AliDPG/MC/GeneratorConfig.C where we get infromation about the eta, phi, $$p_{\rm T}^{\rm hard}$$, quenchin and structure function that are used for the simulation.
 
-### 2. Extract $$p_{\rm T}^{\rm hard}$$ bin weights
+### 2. Extract $$x = y$$ bin weights
 
 Due to the nature of the JetJet simulation which requires a jet with a transverse energy of at least 5 GeV, several trial are necessary \(N\_trials\). For each event, Pythia also calculates the cross-section to which the gernerated sample of events corresponds on average. As only a small part of the full phase space for each $$p_{\rm T}^{\rm hard}$$hard bin is sampled, a certain weight has to be applied. The weight is calculated as $$\omega=\frac{\sigma_{evt}}{N_{trials}/N_{evt.gen.}}$$.
 
