@@ -85,7 +85,7 @@ Where the _fParticle\[\]_ array entries for both particles of the ratio are requ
 
 Once all spectra are added and the input spectra file is created \(CocktailInputPP.root\), the spectra can be parametrized. The fitting is done with **CocktailInputParametrization.C **in combination with three text files as input. As given in the bash script, the macro is called the following way.
 
-`oot -x -l -b -q 'CocktailInputParametrization.C+("CocktailInputPP.root","pp_5TeV","eps","parametrizationSettings/pp_5TeV_standard.dat","parametrizationSettings/pp_5TeV_ratio_standard.dat","parametrizationSettings/listAllUniqueNames_5TeV.txt",kFALSE,kFALSE,0,kFALSE)'`
+`root -x -l -b -q 'CocktailInputParametrization.C+("CocktailInputPP.root","pp_5TeV","eps","parametrizationSettings/pp_5TeV_standard.dat","parametrizationSettings/pp_5TeV_ratio_standard.dat","parametrizationSettings/listAllUniqueNames_5TeV.txt",kFALSE,kFALSE,0,kFALSE)'`
 
 With the input spectra file as first argument, the name of the list as second argument, the figure file format as the third followed by the three text files. The macro itself does not need to be modified for this step. **The only way to influence/change the fitting is via the first text file** \(e.g. parametrizationSettings/pp\_5TeV\_standard.dat \). This file has to be created if it does not already exist and is setup the following way:
 
