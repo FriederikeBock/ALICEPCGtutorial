@@ -32,7 +32,7 @@ They are configure by the AddTasks in **PWGGA/GammaConv/macros** following a sim
 
 AddTask\_Gamma\[Calo,ConvV1,ConvCalo,ConvDalitzV1,CaloDalitzV1,CaloMerged\]\_\[pp,pPb,PbPb\].C
 
-For the heavier meson reconstruction using the $$\pi^0$$ in the decay chain the same convention for the names could not be kept and the correspoding tasks are named according to the decay chain and meson which they are supposed to reconstruct:
+For the heavier meson reconstruction using the $$\pi^0$$ in the decay chain the same convention for the names could not be kept and the corresponding tasks are named according to the decay chain and meson which they are supposed to reconstruct:
 
 * AliAnalysisTaskK0toPi0Pi0.cxx
 * AliAnalysisTaskOmegaToPiZeroGamma.cxx
