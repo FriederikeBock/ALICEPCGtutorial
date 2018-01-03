@@ -16,11 +16,14 @@ To gain committer-access to the PCG-Software directory please subscribe to _**al
 
 ## Contacts
 
-If there are any questions regarding this tutorial do not hesitate to ask on  
-* <alice-pcg-core@cern.ch> 
+If there are any questions regarding this tutorial do not hesitate to ask on
+
+* [alice-pcg-core@cern.ch](mailto:alice-pcg-core@cern.ch) 
+
 or directly to the convenors and creators of the tutorial
 
 * Daniel Muehlheim [d.muehlheim@cern.ch](mailto:d.muehlheim@cern.ch)
+
 * Friederike Bock [friederike.bock@cern.ch](mailto:friederike.bock@cern.ch)
 * Nicolas Schmidt [nicolas.schmidt@cern.ch](mailto:nicolas.schmidt@cern.ch)
 * Mike Sas [msas@nikhef.nl](mailto:msas@nikhef.nl)
