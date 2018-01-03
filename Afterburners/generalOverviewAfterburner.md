@@ -1,6 +1,6 @@
 # Overview of Running Neutral meson analysis
 
-![](assets/SoftwareOverviewNeutralMesonAndDirGamma.jpg)
+![](/assets/SoftwareOverviewNeutralMesonAndDirGamma.jpg)
 
 Before you start analysis, get input .root files from grid and change their format by using macros in the folder **AnalysisSoftware /DownloadAndDataPrep/ **.
 
