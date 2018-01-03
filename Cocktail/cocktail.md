@@ -145,11 +145,6 @@ The interpolations are handled by CalculateReference.C in the AnalysisSoftware r
 
 `CombinedResultsPaperPP2760GeV_2017_04_19_FrediV2Clusterizer.root    0    Pi02.76TeV/graphInvCrossSectionPi0PCM2760GeVStatErr    0    Pi02.76TeV/graphInvCrossSectionPi0PCM2760GeVSysErr 2.76TeV 2760    1 bla bla SystematicsInputOtherEnergies/SystematicErrorAveragedSinglePCM_Pi0_2_76TeV_2016_12_14.dat    ExternalInput/Theory/TheoryCompilationPP.root histoInvSecPythia8Monash2013LegoPi02760GeV`
 
-  
-		@page { margin: 0.79in }  
-		p { margin-bottom: 0.1in; line-height: 120% }  
-		a:link { so-language: zxx }  
-	
 
 For each energy, a separate line in the above format has to be provided starting with the root file first, followed by a switch \(0:histogram, 1:graph\) and the name for the statistical error input \(full path in root file including folder\). Afterwards the same is given for the systematic errors. Then the center of mass energy in two forms is given \(once in the standard format for our framework e.g. 900GeV, 7TeV, ... and once in units of GeV e.g. 900, 7000, ...\). The following three arguments are usually set as "1 bla bla" followed by a systematic uncertainty input file \(or also “bla”\) and the corresponding theory curve.
 

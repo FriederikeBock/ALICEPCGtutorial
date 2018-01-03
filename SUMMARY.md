@@ -13,3 +13,4 @@
     * [Link collection from other PWGs](Cocktail/ExternalLinks.md)
 
 ## Afterburner implementation
+* [Merged Cluster Analysis](Afterburners/mergedAnalysis.md)
