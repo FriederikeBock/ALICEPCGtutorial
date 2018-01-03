@@ -1,4 +1,4 @@
 {
-"plugins": ["autocover", "mathjax"],
+"plugins": ["autocover", "katex"],
 "pluginsConfig": {}
 }
