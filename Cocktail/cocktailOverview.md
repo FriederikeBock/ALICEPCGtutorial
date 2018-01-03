@@ -2,9 +2,9 @@
 
 ## Organization
 
-**e-group**: alice-cocktail-EM Link  
-contacts
-
+**e-group**: _alice-cocktail-EM_
+**twiki**: [EMCocktail](https://twiki.cern.ch/twiki/bin/view/ALICE/EMCocktail)
+**contacts**:
 * photons: Friederike Bock [friederike.bock@cern.ch](mailto:friederike.bock@cern.ch)
 * electrons: Ralf Averbeck [ralf.averbeck@cern.ch](mailto:ralf.averbeck@cern.ch)
 * dielectrons: Oton Vazquez Doce [oton.vazquez@universe-cluster.de](mailto:oton.vazquez@universe-cluster.de)

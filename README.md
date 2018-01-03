@@ -1,6 +1,6 @@
 # Welcome to the Conversion Group Tutorials
 
-This tutorial is meant as an introduction to the software packages provided by the Photon Conversion Group \(PCG\). As it is still under development as is the software it does not claim completeness. However, it should provide a good start for new-comers and oldies to get started on a new topic. If you wanna help improving this documentation you are very welcome and just need to let us know and [e-mail Friederike](friederike.bock@cern.ch). She will grant you access to the documentation git as well.
+This tutorial is meant as an introduction to the software packages provided by the Photon Conversion Group \(PCG\). As it is still under development as is the software it does not claim completeness. However, it should provide a good start for new-comers and oldies to get started on a new topic. If you wanna help improving this documentation you are very welcome and just need to let us know and [e-mail Friederike](friederike.bock@cern.ch). She will grant you access to the documentation git as well. 
 
 In the provided software package the reconstruction of photons within ALICE using different detectors \(EMCal, DCal, PHOS, TPC & ITS\) is handled in a common way and the neutral mesons can be extracted using different techniques. Furthermore the software can be used as analysis level QA for the corresponding detectors focussing on the quantities relevant for the corresponding photon reconstruction.
 
@@ -23,10 +23,16 @@ If there are any questions regarding this tutorial do not hesitate to ask on
 or directly to the convenors and creators of the tutorial
 
 * Daniel Muehlheim [d.muehlheim@cern.ch](mailto:d.muehlheim@cern.ch)
-
 * Friederike Bock [friederike.bock@cern.ch](mailto:friederike.bock@cern.ch)
 * Nicolas Schmidt [nicolas.schmidt@cern.ch](mailto:nicolas.schmidt@cern.ch)
 * Mike Sas [msas@nikhef.nl](mailto:msas@nikhef.nl)
 
 We are happy to help.
+
+## Additional Information
+
+**twikis**: 
+* [PCG](https://twiki.cern.ch/twiki/bin/view/ALICE/PWGGAPcmGroup)
+* [PWGGA](https://twiki.cern.ch/twiki/bin/view/ALICE/PWGGA)
+* [EMCocktail](https://twiki.cern.ch/twiki/bin/view/ALICE/EMCocktail)
 

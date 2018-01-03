@@ -12,5 +12,6 @@
    * [Cocktail Framework Intro](Cocktail/cocktail.md)
    * [Link collection from other PWGs](Cocktail/ExternalLinks.md)
 
-## Afterburner implementation
-* [Merged Cluster Analysis](Afterburners/mergedAnalysis.md)
+## Neutral Meson and Direct Photon Analysis - Afterburners
+   * [General Afterburner Introduction](Afterburners/generalOverviewAfterburner.md)
+   * [Merged Cluster Analysis](Afterburners/mergedAnalysis.md)
