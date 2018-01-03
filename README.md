@@ -7,16 +7,16 @@ In the provided software package the reconstruction of photons within ALICE usin
 Our software is structured in 3 main parts:
 
 1. [**AliPhysics**](https://github.com/alisw/AliPhysics) implementation in **PWGGA/GammaConv**, which is running on the reconstructed ESD/AOD data or simulation files
-2. **Afterburner** implementation which is kept and maintained in the [PCG-Software directory](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware) and is used to analyse the output files of the AliPhysics-Tasks to extract the meson spectra \($$\pi^0, \eta, \omega$$\), $$v_n$$ and direct photon results
+2. **Afterburner** implementation which is kept and maintained in the [**PCG-Software directory**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware) and is used to analyse the output files of the AliPhysics-Tasks to extract the meson spectra \($$\pi^0, \eta, \omega$$\), $$v_n$$ and direct photon results
 3. **Cocktail** implementation, which is scattered in 2 different places in AliPhysics \(**PWG/Cocktail** & **PWGGA/GammaConv**\) and which has to fed by inputs summarized in the [**Cocktail-Repository**](https://gitlab.cern.ch/alice-cocktail-EM/cocktail_input)
 
 All three packages will be needed to complete the full meson and direct photon analysis as it is currently implemented and will be explained in the following tutorial in different sections.
 
-To gain committer-access to the PCG-Software directory please subscribe to _alice-pcg_ & _alice-pcg-core_ on [e-groups](https://e-groups.cern.ch/) and to get the committer access to the Cocktail repository you have to be subscribed to _alice-cocktail-EM_.
+To gain committer-access to the PCG-Software directory please subscribe to _**alice-pcg**_** & **_**alice-pcg-core**_ on [e-groups](https://e-groups.cern.ch/) and to get the committer access to the Cocktail repository you have to be subscribed to _**alice-cocktail-EM**_.
 
 ## Contacts
 
-If there are any questions regarding this tutorial do not hesitate to ask on   
+If there are any questions regarding this tutorial do not hesitate to ask on  
 _alice-pcg-core@cern.ch_  
 or directly to the convenors and creators of the tutorial
 
