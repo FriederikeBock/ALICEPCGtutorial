@@ -1,6 +1,6 @@
 # Overview of Running Neutral meson analysis
 
-Task AliAnalysisTaskGammaConvV1.cxx gives GammaConvV1 \_x.root \(x = train config\).
+![](assets/SoftwareOverviewNeutralMesonAndDirGamma.jpg)
 
 Before you start analysis, get input .root files from grid and change their format by using macros in the folder **AnalysisSoftware /DownloadAndDataPrep/ **.
 
