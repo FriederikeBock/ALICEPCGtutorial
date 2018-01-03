@@ -21,7 +21,7 @@ The spectra then need to be added to the list as **invariant cross section** in 
 #### **To summarize:**
 
 1. Create list for given center of mass energy \(if not yet defined\)
-2. Load input spectra \(TH1D, TGraphErrors or TGraphAsymmerrors\) with separate spectra for statistical and systematic uncertainties
+2. Load input spectra \(TH1D, TGraphErrors or TGraphAsymmErrors\) with separate spectra for statistical and systematic uncertainties
 3. Convert spectra to invariant yield per inelastic event and afterwards to dN/dydpT
 4. Apply correct naming scheme using the arrays fParticle\[\] and fMethod\[\]
 5. Add spectra to the list
@@ -136,12 +136,13 @@ The cocktail is then simply run by the following line to generate 50 events:
 `aliroot -x -l -b -q 'runStandaloneCocktail.C(50)'`
 
 On the grid, the procedure requires the parametrization file to be comitted to AliPhysics into the folder AliPhysics/PWG/Cocktail/parametrisations/ where one can either update the existing file or recreate the complete file. To have the cocktail produced just let the trainoperators \(alice-pwg-GA-train-operators@cern.ch\) know which existing or new dataset should be used. Effectively, the full information of the AliGenerator \(gener\) needs to be handed to the operator. Cocktails on the grid are generated with 1M events and show nearly no remaining statistical uncertainties. For a thorough analysis, the systematics of the cocktail have to be requested as soon as the main cocktail is validated.
+It is advised to run in parallel the pure photon cocktail as well as the hadronic cocktail analysis tasks. When the data set has been activated ask the operators to activate the wagons: Pi0Cocktail\_diffRap \(& GammaCocktail\_diffRap and run the corresponding train. 
 
 ## Addition: Inter/Extrapolation of particle spectra
 
-This step is an important addition for analyses that require a reliable cocktail early on \(before other particles are measured/published\). For example in the 5 TeV pp case, there were no measured spectra of kaons, protons, phi, omega, ... available, but a first cocktail for the measurements was needed. There is the possibility to use mT scaling for all spectra but this has proven to yield very limited results at LHC energies \(see [https://arxiv.org/abs/1710.01933](https://arxiv.org/abs/1710.01933%29\). Therefore it might be desired to inter/extrapolate the particle spectra from measurements at other center of mass energies. In the 5 TeV pp case, there are measurements available at 0.9, 2.76, 7 and 8 TeV which will allow for a very stable interpolation over a wide pT range.
+This step is an important addition for analyses that require a reliable cocktail early on \(before other particles are measured/published\). For example in the 5 TeV pp case, there were no measured spectra of kaons, protons, phi, omega, ... available, but a first cocktail for the measurements was needed. There is the possibility to use $$m_T$$ scaling for all spectra but this has proven to yield very limited results at LHC energies \(see [https://arxiv.org/abs/1710.01933](https://arxiv.org/abs/1710.01933%29\). Therefore it might be desired to inter/extrapolate the particle spectra from measurements at other center of mass energies. In the 5 TeV pp case, there are measurements available at 0.9, 2.76, 7 and 8 TeV which will allow for a very stable interpolation over a wide pT range. In order for the inter-/extrapolation-macro to work properly a global binning for the desired particle \(i.e. $$K^0_s$$, $$K^{\pm}$$, $$\Lambda$$, P, $$\pi^0$$, $$\pi^\pm$$, $$\eta$$, ... \) needs to be defined for the corresponding energy. This should be done in the function _GetBinning\(\)_ of **CommonHeaders/ExtractSignalBinning.C** within the \([AnalysisSoftware repository](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware\).
 
-The interpolations are handled by CalculateReference.C in the AnalysisSoftware repository \([https://gitlab.cern.ch/alice-pcg/AnalysisSoftware\](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware%29\). The macro is steered with an input text file and macro parameters. The text file is the most important ingredient as it provides the input spectra.
+The interpolations are handled by CalculateReference.C in the \([AnalysisSoftware repository](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware\). The macro is steered with an input text file and macro parameters. The text file is the most important ingredient as it provides the input spectra.
 
 `CombinedResultsPaperPP2760GeV_2017_04_19_FrediV2Clusterizer.root    0    Pi02.76TeV/graphInvCrossSectionPi0PCM2760GeVStatErr    0    Pi02.76TeV/graphInvCrossSectionPi0PCM2760GeVSysErr 2.76TeV 2760    1 bla bla SystematicsInputOtherEnergies/SystematicErrorAveragedSinglePCM_Pi0_2_76TeV_2016_12_14.dat    ExternalInput/Theory/TheoryCompilationPP.root histoInvSecPythia8Monash2013LegoPi02760GeV`
 
