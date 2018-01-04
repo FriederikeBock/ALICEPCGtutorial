@@ -1,6 +1,25 @@
-# Overview of Running Neutral meson analysis
+# Overview of Running Neutral Meson Analysis and Direct Photon
+
+The analysis of the neutral mesons and direct photons, which is done after the pure grid analysis is organized in different macros, where we tried to have one macro per analysis step. Thus we split the steps of signal extraction, out-of-bunch pileup calculation, correction, cocktail processing, double ratio calculation, cut comparsion and systematics calculation into different macros. However, as the most of the macros need input from a previous step and it would be cumbersome to change the macro calls each time with the appropriate file. Most of steps, which need no manual intervention or optimization are handled by our steering scripts:
+
+* _start\_FullMesonAnalysis\_TaskV3.sh_ - handling the $$\pi^0$$ & $$\eta$$  in the $$\gamma\gamma$$-decay channel and the merged analysis as well as direct photon analysis
+* _start\_FullMesonAnalysisDalitz\_TaskV2.sh_ - handling the $$\pi^0$$ & $$\eta$$  in the $$\gamma e^+e-$$-decay channel 
+* _start\_FullOmegaMesonAnalysis.sh_ - handling the $$\eta$$ and $$\omega$$ analysis in the $$\pi^0 \pi^+ \pi^-$$ and $$\pi^0 \gamma$$ channel
+
+They are stored in the main directory of the [PCG-Afterburner directory](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware). A visualisation of the paths for the neutral meson analysis in the $$\gamma\gamma$$-channel and the direct photon analysis can be found below using the _start\_FullMesonAnalysis\_TaskV3.sh_. It explains the main path of the analysis in the standard setup. 
 
 ![](/assets/SoftwareOverviewNeutralMesonAndDirGamma.jpg)
+
+However, as usual there are some exceptions and you might want to read the corresponding script ones if you are analysing a well know data set for the first time, as for instance it might be necessary to run a special merging step for the efficiencies from added signals and minimum bias or jet-jet simulations. Each of the three scripts is also equipped with a short helper page, which can be called '--help' or '-h' after the script name.
+
+In general the repository is ordered as follows:
+
+* **main directory**: 
+  Contains general steering scripts for the macros, as mentioned above. Furthermore, the macros to calculate the systematics of the different analysis techniques (_FinaliseSystematicErrors\[Calo,Conv,ConvCalo,Merged,Dalitz\]\_\[$SYSTEM$ENERGY\]*.C_), the combinaton macros for the mesons/gammas from different reconstruction techniques (_CombineMesonMeasurements\_*.C, CombineGammaResults\_*.C_) as well as comparison macros among different energies and particles (_CombineNeutralPion*.C, CompareCharged*.C, CompareGamma*.C_). Most of these are taylored to specific energies and cannot be used as generalized macros, but have either been used for the corresponding publications or for the prelimarinary creation. 
+  Additional import macros contained in the main directory regarding the publications are the CalculateReference.C, CalculateSignificanceToPYTHIA.C, ComputeCorrelationFactors.C, TestMtScaling.C_ which can be used in a slightly more general way. In addition to these there are more specific macros, which were used for the publications (p-Pb mesons and the first meson paper), which are not necessarily maintaiend any longer.
+  The compilation macros of the external inputs for different data files from ALICE and other experiments \(_PrepareChargedPionDataALICE*.C,ProduceExperimentalDataGraphsPbPb.C_\) and theory predictions \(_ProduceTheoryGraphs*.C_\) can also be found here.
+
+
 
 Before you start analysis, get input .root files from grid and change their format by using macros in the folder **AnalysisSoftware /DownloadAndDataPrep/ **.
 
