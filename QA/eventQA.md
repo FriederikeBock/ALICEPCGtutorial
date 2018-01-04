@@ -21,9 +21,15 @@ Carefully check all output from runwise/full output with special focus on data/M
 
 Some example plots for 1.-6.:
 
-1. ![](/QA/figures/ClusterQualityCuts_vs_E_LHC12.jpg)
-2. ![](/QA/figures/hTracksGood-Mean.jpg)
-3. ![](/QA/figures/hFracWVtxOutside10cm.jpg)
-4. ![](/QA/figures/hVertexZ-Mean.jpg)
-5. ![](/QA/figures/hCaloNClustersQA.jpg)
-6. ![](/QA/figures/hPi0Mass.jpg)
+1. 
+ ![](/QA/figures/ClusterQualityCuts_vs_E_LHC12.jpg)
+2. 
+ ![](/QA/figures/hTracksGood-Mean.jpg)
+3. 
+ ![](/QA/figures/hFracWVtxOutside10cm.jpg)
+4. 
+ ![](/QA/figures/hVertexZ-Mean.jpg)
+5. 
+ ![](/QA/figures/hCaloNClustersQA.jpg)
+6. 
+ ![](/QA/figures/hPi0Mass.jpg)

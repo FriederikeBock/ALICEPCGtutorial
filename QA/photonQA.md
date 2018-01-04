@@ -21,9 +21,11 @@ Carefully check all output from runwise histograms with special focus on data/MC
 
 Some example plots for 1. and 2.:
 
-1. ![](/QA/figures/Photon_Phi.jpg)
-2. ![](/QA/Armenteros_LHC12h.jpg)
-2. ![](/QA/figures/hGammaEta.jpg)
+1.
+ ![](/QA/figures/Photon_Phi.jpg)
+2. 
+ ![](/QA/Armenteros_LHC12h.jpg)
+ ![](/QA/figures/hGammaEta.jpg)
 
 
 

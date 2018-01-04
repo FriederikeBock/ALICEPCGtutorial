@@ -2,12 +2,15 @@
 
 * [Welcome](README.md)
 * [Introduction](Introduction/generalIntro.md)
+* [Git](git.md)
 
 ## AliPhysics Implementation and GRID Running
+   * [GRID and AliRoot/AliPhysics](AliPhysicsAndGrid/aliphysics.md)
+   * [Running AnalysisTasks](AliPhysicsAndGrid/runningTasks.md)
    * [Integration of new Monte Carlo Simulations](AliPhysicsAndGrid/jetjet-mc.md)
-   * [The EMCal Correction Framework](AliPhysicsAndGrid/corrframework.md)
    * [LEGO Trains](AliPhysicsAndGrid/legotrains.md)
    * [Download Files from GRID](AliPhysicsAndGrid/download.md)
+   * [The EMCal Correction Framework](AliPhysicsAndGrid/corrframework.md)
 
 ## Quality Assurance and Energy Calibration of Calorimeters
    * [Overview](QA/overview.md)
