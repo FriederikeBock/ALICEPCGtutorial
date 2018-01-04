@@ -1,8 +1,8 @@
 # Summary
 
 * [Welcome](README.md)
-* [Introduction](Introduction/generalIntro.md)
 * [Git](git.md)
+* [General Naming Scheme and Analysis Tasks](Introduction/generalIntro.md)
 
 ## AliPhysics Implementation and GRID Running
    * [GRID and AliRoot/AliPhysics](AliPhysicsAndGrid/aliphysics.md)

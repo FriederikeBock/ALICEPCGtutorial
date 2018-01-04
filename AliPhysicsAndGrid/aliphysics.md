@@ -71,7 +71,7 @@ TBrowser a;
 }
 ```
 
-and add the following lines to your _.bash\_aliases_ :
+and add the following lines to your _.bash\_aliases_ (remember to replace YOURUSERNAME):
 
 ```
 alias ali='alienv load AliPhysics/latest-ali-master'
@@ -84,7 +84,7 @@ alias alic='. ~/alice/compile_aliphysics.sh'
 alias aliroots='cd ~/alice/ali-master/AliRoot'
 alias alirootb='cd ~/alice/sw/BUILD/AliRoot-latest-ali-master/AliRoot/'
 alias alirootc='. ~/alice/compile_aliroot.sh'
-alias token='alien-token-init dmuhlhei'
+alias token='alien-token-init YOURUSERNAME'
 alias tb='root -l ~/alice/tbrowser.C'
 ```
 
