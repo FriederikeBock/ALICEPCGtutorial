@@ -6,13 +6,54 @@ It is important to ensure that all detectors behave as expected and that related
 
 The QA framework can be found within the [AnalysisSoftware Repository](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware) in _TaskQA/*_ , it is split into the major parts:
 
-* Event QA
-* Photon QA
-* Cluster QA
-* PrimaryTrack QA
+1. [Event QA](QA/eventQA.md)
+2. [Photon QA](QA/photonQA.md)
+3. [Cluster QA](QA/clusterQA.md)
+4. [PrimaryTrack QA](QA/primaryQA.md)
 
 As data taking is split into runs, a so-called runwise QA must be run on the desired data/MC to analyze. Furthermore, it is important to globally check the observables for the full statistics.
 
-Furthermore, the calibration of calorimeters directly follows the QA stage and is described in this chapter as well (macros are contained in [AnalysisSoftware Repository](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware) in TaskV1/*). Generally, all macros/functions should be able to handle EMCal as well as PHOS and DCal, but for last two calorimeters special care needs to be taken and every QA step still needs to be verified in detail (after sucessful validation this statement may be removed).
+All QA tasks need to have the _slow_ option active as well as _runwise processing_ must be enabled on GRID (remember to include this in your request [Requesting a LEGO Train](AliPhysicsAndGrid/legotrains.md)).
+Two different sets of download macros are available in _DownloadAndDataPrep/*_ and _TaskQA/Grid_CopyFiles*_, see [Download Files from GRID](AliPhysicsAndGrid/download.md).
+For runwise processing with the QA framework, the _Gamma*.root_ files should be placed in the following folder scheme in the AnalysisSoftware folder ([AnalysisSoftware Repository](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware)):
+
+> DataQA / -DATE- / -PERIODNAME- / -RUNNUMBER- / Gamma*.root (for example: DataQA/20180104/LHC15h1b/177681/GammaCalo_104.root and so on for the differnt runs available for the given dataset)
+
+Make sure that a file _runlists -PERIODNAME-.txt_ (for example runlistsLHC15h1b.txt) is contained in _DownloadAndDataPrep/runlists_ containing the different run numbers line by line (examples may be found when checking out from [AnalysisSoftware Repository](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware)) as the QA framework will look for the run numbers in that folder per default.
+
+**Central Steering Macros**
+
+The central steering macros for the QA framework are:
+
+* QAV2.C
+* QA_RunwiseV2.C
+
+which can be called from bash via:
+
+> root -x -l -b -q TaskQA/QAV2.C\+\(\"config.txt\"\,kTRUE\,kTRUE\,kTRUE\,kTRUE\,kTRUE\,2\,\"eps\"\)
+
+and
+
+> root -x -l -b -q TaskQA/QA_RunwiseV2.C\+\(\"config.txt\"\,kTRUE\,kTRUE\,kTRUE\,kTRUE\,kTRUE\,2\,\"eps\"\)
+
+Example configurations for _config.txt_ may be found within _TaskQA/ExampleConfigurations_ while the other parameters of the functions stand for:
+
+* doEventQA -> _kTRUE_
+* doPhotonQA -> _kTRUE_ (set _kFALSE_ if you are not using any photon conversions)
+* doClusterQA -> _kTRUE_ (set _kFALSE_ if you are not using any calorimeter clusters)
+* doMergedQA -> _kTRUE_ (set _kFALSE_ if you are not running a merged analysis)
+* doPrimaryTrackQA -> _kTRUE_ (set _kFALSE_ if you are not running Dalitz or neutral meson analysis via 3 pions)
+* doExtQA -> _2_ (_0_ -> switched off, _1_ -> normal QA mode, _2_ extendedQA mode with cell QA)
+* suffix -> _eps_ (_pdf_,_C_,...)
+
+## Energy Calibration of Calorimeters
+
+Furthermore, the energy calibration of calorimeters directly follows the QA stage and is described in 
+
+* [Energy Calibration of Calorimeters](QA/ecalib.md)
+
+> macros are contained in [AnalysisSoftware Repository](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware) in TaskV1/*
+
+Generally, all macros/functions should be able to handle EMCal as well as PHOS and DCal, but for last two calorimeters special care needs to be taken and every QA step still needs to be verified in detail (after sucessful validation this statement may be removed).
 In general, the calibration of calorimeters is performed by the specific detector groups for EMCal/DCal and PHOS. What we are referring to in this chapter is an improved energy calibration scheme based on the measured pi0-peak position in data to which the simulated MC mass positions are tuned to. In general, it may happen that an improved energy calibration is not needed but still then the macros should be run to cross-check the calibration.
 
