@@ -12,11 +12,14 @@ The merged analysis is done with the following classes/macros in our repositorie
 
 **Afterburner**: ExtractSignalMergedMeson -> CorrectSignalMerged
 
-The task on the grid uses the same cut classes as the other calorimeter tasks, however, contrary to the standard calorimeter task two AliCaloPhotonCuts cutnumbers are defined. One cut is applied on the standard cluster and one on the merged clusters. The cutnumbers have the following format:
+The task on the grid uses the same cut classes as the other calorimeter tasks, however, contrary to the standard calorimeter task two AliCaloPhotonCuts cutnumbers are defined. One cutnumber is used on all clusters and one to select the merged clusters. The merged analysis cutnumbers have the following format:
 
 ```
 00010113_1111111067032200000_1111111067022700001_0163300000000000"
   event       cluster           merged cluster         meson
 ```
 
-The task provides in the end an output file called GammaCaloMerged.root.
+The task provides in the end an output file called GammaCaloMerged.root. This output is fed as shown in the flow chart into out AnalysisSoftware afterburners.
+
+![](assets/MergedAnalysisOverview.pdf)
+
