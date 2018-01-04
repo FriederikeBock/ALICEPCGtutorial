@@ -14,7 +14,8 @@
 **repository**: [**Cocktail-Repository**](https://gitlab.cern.ch/alice-cocktail-EM/cocktail_input)  
 in order to check it out first go to the web page and add your ssh key. readme  
 afterwards you can check it out with:  
-git clone ssh://git@gitlab.cern.ch:7999/alice-cocktail-EM/cocktail\_input.git
+
+> git clone ssh://git@gitlab.cern.ch:7999/alice-cocktail-EM/cocktail\_input.git
 
 If you can't access, please inform Friederike Bock
 
