@@ -6,10 +6,10 @@ It is important to ensure that all detectors behave as expected and that related
 
 The QA framework can be found within the [AnalysisSoftware Repository](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware) in _TaskQA/*_ , it is split into the major parts:
 
-1. [Event QA](QA/eventQA.md)
-2. [Photon QA](QA/photonQA.md)
-3. [Cluster QA](QA/clusterQA.md)
-4. [PrimaryTrack QA](QA/primaryQA.md)
+1. [Event QA](/QA/eventQA.md)
+2. [Photon QA](/QA/photonQA.md)
+3. [Cluster QA](/QA/clusterQA.md)
+4. [PrimaryTrack QA](/QA/primaryQA.md)
 
 As data taking is split into runs, a so-called runwise QA must be run on the desired data/MC to analyze. Furthermore, it is important to globally check the observables for the full statistics.
 
@@ -17,13 +17,13 @@ As data taking is split into runs, a so-called runwise QA must be run on the des
 
 ## GRID running
 
-All QA tasks need to have the _slow_ option active as well as _runwise processing_ must be enabled on GRID (remember to include this in your request [Requesting a LEGO Train](AliPhysicsAndGrid/legotrains.md)).
+All QA tasks need to have the _slow_ option active as well as _runwise processing_ must be enabled on GRID (remember to include this in your request [Requesting a LEGO Train](/AliPhysicsAndGrid/legotrains.md)).
 
 * The PhotonQA is run by specialized wagons running the AddTask\_PhotonQA, they can be found on the MonAlisa pages in the _Group PCM_ - look for _PhotonQA*_.
 * The EventQA needs the standard output by one of our standard analysis tasks (GammaConvV1, GammaCalo, GammaConvCalo,..)
 * For ClusterQA peferably run the standard calorimeter-related tasks GammaCalo & GammaConvCalo (as you will need output from both to verify the energy calibration) - if bad cell identification should be performed in addition, one of both tasks need to be run with QA level, for example '5' to enable full QA output including cell QA
 
-Two different sets of download macros are available in _DownloadAndDataPrep/*_ and _TaskQA/Grid_CopyFiles*_, see [Download Files from GRID](AliPhysicsAndGrid/download.md) to download the runwise output as well as the fully merged output from GRID.
+Two different sets of download macros are available in _DownloadAndDataPrep/*_ and _TaskQA/Grid_CopyFiles*_, see [Download Files from GRID](/AliPhysicsAndGrid/download.md) to download the runwise output as well as the fully merged output from GRID.
 
 ## Processing
 
@@ -74,7 +74,7 @@ As we are using TTrees for the photon QA, there is a slightly different approach
 
 Furthermore, the energy calibration of calorimeters directly follows the QA stage and is described in 
 
-* [Energy Calibration of Calorimeters](QA/ecalib.md)
+* [Energy Calibration of Calorimeters](/QA/ecalib.md)
 
 > the macros are contained in [AnalysisSoftware Repository](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware) in TaskV1/*
 

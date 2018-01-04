@@ -12,7 +12,7 @@ with doEventQA = kTRUE and doClusterQA = kTRUE (doMergedQA for EMCal merged anal
 **2. CellQA step: identify dead and warm/hot cells comparing data and MC information**
 Check histograms created in _ExtQA/*_ and especially _ExtQA/MissingCells/*_ for dead cells. Dead/warm/hot cell identification by comparing the cells EFrac to mean EFrac of neighboring cells 
 
-* EFrac = cells energy fraction of full cluster energy, summed over all events --> turned out to be a much better discriminator than just looking how often cells fired
+> EFrac = cells energy fraction of full cluster energy, summed over all events --> turned out to be a much better discriminator than just looking how often cells fired
 
 We have a dead cell candidate:
 * if((nCurrentEFrac$$<$$mean/3 && mean$$>=$$80) || (nCurrentEFrac$$<$$mean/5 && mean$$>=$$40 && mean$$<$$80) || (nCurrentEFrac$$<$$mean/8 && mean$$>=$$10 && mean$$<$$40) || (nCurrentEFrac$$<$$mean/10 && mean$$<$$10))

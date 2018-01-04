@@ -5,7 +5,7 @@
 
 ## AliPhysics Implementation and GRID Running
    * [Integration of new Monte Carlo Simulations](AliPhysicsAndGrid/jetjet-mc.md)
-   * [The Correction Framework](AliPhysicsAndGrid/corrframework.md)
+   * [The EMCal Correction Framework](AliPhysicsAndGrid/corrframework.md)
    * [LEGO Trains](AliPhysicsAndGrid/legotrains.md)
    * [Download Files from GRID](AliPhysicsAndGrid/download.md)
 
