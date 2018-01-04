@@ -34,14 +34,15 @@ Double-check the set of parameters in the wagons which are handed to the AddTask
   * a comment that describes the train, e.g. the purpose or what you changed with respect to the last train on this dataset 
 
 an example, title of email: _Train request GA\_PbPb_
-> train:                    GA_PbPb
-> wagons:                   PhotonQA\_5TeV\_0090, PhysicsSelectionESD, CentralityTaskESD2015, PIDResponseTaskESD2015
-> dataset:                  LHC15o\_pass1\_highIR
-> runwise:                  yes
-> runlist:                  CentralBarrelGood
-> aliphysics:               vAN-20171024
-> slow-train-option:        yes
-> comment:                  PhotonQA
+
+    train:                    GA_PbPb
+    wagons:                   PhotonQA\_5TeV\_0090, PhysicsSelectionESD, CentralityTaskESD2015, PIDResponseTaskESD2015
+    dataset:                  LHC15o\_pass1\_highIR
+    runwise:                  yes
+    runlist:                  CentralBarrelGood
+    aliphysics:               vAN-20171024
+    slow-train-option:        yes
+    comment:                  PhotonQA
 
 * in case train test is successful (a green 'OK' in the test results)
 

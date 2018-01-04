@@ -45,17 +45,9 @@ Compare data/MC energy and time distributions for all bad cell candidates found 
 
 Then, merge bad cell candidate list from 5. with lists found in 3. and 4. to be excluded in OADB 
 
-**6. Runwise ClusterQA step by analysing output from ClusterQA_Runwise.C**
-Carefully check all output from runwise histograms with special focus on data/MC comparison (Is the MC able to reproduce all QA histograms extracted from data? Does the MC follow the trends seen in data? Are there any suspicious runs or any observations that cannot be explained?...)
-
-**7. ClusterQA step by analysing output from ClusterQA.C** 
-Carefully check all output from histograms with special focus on data/MC comparison (Is the MC able to reproduce all QA histograms extracted from data? Does the MC follow the distributions seen in data? Are there any suspicious observations or is there anything that cannot be explained?...)
-
-**8. Run ClusterQA_CellCompare (needs to be configured within macro - not _yet_ included in steering macros)**
+**6. Run ClusterQA_CellCompare (needs to be configured within macro - not _yet_ included in steering macros)**
 to visualize bad cell candidates found in step 5.
 
-**9. Optional: run ClusterQA_Compare (needs to be configured within macro - not _yet_ included in steering macros)**
-to compare different data sets (MB vs calorimeter trigger for example for a given dataset; needs input from runwiseQA and periodwiseQA) 
 
 ## Run ClusterQA
 
@@ -70,5 +62,14 @@ Running the ClusterQA(_Runwise).C will save the output into the following folder
 > _CUTNUMBER/SYSTEM/EventQA/_ 
 
 In addition, *.root files will be generated in _CUTNUMBER/SYSTEM/_ containing all the histograms as well.
+
+**7. Runwise ClusterQA step by analysing output from ClusterQA_Runwise.C**
+Carefully check all output from runwise histograms with special focus on data/MC comparison (Is the MC able to reproduce all QA histograms extracted from data? Does the MC follow the trends seen in data? Are there any suspicious runs or any observations that cannot be explained?...)
+
+**8. ClusterQA step by analysing output from ClusterQA.C** 
+Carefully check all output from histograms with special focus on data/MC comparison (Is the MC able to reproduce all QA histograms extracted from data? Does the MC follow the distributions seen in data? Are there any suspicious observations or is there anything that cannot be explained?...)
+
+**9. Optional: run ClusterQA_Compare (needs to be configured within macro - not _yet_ included in steering macros)**
+to compare different data sets (MB vs calorimeter trigger for example for a given dataset; needs input from runwiseQA and periodwiseQA) 
 
 Carefully check all output from runwise/full output with special focus on data/MC comparison (Is the MC able to reproduce all QA histograms extracted from data? Does the MC follow the trends seen in data? Are there any suspicious runs or any observations that cannot be explained?...) In general, they should be stable vs. run number - however, one of the exceptions is pileup which may vary from run to run -> need to be taken with special care!
