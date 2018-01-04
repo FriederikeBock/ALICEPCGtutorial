@@ -11,10 +11,10 @@
 
 ## Quality Assurance and Energy Calibration of Calorimeters
    * [Overview](QA/overview.md)
-   * [Event QA](QA/eventQA.md)
-   * [Photon QA](QA/photonQA.md)
-   * [Cluster QA](QA/clusterQA.md)
-   * [PrimaryTrack QA](QA/primaryQA.md)
+   * [EventQA](QA/eventQA.md)
+   * [PhotonQA](QA/photonQA.md)
+   * [ClusterQA](QA/clusterQA.md)
+   * [PrimaryTrackQA](QA/primaryQA.md)
    * [Energy Calibration of Calorimeters](QA/ecalib.md)
 
 ## Cocktail Running and External Input

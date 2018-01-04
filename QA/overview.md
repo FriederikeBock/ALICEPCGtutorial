@@ -13,13 +13,13 @@ The QA framework can be found within the [AnalysisSoftware Repository](https://g
 
 As data taking is split into runs, a so-called runwise QA must be run on the desired data/MC to analyze. Furthermore, it is important to globally check the observables for the full statistics.
 
-> respective macros can be found in _TaskQA/EventQA.C_ and _TaskQA/EventQA_Runwise.C_ (and accordingly for the other three examples)
+> The respective macros can be found in _TaskQA/EventQA.C_ and _TaskQA/EventQA_Runwise.C_ (and accordingly for the other three examples)
 
 ## GRID running
 
 All QA tasks need to have the _slow_ option active as well as _runwise processing_ must be enabled on GRID (remember to include this in your request [Requesting a LEGO Train](AliPhysicsAndGrid/legotrains.md)).
 
-* The PhotonQA is run by specialized wagons running the AddTask_PhotonQA, they can be found on the MonAlisa pages in the _Group PCM_ - look for _PhotonQA*_.
+* The PhotonQA is run by specialized wagons running the AddTask\_PhotonQA, they can be found on the MonAlisa pages in the _Group PCM_ - look for _PhotonQA*_.
 * The EventQA needs the standard output by one of our standard analysis tasks (GammaConvV1, GammaCalo, GammaConvCalo,..)
 * For ClusterQA peferably run the standard calorimeter-related tasks GammaCalo & GammaConvCalo (as you will need output from both to verify the energy calibration) - if bad cell identification should be performed in addition, one of both tasks need to be run with QA level, for example '5' to enable full QA output including cell QA
 
@@ -27,15 +27,15 @@ Two different sets of download macros are available in _DownloadAndDataPrep/*_ a
 
 ## Processing
 
-> Always run the runwise macros first, then the merged output (also referred to as periodwise or full output).
+Always run the runwise macros first, then the merged output (also referred to as periodwise or full output)!
 
 For runwise processing with the QA framework, the _Gamma*.root_ files should be placed in the following folder scheme in the AnalysisSoftware folder ([AnalysisSoftware Repository](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware)):
 
-> DataQA / -DATE- / -PERIODNAME- / -RUNNUMBER- / Gamma*.root (for example: DataQA/20180104/LHC15h1b/177681/GammaCalo_104.root and so on for the differnt runs available for the given dataset)
+> DataQA/DATE/PERIODNAME/RUNNUMBER/Gamma*.root (for example: DataQA/20180104/LHC15h1b/177681/GammaCalo_104.root and so on for the differnt runs available for the given dataset)
 
-> Furthermore, all screen output is saved in _*.log_ files - watch for them if you want to look up any information.
+Furthermore, all screen output is saved in _*.log_ files - watch for them if you want to look up any information.
 
-Make sure that a file _runlists -PERIODNAME-.txt_ (for example runlistsLHC15h1b.txt) is contained in _DownloadAndDataPrep/runlists_ containing the different run numbers line by line (examples may be found when checking out from [AnalysisSoftware Repository](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware)) as the QA framework will look for the run numbers in that folder per default.
+Make sure that a file _runlistsPERIODNAME.txt_ (for example runlistsLHC15h1b.txt) is contained in _DownloadAndDataPrep/runlists_ containing the different run numbers line by line (examples may be found when checking out from [AnalysisSoftware Repository](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware)) as the QA framework will look for the run numbers in that folder per default.
 
 **Central Steering Macros**
 
@@ -66,8 +66,7 @@ Example configurations for _config.txt_ may be found within _TaskQA/ExampleConfi
 **IMPORTANT FOR RUNNING PHOTON QA**
 
 As we are using TTrees for the photon QA, there is a slightly different approach in this case:
-
-> _only_ download runwise output for the photon QA, as in most cases the full merges _will_ fail on GRID due to huge output size!
+**_only_ download runwise output for the photon QA, as in most cases the full merges _will_ fail on GRID due to huge output size!**
 > during processing of PhotonQA_Runwise.C, the periodwise output will be automatically produced!
 
 
@@ -80,5 +79,5 @@ Furthermore, the energy calibration of calorimeters directly follows the QA stag
 > the macros are contained in [AnalysisSoftware Repository](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware) in TaskV1/*
 
 Generally, all macros/functions should be able to handle EMCal as well as PHOS and DCal, but for last two calorimeters special care needs to be taken and every QA step still needs to be verified in detail (after sucessful validation this statement may be removed).
-In general, the calibration of calorimeters is performed by the specific detector groups for EMCal/DCal and PHOS. What we are referring to in this chapter is an improved energy calibration scheme based on the measured pi0-peak position in data to which the simulated MC mass positions are tuned to. In general, it may happen that an improved energy calibration is not needed but still then the macros should be run to cross-check the calibration.
+In general, the calibration of calorimeters is performed by the specific detector groups for EMCal/DCal and PHOS. What we are referring to in this chapter is an improved energy calibration scheme based on the measured neutral pion peak position in data to which the simulated MC mass positions are tuned to. In general, it may happen that an improved energy calibration is not needed but still then the macros should be run to cross-check the calibration.
 

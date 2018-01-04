@@ -1,15 +1,17 @@
-# Photon QA 
+# PhotonQA 
 
 **This part of the QA must be run for any PCM related analysis (for PCM and hybrid analyses PCM-EMCal, PCM-PHOS, PCM-DCal)**
 
 The photon QA includes all cut variables in the context of conversion photon analysis:
 
-**generated histograms (list of examples)** (full set of generated histograms can be deduced from the macros themselves/or from the output generated)
+**generated histograms (list of examples)** (full set of generated histograms can be deduced from the macros themselves/or from the output generated):
 1. Electron level:  $$p_T$$, $$\eta$$, dE/dx, TPC clusters, findable TPC clusters,...
 2. Photon level: $$p_T$$, $$\eta$$, $$\phi$$, $$\alpha$$, invariant mass, chi2, psi-pair,...
 
-> Running the PhotonQA(_Runwise).C will save the output into the following folder structure: _CUTNUMBER/SYSTEM/PhotonQA/_ 
-> In addition, *.root files will be generated in _CUTNUMBER/SYSTEM/_ containing all the histograms as well.
+Running the PhotonQA(_Runwise).C will save the output into the following folder structure: 
+> _CUTNUMBER/SYSTEM/PhotonQA/_ 
+
+In addition, *.root files will be generated in _CUTNUMBER/SYSTEM/_ containing all the histograms as well.
 
 **important note**
 Run QA_RunwiseV2.C first(!) with doEventQA = kTRUE and doPhotonQA = kTRUE - it will read TTrees from runwise output and generate runwise QA plots. It will also merge the output from different runs as this is, in general, impossible to do on TTree level due to the huge file sizes.
