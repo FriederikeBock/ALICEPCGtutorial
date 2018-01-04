@@ -21,5 +21,5 @@ The task on the grid uses the same cut classes as the other calorimeter tasks, h
 
 The task provides in the end an output file called GammaCaloMerged.root. This output is fed as shown in the flow chart into out AnalysisSoftware afterburners.
 
-![](assets/MergedAnalysisOverview.pdf)
+![](/assets/MergedAnalysisOverview.jpg)
 
