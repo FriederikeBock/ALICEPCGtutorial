@@ -73,18 +73,20 @@ TBrowser a;
 
 and add the following lines to your _.bash\_aliases_ :
 
-> alias ali='alienv load AliPhysics/latest-ali-master'
-> alias aliunload='alienv unload AliPhysics/latest-ali-master'
-> alias alienter='alienv enter AliPhysics/latest-ali-master'
-> alias alipc='. ~/alice/compile_alibuild.sh'
-> alias alis='cd ~/alice/ali-master/AliPhysics'
-> alias alib='cd ~/alice/sw/BUILD/AliPhysics-latest-ali-master/AliPhysics/'
-> alias alic='. ~/alice/compile_aliphysics.sh'
-> alias aliroots='cd ~/alice/ali-master/AliRoot'
-> alias alirootb='cd ~/alice/sw/BUILD/AliRoot-latest-ali-master/AliRoot/'
-> alias alirootc='. ~/alice/compile_aliroot.sh'
-> alias token='alien-token-init dmuhlhei'
-> alias tb='root -l ~/alice/tbrowser.C'
+```
+alias ali='alienv load AliPhysics/latest-ali-master'
+alias aliunload='alienv unload AliPhysics/latest-ali-master'
+alias alienter='alienv enter AliPhysics/latest-ali-master'
+alias alipc='. ~/alice/compile_alibuild.sh'
+alias alis='cd ~/alice/ali-master/AliPhysics'
+alias alib='cd ~/alice/sw/BUILD/AliPhysics-latest-ali-master/AliPhysics/'
+alias alic='. ~/alice/compile_aliphysics.sh'
+alias aliroots='cd ~/alice/ali-master/AliRoot'
+alias alirootb='cd ~/alice/sw/BUILD/AliRoot-latest-ali-master/AliRoot/'
+alias alirootc='. ~/alice/compile_aliroot.sh'
+alias token='alien-token-init dmuhlhei'
+alias tb='root -l ~/alice/tbrowser.C'
+```
 
 Then, you just need to type '_ali_' in the command line and you are in the ALICE software environment. 
 Using '_alipc_' you can re-build the whole software chain and using '_alic_' or '_alirootc_' you can trigger rebuild of AliPhysics and AliRoot respectively, no matter in which directory you currently are in the shell.

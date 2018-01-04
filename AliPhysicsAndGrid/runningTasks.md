@@ -11,7 +11,9 @@ Test with local software and local files
 * make sure that you set up the same tasks and make the same settings as you want to use on the train.
 * also, make sure that you have installed the versions of AliRoot and AliPhysics that you want to use on the train. 
 
-Run the macro [runLocal.C](/AliPhysicsAndGrid/runLocal.C) with _root -l -b -q runLocal.C_
+Run the macro [runLocal.C](/AliPhysicsAndGrid/runLocal.C) (right-click and save as) with 
+
+> root -l -b -q runLocal.C
 
 * if you test AODs, you need to specify the AOD cut number. To know it, look into the aodTree in the AliAODGammaConversion.root
 * if you have made major changes to the code, you should test the memory consumption (e.g. with 'top'), the processing time (e.g. with 'time') and the output file size (e.g. with 'ls -sh')
