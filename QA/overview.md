@@ -15,6 +15,8 @@ As data taking is split into runs, a so-called runwise QA must be run on the des
 
 > The respective macros can be found in _TaskQA/EventQA.C_ and _TaskQA/EventQA_Runwise.C_ (and accordingly for the other three examples)
 
+Generally, all calorimeter related macros/functions should be able to handle EMCal as well as PHOS and DCal, but for last two calorimeters special care needs to be taken and every QA step still needs to be verified in detail (after sucessful validation this statement may be removed).
+
 ## GRID running
 
 All QA tasks need to have the _slow_ option active as well as _runwise processing_ must be enabled on GRID (remember to include this in your request [Requesting a LEGO Train](/AliPhysicsAndGrid/legotrains.md)).
@@ -78,6 +80,5 @@ Furthermore, the energy calibration of calorimeters directly follows the QA stag
 
 > the macros are contained in [AnalysisSoftware Repository](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware) in TaskV1/*
 
-Generally, all macros/functions should be able to handle EMCal as well as PHOS and DCal, but for last two calorimeters special care needs to be taken and every QA step still needs to be verified in detail (after sucessful validation this statement may be removed).
 In general, the calibration of calorimeters is performed by the specific detector groups for EMCal/DCal and PHOS. What we are referring to in this chapter is an improved energy calibration scheme based on the measured neutral pion peak position in data to which the simulated MC mass positions are tuned to. In general, it may happen that an improved energy calibration is not needed but still then the macros should be run to cross-check the calibration.
 

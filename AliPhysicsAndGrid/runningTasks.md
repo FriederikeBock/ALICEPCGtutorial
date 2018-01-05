@@ -28,7 +28,7 @@ If everything works well, no errors are shown and the full output is generated, 
 After local testing was successful, try to test by loading all files from the GRID.
 For this purpose:
 
-* specify useGrid = kTRUE in _runLocal.C_ 
+* specify the second argument useGrid == kTRUE for _runLocal.C_ 
 * specify the path to the test files on the GRID in _runLocal.C_ (use aliensh to make sure you have specified the correct file path)
 * possibly check the settings of the GRID handler in _runLocal.C_ (which tag you are using etc)
 

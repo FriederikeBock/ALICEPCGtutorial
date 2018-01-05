@@ -29,3 +29,5 @@
    * [General Afterburner Introduction](Afterburners/generalOverviewAfterburner.md)
    * [Neutral Pion and Eta Analysis](Afterburners/neutralPionAndEtaAna.md)
    * [Merged Cluster Analysis](Afterburners/mergedAnalysis.md)
+   * [Systematic Uncertainties](Afterburners/systematics.md)
+   * [Combination of Measurements](Afterburnes/combination.md)
