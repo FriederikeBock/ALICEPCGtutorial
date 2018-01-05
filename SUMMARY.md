@@ -3,6 +3,7 @@
 * [Welcome](README.md)
 * [Git](git.md)
 * [General Naming Scheme and Analysis Tasks](Introduction/generalIntro.md)
+* [Analysis Notes and Papers](Introduction/notes.md)
 
 ## AliPhysics Implementation and GRID Running
    * [GRID and AliRoot/AliPhysics](AliPhysicsAndGrid/aliphysics.md)
@@ -30,4 +31,4 @@
    * [Neutral Pion and Eta Analysis](Afterburners/neutralPionAndEtaAna.md)
    * [Merged Cluster Analysis](Afterburners/mergedAnalysis.md)
    * [Systematic Uncertainties](Afterburners/systematics.md)
-   * [Combination of Measurements](Afterburnes/combination.md)
+   * [Combination of Measurements](Afterburners/combination.md)
