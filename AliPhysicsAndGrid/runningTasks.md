@@ -1,6 +1,7 @@
 # Running Analysis Tasks
 
-* download data/MC production from GRID, see [Download Files from GRID](/AliPhysicsAndGrid/download.md).
+You need to have some ALICE data on your disk if you want to run the _Offline_ testing.
+To download files from a data/MC production of ALICE from the GRID, see [Download Files from GRID](/AliPhysicsAndGrid/download.md).
 
 ## Offline
 
@@ -13,7 +14,9 @@ Test with local software and local files
 
 Run the macro [runLocal.C](/AliPhysicsAndGrid/runLocal.C) (right-click and save as) with 
 
-> root -l -b -q runLocal.C
+> root -x -l -b -q 'runLocal.C("LHC12c", kFALSE, 0, 9)'
+
+The first argument chooses the data set specified in the _runLocal_ macro. The second argument selects between _offline_ / _GRID testing_ and the two numbers specifiy, which files should be processed (in the example the files from folder '0' until folder '9').
 
 * if you test AODs, you need to specify the AOD cut number. To know it, look into the aodTree in the AliAODGammaConversion.root
 * if you have made major changes to the code, you should test the memory consumption (e.g. with 'top'), the processing time (e.g. with 'time') and the output file size (e.g. with 'ls -sh')

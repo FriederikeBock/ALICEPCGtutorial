@@ -73,3 +73,12 @@ Carefully check all output from histograms with special focus on data/MC compari
 to compare different data sets (MB vs calorimeter trigger for example for a given dataset; needs input from runwiseQA and periodwiseQA) 
 
 Carefully check all output from runwise/full output with special focus on data/MC comparison (Is the MC able to reproduce all QA histograms extracted from data? Does the MC follow the trends seen in data? Are there any suspicious runs or any observations that cannot be explained?...) In general, they should be stable vs. run number - however, one of the exceptions is pileup which may vary from run to run -> need to be taken with special care!
+
+
+## Debug Mode / Visualise Clusters
+
+There is an existing option to write specific clusters to a txt-file with the _GammaCalo_ task (for example cluster combinations with a very small opening angle or select especially huge clusters,...). Once you produced the txt-files with help of the _GammaCalo_ task, you can visualize the clusters by help of the macro _Grid\_PlotGammaCaloDebug_ which can be found in _TaskQA_.
+
+It can be called via:
+
+> Grid\_PlotGammaCaloDebug(TString filePath = "/home/daniel/data/work/debugOutput.txt", TString outputDir = "DebugPlots", Bool\_t plotFullEMCal = kFALSE, Int\_t debugOption = 0)

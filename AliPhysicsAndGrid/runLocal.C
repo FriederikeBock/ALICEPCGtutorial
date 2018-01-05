@@ -32,12 +32,12 @@ void runLocal(TString DataSet = "LHC15h1a1",
     Int_t       workerTTL           = 7200;
 
 //========= Choose Data Set ====
-    if(DataSet.CompareTo("LHC12d")==0){
-        begin=0; end=23;
+    if(DataSet.CompareTo("LHC12c")==0){
+        begin=0; end=9;
         pass = "2";
         isMC = 0;
-        dataSetName = "LHC12d";
-        localFolder+="pp/LHC12d/pass2/";
+        dataSetName = "LHC12c";
+        localFolder+="pp/LHC12c/pass2/";
 	}else if(DataSet.CompareTo("LHC15h1a1")==0){
 		begin=0; end=19;
         pass="2";

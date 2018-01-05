@@ -5,7 +5,7 @@
 [What is the GRID?](http://wlcg.web.cern.ch/)
 
 You need to have a valid GRID certificate if you want to work with ALICE data.
-If you don't know what a GRID certificate is, please ask your supervisor as he needs to request a certificate for you.
+If you don't know what a GRID certificate is, please ask your supervisor as he/she needs to request a certificate for you.
 
 [How-To get/install the GRID certificate](https://dberzano.github.io/alice/alien-certificate/)
 
