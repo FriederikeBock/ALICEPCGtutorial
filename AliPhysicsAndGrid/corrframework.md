@@ -2,6 +2,8 @@
 
 The full set of EMCal calibrations was previously handled by the Tender and was composed of several tasks that were, by demand, added to the analysis chain. The EMCal group has introduced a new framework for the handling of the corrections/calibrations which in addition brings many more useful features. The framework was thoroughly tested by the group and verified to yield the same results as using the Tender.
 
+## Setting up the framework
+
 Setting up the correction framework invovles writing a yaml configuration file. The basic configuration can be found in AliPhysics/PWG/EMCAL/config/AliEmcalCorrectionConfiguration.yaml. In this configuration, the default setting for all corrections/calibrations is "false" meaning that they are not being applied. A very detailed introduction to the parts of this configuration can be found on the [AliDoc webpage](http://alidoc.cern.ch/AliPhysics/master/_r_e_a_d_m_eemc_corrections.html#configureEMCalCorrections).
 
 In the following, only the basic adjustments to the configurations will be explained. The current configurations that are available for our tasks can be found in AliPhysics/PWGGA/GammaConv/config/PWGGA_CF_config.yaml and AliPhysics/PWGGA/GammaConv/config/PWGGA_CF_config_MC.yaml.
@@ -90,6 +92,7 @@ ClusterNonLinearity_S500A100W3:
     clusterContainersNames:
         - ClusterContainerS500A100W3
 ```
+## Local running
 
 For a local test, using the correction framework we now have to add the corresponding tasks for our default setting and the final setting that we want to use in the analysis. This would look like the following in the local test macro:
 
@@ -129,5 +132,7 @@ Correction components:
 
 This now allows us to use the new configuration "S500A100W3" in our analysis tasks via:
 `AliAnalysisTask *taskEMC = AddTask_GammaCalo_pp(0,intMCrunning,1,1, "",conversionAODCutnumber ,periodName,kFALSE,kFALSE,5,kFALSE,kTRUE,3.,periodName,kFALSE,"","",kTRUE,kFALSE,"S500A100W3", "450" );`
+
+## Grid running
 
 **The correction framework can also be used on the grid, however, this part is still under development and will be added in the future.**
