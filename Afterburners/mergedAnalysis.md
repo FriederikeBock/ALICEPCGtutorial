@@ -8,9 +8,9 @@ Due to the nature of this analysis, triggered data is of great importance to sel
 
 The merged analysis is done with the following classes/macros in our repositories:
   
-**GRID**: AddTask_GammaCaloMerged_pp/pPb ->  AliAnalysisTaskGammaCaloMerged
+**GRID**: AddTask_GammaCaloMerged_pp/pPb, AliAnalysisTaskGammaCaloMerged
 
-**Afterburner**: ExtractSignalMergedMeson -> CorrectSignalMerged
+**Afterburner**: ExtractSignalMergedMeson, CompareShapeMergedClusterQuantities, CorrectSignalMerged
 
 The task on the grid uses the same cut classes as the other calorimeter tasks, however, contrary to the standard calorimeter task two AliCaloPhotonCuts cutnumbers are defined. One cutnumber is used on all clusters and one to select the merged clusters. The merged analysis cutnumbers have the following format:
 
@@ -19,7 +19,25 @@ The task on the grid uses the same cut classes as the other calorimeter tasks, h
   event       cluster           merged cluster         meson
 ```
 
-The task provides in the end an output file called GammaCaloMerged.root. This output is fed as shown in the flow chart into out AnalysisSoftware afterburners.
+The task provides in the end an output file called GammaCaloMerged.root. This output is fed, as shown in the flow chart, into the AnalysisSoftware afterburners.
 
 ![](/assets/MergedAnalysisOverview.jpg)
 
+Running ExtractSignalMergedMeson produces several plots in the outputfolder `$CUTNUMBER/$ENERGY/ExtractSignalMergedMeson`. Control plots showing the energy dependend M02 cut in Pi0_data_EVsM02_AllAcceptedMesons are produced for data and MC, see:
+![](/assets/Pi0_data_EVsM02_AllAcceptedMesons.jpg)
+Furthermore, the M02 distributions for each pT bin are shown as well as the corresponding invariant mass distributions for the merged cluster pion candidates.
+![](/assets/Pi0_data_MesonM02_00081113_1111111067032200000_1111111067022700001_0163300000000000.jpg)
+![](/assets/Pi0_data_MesonInvMass_00081113_1111111067032200000_1111111067022700001_0163300000000000.jpg)
+
+The second macro in the analysis chain (CompareShapeMergedClusterQuantities) makes necessary comparison plots between data and MC for different quantities (cluster energy, M02, number of cells per merged cluster and invariant mass). It can be seen that in Monte Carlo less cells per cluster will be present, however the invariant mass and M02 distributions agree quite acceptable, see:
+
+![](/assets/Pi0_MesonM02Compared_00081113_1111111067032200000_1111111067022700001_0163300000000000.jpg)
+
+The correction of the raw yields from the merged clusters is done in CorrectSignalMerged. Here, acceptance, efficiency, secondary contamination and purity are determined from Monte Carlo and applied.
+In the following, the background contributions and corresponding purity correction are shown.
+![](/assets/Pi0_MC_BGRatioPtCleaner_00081113_1111111067032200000_1111111067022700001_0163300000000000.jpg)
+![](/assets/Pi0_data_TruePurity_00081113_1111111067032200000_1111111067022700001_0163300000000000.jpg)
+Furtheremore, the acceptance correction is given:
+![](/assets/Pi0_Acceptance_00081113_1111111067032200000_1111111067022700001_0163300000000000.jpg)
+The secondary raw yields are shown below:
+![](/assets/Pi0_data_RAWYieldSecPt_00081113_1111111067032200000_1111111067022700001_0163300000000000.jpg)
