@@ -8,7 +8,7 @@
 ## AliPhysics Implementation and GRID Running
    * [GRID and AliRoot/AliPhysics](AliPhysicsAndGrid/aliphysics.md)
    * [Running AnalysisTasks](AliPhysicsAndGrid/runningTasks.md)
-   * [Integration of new Monte Carlo Simulations](AliPhysicsAndGrid/jetjet-mc.md)
+   * [Integration of Dataset/MC](AliPhysicsAndGrid/jetjet-mc.md)
    * [LEGO Trains](AliPhysicsAndGrid/legotrains.md)
    * [Download Files from GRID](AliPhysicsAndGrid/download.md)
    * [The EMCal Correction Framework](AliPhysicsAndGrid/corrframework.md)
@@ -32,3 +32,4 @@
    * [Merged Cluster Analysis](Afterburners/mergedAnalysis.md)
    * [Systematic Uncertainties](Afterburners/systematics.md)
    * [Combination of Measurements](Afterburners/combination.md)
+   * [Useful functions](Afterburners/functions.md)
