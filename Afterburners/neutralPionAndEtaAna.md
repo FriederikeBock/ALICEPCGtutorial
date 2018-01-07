@@ -59,7 +59,7 @@ G
 Gaussian chosen ...
 Please check that you really want to process all cuts, otherwise change the CutSelection.log. Remember at first all gamma cutstudies will be carried out. Make sure that the standard cut is the first in the file. Continue? Yes/No?
 Y
-``
+```
 After you have understood and verified that the answers you gave, have the desired outcome you can also store them in a text file ($ENTER-separated) like [answersExamplepPbPCMEMC.txt](/assets/answersExamplepPbPCMEMC.txt) and start the script like this:
 ```
  bash start_FullMesonAnalysis_TaskV3.sh -etaOff $referenceDirectoryData/GammaConvCalo_LHC13bc-pass2_20_A.root $referenceDirectoryMC/GammaConvCalo_MC_LHC13b2_efix_p1_p2_p3_p4_20_A.root eps < answersExamplepPbPCMEMC.txt
