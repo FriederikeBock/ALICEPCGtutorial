@@ -6,7 +6,7 @@ The systematic uncertainty on the neutral meson measurements is evaluated, like 
 
 | Default | Variation 1 | Variation 2 |
 | :--- | :--- | :--- |
-| \|y\| meson &lt; 0.8 | \|y\| meson &lt; 0.6 | \|y\| meson &lt; 0.5 |
+| -0.8 &lt; y &lt; 0.8 | -0.6 &lt; y &lt; 0.6 | -0.5 &lt; y &lt; 0.5 |
 
 We then compare the corrected yield of each variation, as function of transverse momentum, to the corrected yield of the default selection cut. We always vary one cut at a time. In the case of our neutral mesons we can vary the cuts for photon and meson reconstruction. The full evaluation of the systematic uncertainty for a neutral meson analysis is handled in two parts, first by running all the different selection cuts on the grid, and then by the afterburner.
 
