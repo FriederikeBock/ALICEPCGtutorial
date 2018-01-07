@@ -14,10 +14,33 @@ However, as usual there are some exceptions and you might want to read the corre
 
 In general the repository is ordered as follows:
 
-* **main directory**: 
+* [**main directory**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware): 
   Contains general steering scripts for the macros \(_start\_FullMesonAnalysis\_TaskV3.sh, start\_FullMesonAnalysisDalitz\_TaskV2.sh, start\_FullOmegaMesonAnalysis_\), as mentioned above. Furthermore, the macros to calculate the systematics of the different analysis techniques \(_FinaliseSystematicErrors\[Calo,Conv,ConvCalo,Merged,Dalitz\]\_\[$SYSTEM$ENERGY\].C\),_ the combination macros for the mesons/gammas from different reconstruction techniques_ \(CombineMesonMeasurements\_\*.C, CombineGammaResults\_\*.C\) as well as comparison macros among different energies and particles \(_CombineNeutralPion\*.C, CompareCharged\*.C, CompareGamma\*.C_\). Most of these are tailored to specific energies and cannot be used as generalized macros, but have either been used for the corresponding publications or for the preliminary creation. 
   * Additional import macros contained in the main directory regarding the publications are the _CalculateReference.C_, _CalculateSignificanceToPYTHIA.C, ComputeCorrelationFactors.C, TestMtScaling.C_ which can be used in a slightly more general way. In addition to these there are more specific macros, which were used for the publications \(p-Pb mesons and the first meson paper\), which are not necessarily maintained any longer.
   * The compilation macros of the external inputs for different data files from ALICE and other experiments \(_PrepareChargedPionDataALICE\*.C,ProduceExperimentalDataGraphsPbPb.C_\) and theory predictions \(_ProduceTheoryGraphs\*.C_\) can also be found here.
+* [**CocktailInput**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/CocktailInput):
+
+* [**CommonHeaders**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/CommonHeaders):
+
+* [**DownloadAndDataPrep**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/DownloadAndDataPrep):
+
+* [**RooUnfold**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/RooUnfold):
+
+* [**ExternalInput**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/ExternalInput)**, **[**ExternalInputpPb**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/ExternalInputpPb)**, **[**ExternalInputPbPb**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/ExternalInputPbPb)**, **[**LHC11hInputFiles**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/LHC11hInputFiles):
+
+* [**SimulationStudies**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SimulationStudies)**, **[**ToyModels**](https://www.gitbook.com/book/friederikebock/pcgtutorial/edit#):
+
+* [**DeprecatedMacros**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/DeprecatedMacros):** **
+
+* [**SupportingMacros**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SupportingMacros):
+
+* [**SystematicErrorsNew**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SystematicErrorsNew)**, **[**SystematicErrorsOld**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SystematicErrorsOld):
+
+* [**TaskFlow**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskFlow):
+
+* [**TaskQA**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskQA):
+
+* [**TaskV1**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1):
 
 Before you start analysis, get input .root files from grid and change their format by using macros in the folder **AnalysisSoftware /DownloadAndDataPrep/ **.
 
