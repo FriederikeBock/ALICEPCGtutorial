@@ -1,8 +1,6 @@
 # Systematic Uncertainties
 
-
-
-The systematic uncertainty on the neutral meson measurements is evaluated, like in most analyses, by varying the selection cuts. These variations are chosen such that a reasonable deviation to the default selection criteria is tested. 
+The systematic uncertainty on the neutral meson measurements is evaluated, like in most analyses, by varying the selection cuts. These variations are chosen such that a reasonable deviation to the default selection criteria is tested.
 
 **For example we vary the rapidity selection of the reconstructed meson:**
 
@@ -76,13 +74,9 @@ After successfully running all the cut variations on the grid we need run the fu
 
 ## 3. Calculating the deviations to the default cut
 
-
-
 ```
 macro.c
 ```
-
-
 
 ## 4. Smoothing the deviations
 
