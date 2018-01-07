@@ -19,6 +19,13 @@ In general the repository is ordered as follows:
   * Furthermore, the macros to calculate the systematics of the different analysis techniques \(_FinaliseSystematicErrors\[Calo,Conv,ConvCalo,Merged,Dalitz\]\_\[$SYSTEM$ENERGY\].C\),_ the combination macros for the mesons/gammas from different reconstruction techniques_ \(CombineMesonMeasurements\_\*.C, CombineGammaResults\_\*.C\) as well as comparison macros among different energies and particles \(_CombineNeutralPion\*.C, CompareCharged\*.C, CompareGamma\*.C_\). Most of these are tailored to specific energies and cannot be used as generalized macros, but have either been used for the corresponding publications or for the preliminary creation. 
   * Additional import macros contained in the main directory regarding the publications are the _CalculateReference.C_, _CalculateSignificanceToPYTHIA.C, ComputeCorrelationFactors.C, TestMtScaling.C_ which can be used in a slightly more general way. In addition to these there are more specific macros, which were used for the publications \(p-Pb mesons and the first meson paper\), which are not necessarily maintained any longer.
   * The compilation macros of the external inputs for different data files from ALICE and other experiments \(_PrepareChargedPionDataALICE\*.C,ProduceExperimentalDataGraphsPbPb.C_\) and theory predictions \(_ProduceTheoryGraphs\*.C_\) can also be found here.
+  * In addition to these the [_CompileCorrectGammaV2.C_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/CompileCorrectGammaV2.C) is stored here, which needs to be adjusted to contain your user-name and path to RooUnfold-headers if you want to run the direct photon extraction.
+  * Last but not least a very helpful shell-script to create soft-links on your computer to one common software directory is stored here [_prepareResultsDirectory.sh_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/prepareResultsDirectory.sh). it is recommended to only checkout the PCG-repository once and then create soft-links to that directory in whatever other directory you are running the analysis on different data sets. It can be run by typing:
+    ```
+        bash $PATHTOPCGGIT/prepareResultsDirectory.sh $USERNAME [pp2760GeV,pPb5TeV,pp7TeV,pp8TeV,pp13TeV]
+    ```
+    with the last parameter being optional and the $USERNAME which needs to be added including the path. If the last parameter is used the number of links will be reduced in the main-dir to only include the necessary macros for that specific collision system.
+
 * [**CocktailInput**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/CocktailInput): 
   Contains the output files from the cocktail generation on the grid, which are needed as input for the Afterburners once they are final. Furthermore, contains the final processed files by _PrepareCocktail.C_ if they are close to preliminary or publication. We ask everyone not to commit too large root files here, as these will blow up the size of the repository and cannot be deleted fully again.
 
@@ -37,34 +44,34 @@ In general the repository is ordered as follows:
     * [_PlottingMeson.h_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/CommonHeaders/PlottingMeson.h) contains the specific plotting functions for the meson QA needed in the framework.
 
 * [**DownloadAndDataPrep**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/DownloadAndDataPrep): 
-  
+  Contains the shell scripts to download the root-output files created by the lego-trains per period or per run (Get[GammaConv,GammaCalo,GammaConvCalo,GammaCaloMerged,NeutralMeson\]FilesFromGridAndMergeThem\_\[pp,pPb,PbPb,XeXe\]\[$ENERGY/\$PERIOD\].sh). The newest versions of these script are for the Run2 p-Pb and Xe-Xe data, which already depend on the ([_basicFunction.sh_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/DownloadAndDataPrep/_basicFunction.sh)). In this shell script the commonly used functions for the download are stored for usage in other shell scripts. In the future please use these functions as they already check the consistency of the file and prevent multiple downloads, if not explicitly desired. Furthermore, the directory contains the helper macros for the download to separate files into their different directories ([_SeparateDifferentCutnumbers.C_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/DownloadAndDataPrep/SeparateDifferentCutnumbers.C)), to change the directory name to the default name ([_ChangeStructureToStandard.C_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/DownloadAndDataPrep/ChangeStructureToStandard.C)) and to combine the output from different folders into one file ([_CombineDifferentFolders.C_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/DownloadAndDataPrep/CombineDifferentFolders.C)). In addition, a number of perl-scripts are provide to create the disired structure for the added signal processing for certain data sets (_MakeLinks*.C_). Last but not least this directory contains the different run lists and Jet-Jet bin number list in [**DownloadAndDataPrep/runlists**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/DownloadAndDataPrep/runlists). Please make sure that if you create a new data set or analyse a new data set that these are contained under the proper name in this folder.
 
-* [**RooUnfold**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/RooUnfold): 
-  
+* [**RooUnfold**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/RooUnfold):  
+  Contains the necessary inputs to include RooUnfold. You need to compile RooUnfold uisng `make` in this folder once you have downloaded the directory in order to be able run the direct photon extraction properly. Afterwards the path to this directory needs to be included in [_CompileCorrectGammaV2.C_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/CompileCorrectGammaV2.C) including your user-name on your device.
 
-* [**ExternalInput**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/ExternalInput)**, **[**ExternalInputpPb**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/ExternalInputpPb)**, **[**ExternalInputPbPb**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/ExternalInputPbPb)**, **[**LHC11hInputFiles**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/LHC11hInputFiles): 
-  
+* [**ExternalInput**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/ExternalInput)**, **[**ExternalInputpPb**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/ExternalInputpPb)**, **[**ExternalInputPbPb**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/ExternalInputPbPb)**, **[**LHC11hInputFiles**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/LHC11hInputFiles):  
+  These directories contain additional root & text files from external sources (like other analyzers in ALICE from PHOS & EMCal on $$\pi^0, \eta \& \omega$), other particles like $$\pi^\pm, K^\pm \ldots$$ or theory calculations on the various topics. Furthermore they contain the final results for the neutral mesons once they are prelimary or published. 
 
-* [**SimulationStudies**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SimulationStudies)**, **[**ToyModels**](https://www.gitbook.com/book/friederikebock/pcgtutorial/ToyModels): 
-  
+* [**SimulationStudies**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SimulationStudies)**, **[**ToyModels**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/ToyModels): 
+  These folders contain macros to analyse the pure simulation output created by the task _AliAnalysisTaskGammaPureMC.cxx_ in **AliPhysics/PWGGA/GammaConv** as well as some macros to produce Toy-MC simulations to study for instance the effect of the the different resultions in the merged cluster analysis and a simple decay simulation for secondary decay studies.
 
 * [**DeprecatedMacros**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/DeprecatedMacros): 
-  
+  Here all macros have been moved which are no longer maintained but have been used to create published or preliminary plots. Additionally some older shell scripts to stear the material budget analysis can be found here. 
 
 * [**SupportingMacros**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SupportingMacros): 
-  
+  This directory contains a number of small macros, which are currently not need in general for the processing, but might be helpful to visualize some specific parts of the data or create specific input files for the grid analysis.
 
 * [**SystematicErrorsNew**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SystematicErrorsNew)**, **[**SystematicErrorsOld**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SystematicErrorsOld): 
-  
+  These folder should contain all systematic errors in a text format which have been used for publication or preliminary creation. They will soon be sorted a bit better and reorganized to ease the understanding of these inputs.
 
 * [**TaskFlow**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskFlow): 
-  
+  This folder contains all necessary macros to perform the direct photon flow analysis, for further details please ask **Mike Sas**
 
 * [**TaskQA**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskQA): 
-  
+  This is the dedicated folder for the post-processing macro of the analysis-level QA, they are explained in detail in the section [**Quality Assurance and Energy Calibration of Calorimeters**](https://friederikebock.gitbooks.io/pcgtutorial/content/QA/overview.md). In order to ease the processing also examples for the configuration files are given in [**TaskQA/ExampleConfigurations**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskQA/ExampleConfigurations).
 
 * [**TaskV1**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1): 
-  
+  This folder contains all macros and header files needed to perform the neutral meson ($$pi^0/$eta  \rightarrow \gamma\gamma, \gamma e^+,e^-$$ & merged), heavy meson ($$\omega, ...$$) and direct photon analyses, which will be explained in the next sections.
 
 Before you start analysis, get input .root files from grid and change their format by using macros in the folder **AnalysisSoftware /DownloadAndDataPrep/ **.
 
