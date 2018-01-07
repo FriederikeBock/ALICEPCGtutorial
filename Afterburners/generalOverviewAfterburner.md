@@ -15,12 +15,12 @@ However, as usual there are some exceptions and you might want to read the corre
 In general the repository is ordered as follows:
 
 * [**main directory**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware): 
-  * Contains general steering scripts for the macros \(_start\_FullMesonAnalysis\_TaskV3.sh, start\_FullMesonAnalysisDalitz\_TaskV2.sh, start\_FullOmegaMesonAnalysis_\), as mentioned above.  
-  * Furthermore, the macros to calculate the systematics of the different analysis techniques \(_FinaliseSystematicErrors\[Calo,Conv,ConvCalo,Merged,Dalitz\]\_\[$SYSTEM$ENERGY\].C\),_ the combination macros for the mesons/gammas from different reconstruction techniques_ \(CombineMesonMeasurements\_\*.C, CombineGammaResults\_\*.C\) as well as comparison macros among different energies and particles \(_CombineNeutralPion\*.C, CompareCharged\*.C, CompareGamma\*.C_\). Most of these are tailored to specific energies and cannot be used as generalized macros, but have either been used for the corresponding publications or for the preliminary creation. 
-  * Additional import macros contained in the main directory regarding the publications are the _CalculateReference.C_, _CalculateSignificanceToPYTHIA.C, ComputeCorrelationFactors.C, TestMtScaling.C_ which can be used in a slightly more general way. In addition to these there are more specific macros, which were used for the publications \(p-Pb mesons and the first meson paper\), which are not necessarily maintained any longer.
-  * The compilation macros of the external inputs for different data files from ALICE and other experiments \(_PrepareChargedPionDataALICE\*.C,ProduceExperimentalDataGraphsPbPb.C_\) and theory predictions \(_ProduceTheoryGraphs\*.C_\) can also be found here.
-  * In addition to these the [_CompileCorrectGammaV2.C_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/CompileCorrectGammaV2.C) is stored here, which needs to be adjusted to contain your user-name and path to RooUnfold-headers if you want to run the direct photon extraction.
-  * Last but not least a very helpful shell-script to create soft-links on your computer to one common software directory is stored here [_prepareResultsDirectory.sh_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/prepareResultsDirectory.sh). it is recommended to only checkout the PCG-repository once and then create soft-links to that directory in whatever other directory you are running the analysis on different data sets. It can be run by typing:
+    * Contains general steering scripts for the macros \(_start\_FullMesonAnalysis\_TaskV3.sh, start\_FullMesonAnalysisDalitz\_TaskV2.sh, start\_FullOmegaMesonAnalysis_\), as mentioned above.  
+    * Furthermore, the macros to calculate the systematics of the different analysis techniques \(_FinaliseSystematicErrors\[Calo,Conv,ConvCalo,Merged,Dalitz\]\_\[$SYSTEM$ENERGY\].C\),_ the combination macros for the mesons/gammas from different reconstruction techniques_ \(CombineMesonMeasurements\_\*.C, CombineGammaResults\_\*.C\) as well as comparison macros among different energies and particles \(_CombineNeutralPion\*.C, CompareCharged\*.C, CompareGamma\*.C_\). Most of these are tailored to specific energies and cannot be used as generalized macros, but have either been used for the corresponding publications or for the preliminary creation. 
+    * Additional import macros contained in the main directory regarding the publications are the _CalculateReference.C_, _CalculateSignificanceToPYTHIA.C, ComputeCorrelationFactors.C, TestMtScaling.C_ which can be used in a slightly more general way. In addition to these there are more specific macros, which were used for the publications \(p-Pb mesons and the first meson paper\), which are not necessarily maintained any longer.
+    * The compilation macros of the external inputs for different data files from ALICE and other experiments \(_PrepareChargedPionDataALICE\*.C,ProduceExperimentalDataGraphsPbPb.C_\) and theory predictions \(_ProduceTheoryGraphs\*.C_\) can also be found here.
+    * In addition to these the [_CompileCorrectGammaV2.C_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/CompileCorrectGammaV2.C) is stored here, which needs to be adjusted to contain your user-name and path to RooUnfold-headers if you want to run the direct photon extraction.
+    * Last but not least a very helpful shell-script to create soft-links on your computer to one common software directory is stored here [_prepareResultsDirectory.sh_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/prepareResultsDirectory.sh). it is recommended to only checkout the PCG-repository once and then create soft-links to that directory in whatever other directory you are running the analysis on different data sets. It can be run by typing:
     ```
         bash $PATHTOPCGGIT/prepareResultsDirectory.sh $USERNAME [pp2760GeV,pPb5TeV,pp7TeV,pp8TeV,pp13TeV]
     ```
@@ -71,54 +71,6 @@ In general the repository is ordered as follows:
   This is the dedicated folder for the post-processing macro of the analysis-level QA, they are explained in detail in the section [**Quality Assurance and Energy Calibration of Calorimeters**](https://friederikebock.gitbooks.io/pcgtutorial/content/QA/overview.md). In order to ease the processing also examples for the configuration files are given in [**TaskQA/ExampleConfigurations**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskQA/ExampleConfigurations).
 
 * [**TaskV1**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1): 
-  This folder contains all macros and header files needed to perform the neutral meson ($$pi^0/$eta  \rightarrow \gamma\gamma, \gamma e^+,e^-$$ & merged), heavy meson ($$\omega, ...$$) and direct photon analyses, which will be explained in the next sections.
+  This folder contains all macros and header files needed to perform the neutral meson ($$pi^0/$eta  \rightarrow \gamma\gamma, \gamma e^+,e^-$$ & merged), heavy meson ($$\omega, ...$$) and direct photon analyses, which will be explained in the next sections. Addtionally, it contains macros to perform the material budget analysis and characterize the meson analysis further. Also the macros to perform create the energy-position-correction of the calorimeters are stored here. Once more example configurations for the macors which need a text file as input are provide in [**TaskV1/ExampleConfigs**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/ExampleConfigs).
 
-Before you start analysis, get input .root files from grid and change their format by using macros in the folder **AnalysisSoftware /DownloadAndDataPrep/ **.
-
-_ChangeStructureToStandard.C_
-
-* Since the output from the task GammaConvV1 is not in a format readable by the following codes, you need to run this macro on the .root file \(what it does is just changing the name of the folder inside\)
-  ```
-  root -x -q -l -b 'TaskV1/ChangeStructureToStandard.C++("GammaConvV1x.root","GammaConvV1(name)_x.root","GammaConvV1_x")'
-  ```
-
-Shell scripts begin with "Get ... sh"  
-helpful to get files from grid and change structure at a time. \(what they do are create list of file to get \(alien\_ls\), copy from the grid \(alien\_cp\), change structure \(run ChangeStructure...\), and merge them\(hadd\)\)
-
-Following codes are in the folder **AnalysisSoftware/TaskV1**
-
-_ExtractSignalV2.C_
-
-* analyses the invariant mass of the mesons for each pT bin, subtracts BG, fits with functions, gives raw yields.
-* the binning for the pT for pi0/eta is defined in the header ExtractSignalBinning.h \(location: **AnalysisSoftware/CommonHeaders/**\)
-
-_AnalyseDCATestV1.C_
-
-* calculates the fraction of photons from out-of-bunch pileup
-* input file is GammaConvV1 \_\(name\)\_x.root with dca tree.
-
-_CorrectSignalV2.C_
-
-* applies the raw yields to all the corrections they need \(the input for this macro is the output from the _ExtractSignalV2.C_ and _AnalyseDCATestV1.C_\). Also in this a .root file and plots are produced
-
-_CutStudyOverview.C_
-
-* gives systematic uncertainty on cut variation with different sets of cuts.
-* input: CutSelection.log + uncorected file, corrected file
-
-_MakeCutLog.C_
-
-* gives CutSelection.log
-
-Running above macros \(except _AnalyseDCATestV1.C_\) is done by _start\_FullMesonAnalysis\_TaskV2.sh in this order: MakeCutLog.C_ -&gt; _ExtractSignalV2.C_ -&gt; _CorrectSignalV2.C_ -&gt; _CutStudyOverView.C_
-
-_FinaliseSystematicErrorsYY\_ZZ.C_ \(YY = method, ZZ = collision system and energy\)
-
-* gives a graph of all systematic uncertainties and their quadratic sum. also produce .dat file.
-
-_ProduceFinalResultsV2.C_
-
-* gives corrected yield of each mesons with systematic uncertainties.
-
-
-
+As you can imagine the software is evolving, as such some macros may exist in several version (V1,V2..), please make sure to always use the latest version if you start developing on top of something, as at some point the older ones will be deleted. In order to prevent incontinuities or larger disruptions these major deletion processes are kept to a minimum though and we try to do the changes in a more gradual fashion.

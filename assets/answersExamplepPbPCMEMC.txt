@@ -1,0 +1,12 @@
+2
+N
+pPb5
+Y
+/home/fbock/Photon/Software/PCGGIT/CocktailGridRuns/EMCocktail_pPb5TeV_PCMEMC_defaultParam_20170901.root
+0.80
+YPCMEMC
+28
+Y
+N
+G
+Y
