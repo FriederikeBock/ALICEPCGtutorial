@@ -1,9 +1,9 @@
 # Analysis Notes and Papers
 
-It is **recommended** to read through some analysis notes before going through this tutorial to gain some insight into the analysis techniques and the physics observables we are looking for.
-Below, all papers are listed which are in the context of this tutorial (neutral mesons and photons).
+It is **recommended** to read through some analysis notes before going through this tutorial to gain some insight into the analysis techniques and the physics observables we are looking for.  
+Below, all papers are listed which are in the context of this tutorial \(neutral mesons and photons\).
 
-If you click on the respective links, you will be directed to the internal paper pages of ALICE.
+If you click on the respective links, you will be directed to the internal paper pages of ALICE.  
 In the field _Article Information_ on the respective pages, you will find the section _Link to corresponding note_, where all analysis notes are linked which are relevant for the given paper.
 
 It is **highly recommended** to read the analysis notes concerning 2.76 TeV and 8 TeV for neutral mesons and direct photons, as they were the latest notes to be written and therefore describe the latest developed analysis procedures using the latest available version of the software.
@@ -24,3 +24,8 @@ It is **highly recommended** to read the analysis notes concerning 2.76 TeV and 
 * [Neutral Pions @ PbPb 2.76 TeV](https://aliceinfo.cern.ch/ArtSubmission/node/2151)
 
 * [Direct Photons @ PbPb 2.76 TeV](https://aliceinfo.cern.ch/ArtSubmission/node/1887)
+
+* [Direct Photon Flow @ PbPb 2.76 TeV](https://aliceinfo.cern.ch/Notes/node/548)
+
+
+
