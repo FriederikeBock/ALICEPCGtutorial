@@ -6,19 +6,23 @@ If you don't know how to push, pull, rebase and configure Git, you should have a
 
 It is recommended to use a visualization tool as it eases your workflow and gives you direct insight into the state of a repository and the status of all the branches. There are two different tools which are recommended to use:
 
-1. _gitk_ 
+1: _gitk_ 
 
 In general, you can install it via your package manager, for example:
 > sudo apt-get install gitk
 
 For more information see [gitk](https://git-scm.com/docs/gitk).
 
-2. _tig_
+2: _tig_
 
 In general, you can install it via your package manager, for example:
 > sudo apt-get install tig
 
 For more information see [tig](http://jonas.nitro.dk/tig/manual.html).
+
+## Suggested workflow
+
+[Suggested workflow](https://dberzano.github.io/alice/git/#workflow)
 
 ## Useful Links
 

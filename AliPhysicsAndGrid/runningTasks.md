@@ -16,6 +16,8 @@ Run the macro [runLocal.C](/AliPhysicsAndGrid/runLocal.C) (right-click and save 
 
 > root -x -l -b -q 'runLocal.C("LHC12c", kFALSE, 0, 9)'
 
+The additional macros needed are [CreateArchivChain](/AliPhysicsAndGrid/CreateRootArchiveChain.C) [CreateArchivChainAOD](/AliPhysicsAndGrid/CreateRootArchiveChainAOD.C) (right-click and save as).
+
 The first argument chooses the data set specified in the _runLocal_ macro. The second argument selects between _offline_ / _GRID testing_ and the two numbers specifiy, which files should be processed (in the example the files from folder '0' until folder '9').
 
 * if you test AODs, you need to specify the AOD cut number. To know it, look into the aodTree in the AliAODGammaConversion.root
