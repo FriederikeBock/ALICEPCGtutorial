@@ -13,8 +13,8 @@ It is **highly recommended** to read the analysis notes concerning 2.76 TeV and 
 **small systems**
 
 * [Neutral Mesons @ pp 0.9 + 7 TeV](https://aliceinfo.cern.ch/ArtSubmission/node/147)
-  * [PCM](https://aliceinfo.cern.ch/Notes/node/50)
-  * [PHOS](https://aliceinfo.cern.ch/Notes/node/173)
+  - [PCM](https://aliceinfo.cern.ch/Notes/node/50)
+  - [PHOS](https://aliceinfo.cern.ch/Notes/node/173)
 
 * [Neutral Mesons @ pp 2.76 TeV](https://aliceinfo.cern.ch/ArtSubmission/node/1590)
   * [EMCAL](https://aliceinfo.cern.ch/Notes/node/468)
