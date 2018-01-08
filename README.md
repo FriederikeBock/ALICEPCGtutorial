@@ -7,14 +7,14 @@ In the provided software package the reconstruction of photons within ALICE usin
 Our software is structured in 3 main parts hosted on GitHub and GitLab:
 
 1. [**AliPhysics**](https://github.com/alisw/AliPhysics) implementation in **PWGGA/GammaConv**, which is running on the reconstructed ESD/AOD data or simulation files
-2. **Afterburner** implementation which is kept and maintained in the [**PCG-Software directory**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware) and is used to analyse the output files of the AliPhysics-Tasks to extract the meson spectra \($$\pi^0, \eta, \omega$$\), $$v_n$$ and direct photon results
+2. **Afterburner** implementation which is kept and maintained in the [**PCG-Software directory**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware) and is used to analyse the output files of the AliPhysics-Tasks to extract the meson spectra \($$\pi^0, \eta, \omega$$\), $$v\_n$$ and direct photon results. It is named _AnalysisSoftware_ repository
 3. **Cocktail** implementation, which is scattered in 2 different places in AliPhysics \(**PWG/Cocktail** & **PWGGA/GammaConv**\) and which has to fed by inputs summarized in the [**Cocktail-Repository**](https://gitlab.cern.ch/alice-cocktail-EM/cocktail_input)
 
 All three packages will be needed to complete the full meson and direct photon analysis as it is currently implemented and will be explained in the following tutorial in different sections.
 
-To gain committer-access to the PCG-Software directory please subscribe to **_alice-pcg_ & _alice-pcg-core_** on [e-groups](https://e-groups.cern.ch/) and to get the committer access to the Cocktail repository you have to be subscribed to **_alice-cocktail-EM_**.
+Furthermore, we have a repository (named AnalysisNotes) hosting all analysis/combination notes [**PCG-Notes repository**](https://gitlab.cern.ch/alice-pcg/AnalysisNotes) where you should contribute with your own analysis note once your analysis reached an advanced stage and is targeted to be included in a publication.
 
-Furthermore, we have a repository hosting all analysis/combination notes [**PCG-Notes repository**](https://gitlab.cern.ch/alice-pcg/AnalysisNotes) where you should contribute with your own analysis note once your analysis reached an advanced stage and is targeted to be included in a publication.
+To gain committer-access to the PCG-Software directories (AnalysisSoftware and AnalysisNotes) please subscribe to **_alice-pcg_ & _alice-pcg-core_** on [e-groups](https://e-groups.cern.ch/) and to get the committer access to the Cocktail repository you have to be subscribed to **_alice-cocktail-EM_**. For AliPhysics such a subscribtion is not needed as you create your own fork of the repository and do pull-requests as described in [Working with AliPhysics](http://alisw.github.io/git-tutorial/).
 
 Last but not least, the last GitHub repository is our GitBook tutorial repository to complete the list (which you are reading) [**PCG-tutorial**](https://github.com/FriederikeBock/ALICEPCGtutorial) which is linked to the GitBook itself [**Tutorial**](https://friederikebock.gitbooks.io/pcgtutorial/content/)
 
@@ -32,6 +32,22 @@ or directly to the convenors and creators of the tutorial
 * Mike Sas [msas@nikhef.nl](mailto:msas@nikhef.nl)
 
 We are happy to help.
+
+## Communication Tools
+
+Besides the egroup and email contact, the _PCG_ uses a [Slack](https://slack.com) group [PCM @ Slack](https://alicepcmgroup.slack.com/). 
+If you want to join the group, you need to have an invitation.
+Please write an e-mail to one of the creators of the tutorial for this purpose.
+
+**Weekly meetings of the PCG**
+
+Weekly meetings of the PCG take place on vidyo [PCG @ Indico](https://indico.cern.ch/category/4027/).
+They are usually scheduled for Thursday, 10am, and open to anybody with interest in the topic.
+Announcements are sent around via the main egroup
+
+* [alice-pcg@cern.ch](mailto:alice-pcg@cern.ch)
+
+which you should be registered to in addition to [alice-pcg-core@cern.ch](mailto:alice-pcg-core@cern.ch) -> see [egroups](egroups.cern.ch)
 
 ## Additional Information
 
