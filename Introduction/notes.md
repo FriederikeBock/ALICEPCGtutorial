@@ -17,6 +17,8 @@ It is **highly recommended** to read the analysis notes concerning 2.76 TeV and 
 * [Neutral Mesons @ pp 8 TeV](https://aliceinfo.cern.ch/ArtSubmission/node/3170)
 * [Neutral Mesons @ pPb 5.023 TeV](https://aliceinfo.cern.ch/ArtSubmission/node/2963)
 
+* [Neutral Mesons @ pPb 5.023 TeV PCM-PHOS](https://aliceinfo.cern.ch/Notes/node/690)
+
 * [Direct Photons @ pp 2.76 + 8 TeV](https://aliceinfo.cern.ch/ArtSubmission/node/4106)
 
 **heavy-ions**
