@@ -47,22 +47,31 @@ We modify the AddTask accordingly
 **Default cut:**
 
 ```
-cut 1
+cuts.AddCut("80000113","1111141057032230000","01631031000000d0"); // 1 cell lead cell, 17mrad open
 ```
 
 Variations 1:
 
 ```
-cut 2
+cuts.AddCut("80000113","1111141057032230000","01631031000000a0"); // 1 cell lead cell, 0mrad open
 ```
 
 Variations 2:
 
 ```
-cut 3
+cuts.AddCut("80000113","1111141057032230000","01631031000000b0"); // 1 cell lead cell, 15mrad open
 ```
 
-Remember to not put all cut variations in a single configuration, since that would consume too much memory on the grid.
+In the AddTask we would include these variations like this:
+
+```
+} else if (trainConfig == 21){ // default cutstring, 1cell distance lead cell
+    cuts.AddCut("80000113","1111141057032230000","01631031000000a0"); // 1 cell lead cell
+    cuts.AddCut("80000113","1111141057032230000","01631031000000d0"); // 1 cell lead cell, 17mrad open
+    cuts.AddCut("80000113","1111141057032230000","01631031000000b0"); // 1 cell lead cell, 15mrad open
+```
+
+Remember to not put more than 4 or 5 cut variations in a single configuration, since that would consume too much memory on the grid.
 
 ## 2. Running all the cuts
 
@@ -74,9 +83,31 @@ After successfully running all the cut variations on the grid we need run the fu
 
 ## 3. Calculating the deviations to the default cut
 
+After running the cuts we need to add the information to the CutStudies folder. For each set of variations we do it like\(now an example for varying Alpha\):
+
 ```
-macro.c
+# # Alpha
+echo -e "80000113_00200009327000008250400000_2444451041013200000_0163103100000010\n80000113_00200009327000008250400000_2444451041013200000_0163105100000010\n80000113_00200009327000008250400000_2444451041013200000_0163106100000010" > CutSelectionAlpha.log
+    echo -e "Alpha\nLHC13bc\n3\nY\npPb5\nY\n/home/mike/2_pPb_EMC/0_analysis/170803_final_EMC/CocktailEMC_4Mio.root\n0.80\nN\nY\nY" > answersAlpha.txt
+    cp CutSelectionAlpha.log CutSelection.log
+    bash start_FullMesonAnalysis_TaskV3.sh -dgammaOff bla eps < answersAlpha.txt
 ```
+
+Note that this does not refit the mass peaks, it skips that part and runs the CutStudiesOverview on the variations and the default cut and stores it in the corresponding folder. This part is needed for the next macro that generates the systematic uncertainties.
+
+After this procedure is done for all variations we use the following macro to calculate the systematic error:
+
+```
+FinaliseSystematicErrorsMETHOD_system.C
+```
+
+So for pPb it would be the following:
+
+```
+FinaliseSystematicErrorsConvCalo_pPb.C
+```
+
+In this macro we decide which of the cut variations to smooth and which contribute to the total systematic uncertainty.
 
 ## 4. Smoothing the deviations
 
@@ -95,7 +126,7 @@ There is one contribution to the systematic uncertainty that is very rarely smoo
 For generating the final result we use the following macro:
 
 ```
-macro.c
+TaskV1/ProduceFinalResultsPatchedTriggers.C
 ```
 
 
