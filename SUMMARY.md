@@ -3,6 +3,7 @@
 * [Welcome](README.md)
 * [Git](git.md)
 * [General Naming Scheme and Analysis Tasks](Introduction/generalIntro.md)
+* [General Afterburner Introduction](Afterburners/generalOverviewAfterburner.md)
 * [Analysis Notes and Papers](Introduction/notes.md)
 
 ## AliPhysics Implementation and GRID Running
@@ -28,7 +29,6 @@
    * [Link collection from other PWGs](Cocktail/ExternalLinks.md)
 
 ## Neutral Meson and Direct Photon Analysis - Afterburners
-   * [General Afterburner Introduction](Afterburners/generalOverviewAfterburner.md)
    * [Neutral Pion and Eta Analysis](Afterburners/neutralPionAndEtaAna.md)
    * [Merged Cluster Analysis](Afterburners/mergedAnalysis.md)
    * [Systematic Uncertainties](Afterburners/systematics.md)
