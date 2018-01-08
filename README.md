@@ -14,6 +14,17 @@ All three packages will be needed to complete the full meson and direct photon a
 
 Furthermore, we have a repository (named AnalysisNotes) hosting all analysis/combination notes [**PCG-Notes repository**](https://gitlab.cern.ch/alice-pcg/AnalysisNotes) where you should contribute with your own analysis note once your analysis reached an advanced stage and is targeted to be included in a publication.
 
+The _AliPhysics_ repository is automatically installed, the rest of the repositores can be cloned to your local disk (remember the SSH key registration!) via the following commands:
+
+* AnalysisSoftware
+> git clone ssh://git@gitlab.cern.ch:7999/alice-pcg/AnalysisSoftware.git
+
+* AnalysisNotes
+> git clone ssh://git@gitlab.cern.ch:7999/alice-pcg/AnalysisNotes.git
+
+* Cocktail
+> ssh://git@gitlab.cern.ch:7999/alice-cocktail-EM/cocktail_input.git
+
 To gain committer-access to the PCG-Software directories (AnalysisSoftware and AnalysisNotes) please subscribe to **_alice-pcg_ & _alice-pcg-core_** on [e-groups](https://e-groups.cern.ch/) and to get the committer access to the Cocktail repository you have to be subscribed to **_alice-cocktail-EM_**. For AliPhysics such a subscribtion is not needed as you create your own fork of the repository and do pull-requests as described in [Working with AliPhysics](http://alisw.github.io/git-tutorial/).
 
 Last but not least, the last GitHub repository is our GitBook tutorial repository to complete the list (which you are reading) [**PCG-tutorial**](https://github.com/FriederikeBock/ALICEPCGtutorial) which is linked to the GitBook itself [**Tutorial**](https://friederikebock.gitbooks.io/pcgtutorial/content/)
