@@ -12,9 +12,11 @@ It is **highly recommended** to read the analysis notes concerning 2.76 TeV and 
 
 **small systems**
 
+
 * [Neutral Mesons @ pp 0.9 + 7 TeV](https://aliceinfo.cern.ch/ArtSubmission/node/147)
-  - [PCM](https://aliceinfo.cern.ch/Notes/node/50)
-  - [PHOS](https://aliceinfo.cern.ch/Notes/node/173)
+  * [PCM](https://aliceinfo.cern.ch/Notes/node/50)
+  * [PHOS](https://aliceinfo.cern.ch/Notes/node/173)
+
 
 * [Neutral Mesons @ pp 2.76 TeV](https://aliceinfo.cern.ch/ArtSubmission/node/1590)
   * [EMCAL](https://aliceinfo.cern.ch/Notes/node/468)
@@ -22,12 +24,14 @@ It is **highly recommended** to read the analysis notes concerning 2.76 TeV and 
   * [Merged EMCAL](https://aliceinfo.cern.ch/Notes/node/483)
   * [Combination](https://aliceinfo.cern.ch/Notes/node/484)
 
+
 * [Neutral Mesons @ pp 8 TeV](https://aliceinfo.cern.ch/ArtSubmission/node/3170)
   * [PCM](https://aliceinfo.cern.ch/Notes/node/490)
   * [EMCAL](https://aliceinfo.cern.ch/Notes/node/489)
   * [PCM-EMCAL](https://aliceinfo.cern.ch/Notes/node/411)
   * [PHOS](https://aliceinfo.cern.ch/Notes/node/385)
   * [Combination](https://aliceinfo.cern.ch/Notes/node/522)
+
 
 * [Neutral Mesons @ pPb 5.023 TeV](https://aliceinfo.cern.ch/ArtSubmission/node/2963)
   * [PCM](http://aliceinfo.cern.ch/Notes/node/285)
@@ -37,21 +41,26 @@ It is **highly recommended** to read the analysis notes concerning 2.76 TeV and 
   * [PCM-PHOS](https://aliceinfo.cern.ch/Notes/node/690)
   * [Combination](http://aliceinfo.cern.ch/Notes/node/488)
 
+
 * [Direct Photons @ pp 2.76 + 8 TeV](https://aliceinfo.cern.ch/ArtSubmission/node/4106)
   * [Note 2.76 TeV](https://aliceinfo.cern.ch/Notes/node/695)
   * [Note 8 TeV](https://aliceinfo.cern.ch/Notes/node/706)
 
+
 **heavy-ions**
+
 
 * [Neutral Pions @ PbPb 2.76 TeV](https://aliceinfo.cern.ch/ArtSubmission/node/153)
   * [pp+PbPb PCM](https://aliceinfo.cern.ch/Notes/node/217)
   * [pp PHOS](https://aliceinfo.cern.ch/Notes/node/150)
   * [PbPb PHOS](https://aliceinfo.cern.ch/Notes/node/43)
 
+
 * [Direct Photons @ PbPb 2.76 TeV](https://aliceinfo.cern.ch/ArtSubmission/node/224)
   * [PCM](https://aliceinfo.cern.ch/Notes/node/87)
   * [PHOS](https://aliceinfo.cern.ch/Notes/node/226)
   * [Significance of Excess](https://aliceinfo.cern.ch/Notes/node/427)
+
 
 * [Direct Photon Flow @ PbPb 2.76 TeV](https://aliceinfo.cern.ch/Notes/node/548)
 
