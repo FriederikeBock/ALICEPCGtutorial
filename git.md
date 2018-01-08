@@ -24,6 +24,29 @@ For more information see [tig](http://jonas.nitro.dk/tig/manual.html).
 
 [Suggested workflow](https://dberzano.github.io/alice/git/#workflow)
 
+## Basic GIT workflow in our repositories
+Checkout your development branch in the given repository
+> git checkout UserBranch
+
+make your changes to the macros and/or add new files (i.e. ExtractSignalBinning.h)
+> git add ExtractSignalBinning.h
+
+Write a commit message and make the commit itself via:
+> git commit -m "Changed binning for some energy"
+
+Checkout the master branch and rebase to the latest version
+> git checkout master
+> git pull --rebase
+
+Checkout your branch again and rebase it to the latest master version
+> git checkout UserBranch
+> git rebase master
+
+If everything works with the rebase, then push the changes.
+> git push origin UserDevel
+
+Afterwards, a merge request can be made on the git repositories website.
+
 ## Useful Links
 
 * [General Git tutorial](https://git-scm.com/doc)
