@@ -4,10 +4,12 @@
 
 ## More information on cutstrings
 
+To handle all the different possibilities to select our photons and neutral meson candidates we make use of a "cutstring" for the event cuts, conversion cuts, calo cuts and meson cuts. Changing for example a minimum energy threshold for your analysis will be done by changing a digit in the corresponding cutstring. It is recommended to open the classes in parallel so you can easily navigate around to find which digit corresponds to which cut.
+
 **Conversion cut:**
 
 ```
-cuts.AddCut("80000113", "00200009327000008250404000", "0162103500900000"); 
+cuts.AddCut("80000113", "00200009327000008250404000", "0162103500900000");
 ```
 
 **Calo cut:**
@@ -119,7 +121,6 @@ const char* AliConversionMesonCuts::fgkCutNames[AliConversionMesonCuts::kNCuts] 
 };
 
 //==============================================================
-
 ```
 
 
