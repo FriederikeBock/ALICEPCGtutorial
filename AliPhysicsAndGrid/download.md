@@ -8,9 +8,9 @@ Both approaches have their (dis-)advantages, you may decide what is more conveni
 
 #### Download ESD/AODs from the GRID (data / MC production)
 
-The download macro may be found here: [DL-macro](GridJobFileListDL.C) (right-click and save as). It can be called with:
+The download macro may be found here: [DL-macro](/AliPhysicsAndGrid/GridJobFileListDL.C) (right-click and save as). It can be called with:
 
-> root -x -l -b -q 'GridJobFileListDL("list1.txt","pp/LHC12c/pass2","YOURPATH/LocalFiles")'
+> root -x -l -b -q 'GridJobFileListDL.C+("list1.txt","pp/LHC12c/pass2","YOURPATH/LocalFiles")'
 
 It automatically downloads the specified files, saves them in the folder structure needed for running local tests (-> [Running AnalysisTasks](AliPhysicsAndGrid/runningTasks.md)) and unzips the compressed files.
 
@@ -29,7 +29,7 @@ The first argument is the list of files you want to download, an example content
 
 The second argument specifies the relative path where data should be stored ( -> need to be specified in _runLocal.C_ [Running AnalysisTasks](AliPhysicsAndGrid/runningTasks.md)) and the third argument gives the absolute path on your system.
 
-There is a possibility to hand over a fourth argument to the function, if you want to download the files from a specific SE (in case the download is slow due to some unresponsive SEs).
+There is a possibility to hand over a fourth argument to the function, if you want to download the files from a specific SE (in case the download is slow due to some unresponsive SEs, for exaple '_ALICE::FZK::SE_').
 
 ### Download LEGO train output (analysis)
 
