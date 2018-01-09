@@ -1,4 +1,4 @@
-# Summary
+## Introduction
 
 * [Welcome](README.md)
 * [Git](git.md)
