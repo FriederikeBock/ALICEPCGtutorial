@@ -6,7 +6,7 @@ Both approaches have their (dis-)advantages, you may decide what is more conveni
 
 ## 1. via C++ macro
 
-#### Download ESD/AODs from the GRID (data / MC production)
+### Download ESD/AODs from the GRID (data / MC production)
 
 The download macro may be found here: [DL-macro](/AliPhysicsAndGrid/GridJobFileListDL.C) (right-click and save as). It can be called with:
 
@@ -67,4 +67,96 @@ This macro can read in bins/runs of a JetJet MC and plots the NTrials and XSecti
  
 ## 2. via bash script
 
-To-Do (Fredi)
+### Download LEGO train output (analysis)
+
+Over the past few years we also implemented quite some shell scripts to download the data from the grid in particular for the lego train outputs, they can be found in [**AnalysisSoftware/DownloadAndDataPrep**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/DownloadAndDataPrep/). They are usually data set & analysis method specific and take care of the correct download and merging of the corresponding lego train outputs. As such they are in a lot of cases very specific and might need a bit more adjustments when adapting for a new data set. At the same time they also allow very specific modifications (i.e. adjusting the download and merging of specific run-lists only). Furthermore, also the download of partially unmerged runs is slightly easier and the number of downloads can be a bit optimized by for instance always downloading the full _root\_archive.zip_ and only deleting the corresponding files in the end.
+The download scripts are named according to the following scheme:
+* GetGamma\[Calo,Conv,ConvCalo,CaloMerged\]FilesFromGridAndMergeThem\_\[$COLLSYS/$ENERGY/$PERIODNAME\].sh
+  i.e `GetGammaCaloFilesFromGridAndMergeThem_PbPbLHC10h.sh` or `GetGammaConvCaloFilesFromGridAndMergeThem_pPbRun2_5TeV.sh`
+
+As the script scripts got better we recommend to always have a look at the lastest scripts which have been added to the repository, as these most likely contain the most recent features. Currently the best developed are the ones for `pPbRun2_5TeV` & `XeXe`. These are based already on the common functions file [_basicFunction.sh_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/DownloadAndDataPrep/basicFunction.sh) in which all functions, which had been used more frequently have now been implemented. The shell scripts rely on the actual shell interface of alien meaning the programs:
+```
+alien_ls
+alien_cp
+alien_mkdir
+alien_find
+...
+```
+These programs can be executed directly from the bash once you initialized your alice-environment. As such the parsing of files is sometimes more convenient and consequently more straight forwards to parse. Often also basic shell programs as `sed, cat, grep, find` and so on are used. Thus if you are not sure what a certain option does just type `man $PROGRAMNAME` and have a look at the corresponding man-page directly or ask us.
+
+The most complex call for the scripts is :
+> bash GetGammaCaloFilesFromGridAndMergeThem_pPbRun2.sh fbock 0 fast _FAST _fast
+However usually only the first two arguments after the script-name are defined. Where the first one defines your username and in accordance with that some global settings, which you need to add to:
+```
+if [ $1 = "fbock" ]; then
+    BASEDIR=/mnt/additionalStorageExternal/OutputLegoTrains/pPb
+elif [ $1 = "dmuhlhei" ]; then
+    BASEDIR=~/data/work/Grid
+fi
+
+```
+in the beginning of the script. The corresponding outputs are gonna be stored in this base directory with the folder-name $TRAINDIR. In addition depending on this-base directory ($BASEDIR) the number of slashes to reach a certain file is calculated as follows: 
+```
+# Definitition of number of slashes in your path to different depths
+NSlashesBASE=`tr -dc '/' <<<"$BASEDIR" | wc -c`
+NSlashes=`expr $NSlashesBASE + 4`
+NSlashes2=`expr $NSlashes - 1`
+NSlashes3=`expr $NSlashes + 1`
+NSlashes4=`expr $NSlashes + 2`
+echo "$NSlashesBASE $NSlashes $NSlashes2 $NSlashes3 $NSlashes4"
+```
+In addition various global variables are set, which allow you to switch on the downloading of the periods, single runs as well as enabling the merging
+```
+DOWNLOADON=1            # 0/1 - dowload off/on
+MERGEON=1               # 0/1 - global merging of multiple periods switched off/on
+SINGLERUN=1             # 0/1 - download single runs off/on
+SEPARATEON=1            # 0/1 - switch off/on separation of cutnumber into different files
+MERGEONSINGLEData=1     # 0/1 - disable/enable merging for single runs of data
+MERGEONSINGLEMC=1       # 0/1 - disable/enable merging for single runs of MC
+CLEANUP=1               # 0/1 - disable/enable cleaning up of directory
+CLEANUPMAYOR=$2         # 0/1 - disable/enable mayor cleaning up of directory handed as second argument to shell-script
+number=""               # temporary variable
+```
+
+Afterwards the general data set variable are created and the corresponding booleans are enabled. The latter should be 1 if the data set is there and will be automatically put to 0, if they are not.
+```
+# check if train configuration has actually been given
+HAVELHC16q=1
+HAVELHC16t=1
+HAVETOBUILDData=0
+HAVELHC17f2b=1
+HAVELHC17f2afix=1
+
+# default trainconfigurations
+LHC16qData="";
+LHC16tData="";
+LHC16qtData="";
+LHC17f2bMC="";
+LHC17f2a_fixMC="";
+
+passNr="1";
+```
+Last but not least of the configurations the train-numbers which you want to download are handed as data set names, and the script will parse the corresponding train runs.
+```
+TRAINDIR=Legotrain-vAN20171005-dirGammaRun2
+# woSDD (CENT)
+ LHC16qtData="679"; #pass 2
+ LHC16qData="child_1"; #pass 3
+ LHC16tData="child_2"; #pass 2
+ LHC17f2bMC="1090";
+ LHC17f2a_fixMC="1088";
+```
+
+Then the script checks if the train runs exist and downloads the files as specified. If needed this is done run-wise.
+> CopyFileIfNonExisitent $OUTPUTDIR_LHC17f2a_fix "/alice/cern.ch/user/a/alitrain/PWGGA/GA_pPb_MC/$LHC17f2a_fixMC/merge" $NSlashes "" kTRUE
+
+For the new pPb data-set (16q,r,s,t) multiple reconstructions are available. Thus, in order to correctly download the run-wise output for MC, the arguments `fast _FAST _fast`, `woSDD _CENT_woSDD _cent_woSDD` or `wSDD _CENT_wSDD _cent` had to be added to the shell script call. The first one defining the runlist-name addition, the second defining the data additional name and the third the MC additional name. 
+Afterwards the files are merged according to certain runlists defined in [**AnalysisSoftware/DownloadAndDataPrep/runlists**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/DownloadAndDataPrep/runlists)
+> MergeAccordingToSpecificRunlist fileLHC17f2a_fix.txt $OUTPUTDIR_LHC17f2a_fix $NSlashes3 GammaCalo All runlists/runNumbersLHC17f2a_fix_$3_all.txt
+
+and brought into a common naming scheme and format, also containing the runlist name.
+> ChangeStructureIfNeededCalo $fileName $OUTPUTDIR_LHC16q $NSlashes "LHC16q_$3-pass$passNr-All" "-All"
+
+Lastly the sub-periods which can be merged are merged using `hadd` as well as the corresponding MC's if need be. 
+
+If the second option of the scripts was a `1` the script will only do the cleanup of the runwise outputs, so make sure you really wanna do that, if you set it.
