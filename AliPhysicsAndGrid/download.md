@@ -85,7 +85,9 @@ alien_find
 These programs can be executed directly from the bash once you initialized your alice-environment. As such the parsing of files is sometimes more convenient and consequently more straight forwards to parse. Often also basic shell programs as `sed, cat, grep, find` and so on are used. Thus if you are not sure what a certain option does just type `man $PROGRAMNAME` and have a look at the corresponding man-page directly or ask us.
 
 The most complex call for the scripts is :
-> bash GetGammaCaloFilesFromGridAndMergeThem_pPbRun2.sh fbock 0 fast _FAST _fast
+```
+bash GetGammaCaloFilesFromGridAndMergeThem_pPbRun2.sh fbock 0 fast _FAST _fast
+```
 However usually only the first two arguments after the script-name are defined. Where the first one defines your username and in accordance with that some global settings, which you need to add to:
 ```
 if [ $1 = "fbock" ]; then
@@ -148,14 +150,20 @@ TRAINDIR=Legotrain-vAN20171005-dirGammaRun2
 ```
 
 Then the script checks if the train runs exist and downloads the files as specified. If needed this is done run-wise.
-> CopyFileIfNonExisitent $OUTPUTDIR_LHC17f2a_fix "/alice/cern.ch/user/a/alitrain/PWGGA/GA_pPb_MC/$LHC17f2a_fixMC/merge" $NSlashes "" kTRUE
+```
+ CopyFileIfNonExisitent $OUTPUTDIR_LHC17f2a_fix "/alice/cern.ch/user/a/alitrain/PWGGA/GA_pPb_MC/$LHC17f2a_fixMC/merge" $NSlashes "" kTRUE
+```
 
 For the new pPb data-set (16q,r,s,t) multiple reconstructions are available. Thus, in order to correctly download the run-wise output for MC, the arguments `fast _FAST _fast`, `woSDD _CENT_woSDD _cent_woSDD` or `wSDD _CENT_wSDD _cent` had to be added to the shell script call. The first one defining the runlist-name addition, the second defining the data additional name and the third the MC additional name. 
 Afterwards the files are merged according to certain runlists defined in [**AnalysisSoftware/DownloadAndDataPrep/runlists**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/DownloadAndDataPrep/runlists)
-> MergeAccordingToSpecificRunlist fileLHC17f2a_fix.txt $OUTPUTDIR_LHC17f2a_fix $NSlashes3 GammaCalo All runlists/runNumbersLHC17f2a_fix_$3_all.txt
+```
+ MergeAccordingToSpecificRunlist fileLHC17f2a_fix.txt $OUTPUTDIR_LHC17f2a_fix $NSlashes3 GammaCalo All runlists/runNumbersLHC17f2a_fix_$3_all.txt
+```
 
 and brought into a common naming scheme and format, also containing the runlist name.
-> ChangeStructureIfNeededCalo $fileName $OUTPUTDIR_LHC16q $NSlashes "LHC16q_$3-pass$passNr-All" "-All"
+```
+ ChangeStructureIfNeededCalo $fileName $OUTPUTDIR_LHC16q $NSlashes "LHC16q_$3-pass$passNr-All" "-All"
+```
 
 Lastly the sub-periods which can be merged are merged using `hadd` as well as the corresponding MC's if need be. 
 
