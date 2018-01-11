@@ -1,20 +1,23 @@
-# Neutral Meson Analysis ($$\pi^0$$ & $$\eta \rightarrow \gamma\gamma$$ )
+# Neutral Meson Analysis \($$\pi^0$$ & $$\eta \rightarrow \gamma\gamma$$ \)
 
-Before you start the analysis, get input .root files from grid and change their format by using the macros provide in the folder **AnalysisSoftware/DownloadAndDataPrep/** or **AnalysisSoftware/TaskQA**, as describe in the QA section.
-The neutral pion and eta analysis in the $$\gamma\gamma$$ channel is based on the analysis tasks: 
+Before you start the analysis, get input .root files from grid and change their format by using the macros provide in the folder **AnalysisSoftware/DownloadAndDataPrep/** or **AnalysisSoftware/TaskQA**, as describe in the QA section.  
+The neutral pion and eta analysis in the $$\gamma\gamma$$ channel is based on the analysis tasks:
+
 * AliAnalysisTaskGammaConvV1.cxx
 * AliAnalysisTaskGammaCalo.cxx
 * AliAnalysisTaskGammaConvCalo.cxx
-Each of them produces its own output files, which have to be provide to the _start\_FullMesonAnalysis\_TaskV3.sh_. The script can be started as follows:
+  Each of them produces its own output files, which have to be provide to the _start\_FullMesonAnalysis\_TaskV3.sh_. The script can be started as follows:
 
 ```
-  start_FullMesonAnalysis_TaskV3.sh [-$OPTION] $Data-file.root [$MC-file.root] eps 
+  start_FullMesonAnalysis_TaskV3.sh [-$OPTION] $Data-file.root [$MC-file.root] eps
 ```
-If for some reason no data-file or MC-file is available you can give the script a dummy-file it will automatically detect this and try to avoid the corresponding macro running. It could however be that there are some errors in these cases and this option should only be used as a first trial not the general modus operandi. There are several specific options available to either jump to a specific step of the analysis (`-d,-c`) or switch on and off the gamma, pion or eta analysis (`etaOff,etaOnly,gammaOff,gammaOnly,pi0etaOnly,pi0Only`). The latter can be appended to he first two, but the option string has to start with a "-". If you want to jump to a more step further along the processing line you only have to hand it one root file and even that can be a dummy file if the _CutSelection.log_ file contains the desired and valid Cutnumbers. In these case make sure the output files from the previous steps are contained in the current directory, where you are working. Otherwise the operation will fail. As already described most of the macros started by this shell-script are contained in the folder [**AnalysisSoftware/TaskV1**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/TaskV1) and the general strategy for running is displayed in 
+
+If for some reason no data-file or MC-file is available you can give the script a dummy-file it will automatically detect this and try to avoid the corresponding macro running. It could however be that there are some errors in these cases and this option should only be used as a first trial not the general modus operandi. There are several specific options available to either jump to a specific step of the analysis \(`-d,-c`\) or switch on and off the gamma, pion or eta analysis \(`etaOff,etaOnly,gammaOff,gammaOnly,pi0etaOnly,pi0Only`\). The latter can be appended to he first two, but the option string has to start with a "-". If you want to jump to a more step further along the processing line you only have to hand it one root file and even that can be a dummy file if the _CutSelection.log_ file contains the desired and valid Cutnumbers. In these case make sure the output files from the previous steps are contained in the current directory, where you are working. Otherwise the operation will fail. As already described most of the macros started by this shell-script are contained in the folder [**AnalysisSoftware/TaskV1**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/TaskV1) and the general strategy for running is displayed in
 
 ![](/assets/SoftwareOverviewNeutralMesonAndDirGamma.jpg)
 
-It is recommended that you start the shell-script once per hand for each new analysis, which you do, as it will ask you questions, which you need to answer. These questions depend on the data set and collision system you have chosen, as well as the options you have given to the macro. For instance the questions asked for the pPb-direct photon analysis in the PCM-EMC analysis stream are (with the corresponding answers):
+It is recommended that you start the shell-script once per hand for each new analysis, which you do, as it will ask you questions, which you need to answer. These questions depend on the data set and collision system you have chosen, as well as the options you have given to the macro. For instance the questions asked for the pPb-direct photon analysis in the PCM-EMC analysis stream are \(with the corresponding answers\):
+
 ```
 $ bash start_FullMesonAnalysis_TaskV3.sh -etaOff $referenceDirectoryData/GammaConvCalo_LHC13bc-pass2_20_A.root $referenceDirectoryMC/GammaConvCalo_MC_LHC13b2_efix_p1_p2_p3_p4_20_A.root eps 
 -etaOff
@@ -60,70 +63,78 @@ Gaussian chosen ...
 Please check that you really want to process all cuts, otherwise change the CutSelection.log. Remember at first all gamma cutstudies will be carried out. Make sure that the standard cut is the first in the file. Continue? Yes/No?
 Y
 ```
-After you have understood and verified that the answers you gave, have the desired outcome you can also store them in a text file ($ENTER-separated) like [answersExamplepPbPCMEMC.txt](/assets/answersExamplepPbPCMEMC.txt) and start the script like this:
+
+After you have understood and verified that the answers you gave, have the desired outcome you can also store them in a text file \($ENTER-separated\) like [answersExamplepPbPCMEMC.txt](/assets/answersExamplepPbPCMEMC.txt) and start the script like this:
+
 ```
  bash start_FullMesonAnalysis_TaskV3.sh -etaOff $referenceDirectoryData/GammaConvCalo_LHC13bc-pass2_20_A.root $referenceDirectoryMC/GammaConvCalo_MC_LHC13b2_efix_p1_p2_p3_p4_20_A.root eps < answersExamplepPbPCMEMC.txt
 ```
-This option makes it possible to run many different start scripts after one another started by a common shell script without needing to interact with it. In general it is recommended to have one additional bash script, where you keep track what you usually use as input files and which analysis you ran in a certain directory (i.e. [runBaseCuts.sh](/assets/runBaseCuts.sh) ). This also helps to keep track of your files and reduces the probability of creating an error during the configuration of the shell script.
 
-In the following we will go through the different basic macros started by the shell-script and show some characteristic plots produced by them. In general it is recommended to have a look at all plots, log-files and couts which are produced by the various macros in particular for new-commers, as these are there for a reason and should not be ignored. We strongly recommened, however, not to reinvent the wheel and simply use the macros and ask if there is an output which you are missing or which is not clear to you. This will help us improve the software and you to save time (not wasting your energy on redesigning the plotting routines, as the later are in most cases already pretty good and have been used for the publications of the PWGGA).
+This option makes it possible to run many different start scripts after one another started by a common shell script without needing to interact with it. In general it is recommended to have one additional bash script, where you keep track what you usually use as input files and which analysis you ran in a certain directory \(i.e. [runBaseCuts.sh](/assets/runBaseCuts.sh) \). This also helps to keep track of your files and reduces the probability of creating an error during the configuration of the shell script.
+
+In the following we will go through the different basic macros started by the shell-script and show some characteristic plots produced by them. In general it is recommended to have a look at all plots, log-files and couts which are produced by the various macros in particular for new-commers, as these are there for a reason and should not be ignored. We strongly recommened, however, not to reinvent the wheel and simply use the macros and ask if there is an output which you are missing or which is not clear to you. This will help us improve the software and you to save time \(not wasting your energy on redesigning the plotting routines, as the later are in most cases already pretty good and have been used for the publications of the PWGGA\).  
 If you find a bug in the software, please let us know as it might not only affect you but also others and as such can have quite a large impact. Remember to also take this into account if you make changes, we all benefit from a common framework but this means we all need to do our best to keep it running and improve it. **YOU ARE NOT JUST A USER, YOU ARE A DEVELOPER!** So please make sure your changes don't interfer with someone else working code. Everyone else will try to do the same for you!
 
 A nice little 'helper-macro' is the [_MakeCutLog.C_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/MakeCutLog.C), which tells you which cuts are contained in the corresponding file. It can be started with:
+
 ```
 root -b -x -q -l 'TaskV1/MakeCutLog.C("file.root","CutSelection.log",$mode)'
 ```
-It will write a file called _CutSelection.log_, as defined by the argument. It is called by default when executing our base shell-script and call cuts contained in this cutselection file will be analyzed. If you don't want that, you explicitly have to tell this when asked about this particular file and edit it yourself. 
+
+It will write a file called _CutSelection.log_, as defined by the argument. It is called by default when executing our base shell-script and call cuts contained in this cutselection file will be analyzed. If you don't want that, you explicitly have to tell this when asked about this particular file and edit it yourself.
 
 The modes which are defined in the conversion software are:
 
 | mode | reco technique |
-| :---  | :--- |
-| 0     | PCM-PCM |
-| 1     | PCM-Dalitz |
-| 2     | PCM-EMC |
-| 3     | PCM-PHOS |
-| 4     | EMC-EMC |
-| 5     | PHOS-PHOS |
-| 6     | EMC-Dalitz |
-| 7     | PHOS-Dalitz |
-| 10    | mEMC |
-| 11    | mPHOS |
-| 12    | DMC-DMC |
-| 13    | PCM-DMC |
-
+| :--- | :--- |
+| 0 | PCM-PCM |
+| 1 | PCM-Dalitz |
+| 2 | PCM-EMC |
+| 3 | PCM-PHOS |
+| 4 | EMC-EMC |
+| 5 | PHOS-PHOS |
+| 6 | EMC-Dalitz |
+| 7 | PHOS-Dalitz |
+| 10 | mEMC |
+| 11 | mPHOS |
+| 12 | DMC-DMC |
+| 13 | PCM-DMC |
 
 # Neutral Pion and Eta Meson Signal Extraction
 
-## [**_ExtractSignalV2.C_**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/ExtractSignalV2.C)
+## [_**ExtractSignalV2.C**_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/ExtractSignalV2.C)
 
-This macro is supposed to: 
+This macro is supposed to:
+
 * analyse the invariant mass of the mesons for each pT bin
 * subtract the mixed event BG after proper normalization, 
 * fit the peak with different peak functions and
 * extract the raw yields
 
-in case a data file is processed. If it is a MC file it does all this and extracts the correction factors (acceptance, efficiency, secondary contamination,...) in addition. Furthermore, different estimates of the additional BG subtraction are computed and the signal is extracted in different integration windows around the fitted meson peak to later determine the signal extraction uncertainty.
+in case a data file is processed. If it is a MC file it does all this and extracts the correction factors \(acceptance, efficiency, secondary contamination,...\) in addition. Furthermore, different estimates of the additional BG subtraction are computed and the signal is extracted in different integration windows around the fitted meson peak to later determine the signal extraction uncertainty.  
 The $$p_T$$-binning for the  $$\pi^0/\eta$$ is defined in the header [_ExtractSignalBinning.h_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/CommonHeaders/ExtractSignalBinning.h). The macro can be started on a standalone basis as follows:
 
 ```
 root -b -x- q -l 'TaskV1/ExtractSignalV2.C+("$MESONAME","#ROOT-File","$CUTNUMBER","$SUFFIX","$MCOPTION","$ENERGY","Gaussian","$OPTIONSA","$OPTIONSB","","",$NPTBINS,$OPTIONADDSIG,$MODE,0,$OPTIONTHNSPARSE)'
 ```
+
 for the data set above the data and MC would have been called as follows:
+
 ```
 root -b -x- q -l 'TaskV1/ExtractSignalV2.C+("Pi0","/mnt/additionalStorage/OutputLegoTrains/pPb/Legotrain-vAN20170525FF-newDefaultPlusSys/GammaConvCalo_LHC13bc-pass2_20_A.root","80000113_00200009327000008250400000_1111141057032230000_0163103100000010","eps","kFALSE","pPb_5.023TeV","Gaussian","directPhotonA","MinBiasEffOnly","","",28,kFALSE,2,0)'
 root -b -x- q -l 'TaskV1/ExtractSignalV2.C+("Pi0","/mnt/additionalStorage/OutputLegoTrains/pPb/Legotrain-vAN20170525FF-newDefaultPlusSys/GammaConvCalo_MC_LHC13b2_efix_p1_p2_p3_p4_20_A.root","80000113_00200009327000008250400000_1111141057032230000_0163103100000010","eps","kTRUE","pPb_5.023TeV","Gaussian","directPhotonA","MinBiasEffOnly","","",28,kFALSE,2,0)'
 ```
 
-For the details on the options you can have a look at the code. For beginners, it is however highly recommended to start it once with the shell-script to obtain the proper options. The macro will write its plots to **$CUTNUMBER/$ENERGY/$SUFFIX/ExtractSignal** and the corresponding subfolders. The most important output will look like the following plots and all of them should be studied in detail for all cuts and mesons. Also some trending plots are stored in the the corresponding subfolder. These will allow you to judge whether the parameter-settings were reasonable and the fits didn't run into any particular limits. 
+For the details on the options you can have a look at the code. For beginners, it is however highly recommended to start it once with the shell-script to obtain the proper options. The macro will write its plots to **$CUTNUMBER/$ENERGY/$SUFFIX/ExtractSignal** and the corresponding subfolders. The most important output will look like the following plots and all of them should be studied in detail for all cuts and mesons. Also some trending plots are stored in the the corresponding subfolder. These will allow you to judge whether the parameter-settings were reasonable and the fits didn't run into any particular limits.
 
-![](/assets/Pi0_data_InvMassBinPCM-EMC_MB.jpg)
-![](/assets/Pi0_data_MesonSubtracted_80000113_00200009327000008250400000_1111141057032230000_0163103100000010.jpg)
-![](/assets/Pi0_data_MesonWithBck_80000113_00200009327000008250400000_1111141057032230000_0163103100000010.jpg)
-![](/assets/Pi0_MC_TrueInvMassDistributionDisentangled_PtBin_10.jpg)
+![](/assets/Pi0_data_InvMassBinPCM-EMC_MB.jpg)  
+![](/assets/Pi0_data_MesonSubtracted_80000113_00200009327000008250400000_1111141057032230000_0163103100000010.jpg)  
+![](/assets/Pi0_data_MesonWithBck_80000113_00200009327000008250400000_1111141057032230000_0163103100000010.jpg)  
+![](/assets/Pi0_MC_TrueInvMassDistributionDisentangled_PtBin_10.jpg)  
 ![](/assets/Pi0_MC_TrueMesonFitted_80000113_00200009327000008250400000_1111141057032230000_0163103100000010.jpg)
 
 In addition it writes its log-files as well as the root-files to **$CUTNUMBER/$ENERGY/** they are called:
+
 ```
 $MESONNAME_[data,MC]_EffiCheck_RAWDATA_$CUTNUMBER.dat
 $MESONNAME_[data,MC]_FileErrLog_80000113_$CUTNUMBER.dat
@@ -131,16 +142,66 @@ $MESONNAME_[data,MC]_GammaConvV1WithoutCorrection_$CUTNUMBER.root
 $MESONNAME_[data,MC]_GammaExtractionEffiCheck_RAWDATA_$CUTNUMBER.dat
 $MESONNAME_MC_GammaConvV1CorrectionHistos_$CUTNUMBER.root
 ```
-## [**_AnalyseDCATestV1.C_**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/AnalyseDCATestV1.C)
+
+## [_**AnalyseDCATestV1.C**_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/AnalyseDCATestV1.C)
 
 * calculates the fraction of photons from out-of-bunch pileup
 * input file is GammaConvV1 \_\(name\)\_x.root with dca tree.
 
 # Meson Corrections
 
-## [**_CorrectSignalV2.C_**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/CorrectSignalV2.C)
+## [_**CorrectSignalV2.C**_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/CorrectSignalV2.C)
 
-* applies the raw yields to all the corrections they need \(the input for this macro is the output from the _ExtractSignalV2.C_ and _AnalyseDCATestV1.C_\). Also in this a .root file and plots are produced
+Applies the corrections to the raw yields; the input for this macro is the output from the _ExtractSignalV2.C_ and _AnalyseDCATestV1.C_. Also in this a .root file and plots are produced in the folder of the respective cutnumber.
+
+The arguments of the function are
+
+```
+void  CorrectSignalV2(  TString fileNameUnCorrectedFile = "myOutput",
+                        TString fileNameCorrectionFile  = "",
+                        TString fCutSelection           = "",
+                        TString suffix                  = "gif",
+                        TString nameMeson               = "",
+                        TString isMC                    = "",
+                        TString optionEnergy            = "",
+                        TString optionPeriod            = "",
+                        TString fEstimatePileup         = "",
+                        Bool_t optDalitz                = kFALSE,
+                        Int_t mode                      = 9,
+                        Int_t triggerSet                = -1
+
+                     ){
+```
+
+The main script executes CorrectSignalV2.C automatically but it can be called independently with:
+
+```
+root -b -x- q -l 'TaskV1/CorrectSignalV2.C+("$FILETOCORRECT","$FILEWITHCORRECTIONS","$CUTNUMBER","$SUFFIX","$MESON","$ISMC","$ENERGY","","",$DALITZ,$MODE)'
+```
+
+As an example:
+
+```
+root -b -x- q -l 'TaskV1/CorrectSignalV2.C+("80000113_11111410570a2230000_01631031000000d0/pPb_5.023TeV/Pi0_data_GammaConvV1WithoutCorrection_80000113_11111410570a2230000_01631031000000d0.root","80000113_11111410570a2230000_01631031000000d0/pPb_5.023TeV/Pi0_MC_GammaConvV1CorrectionHistos_80000113_11111410570a2230000_01631031000000d0.root","80000113_11111410570a2230000_01631031000000d0","eps","Pi0","kFALSE","pPb_5.023TeV","","",kFALSE,4)'
+```
+
+
+
+Important output plots are \(non exhaustive list\):
+
+* MESON\_Acceptance
+* MESON\_TrueEffSimple
+* MESON\_Mass
+* MESON\_RatioMass
+* MESON\_FWHM
+* MESON\_RatioFWHM
+* MESON\_Data\_RawYieldDiffIntRanges
+* MESON\_Data\_CorrectedYield \(Normal or True efficiency, always use True for PCM analyses and Normal for Calorimetric\)
+
+Questions to ask yourself while inspecting the histograms:
+
+* 
+
 
 ## Secondary Corrections for the neutral pion reconstruction
 
@@ -173,15 +234,16 @@ Pi0\_data\_EffectiveSecCorrPt\_\* & Pi0\_data\_RAWYieldSecPt\_\*
 
 # Preparing for the systematics running
 
-## [**_CutStudiesOverview.C_**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/CutStudiesOverviev.C)
+## [_**CutStudiesOverview.C**_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/CutStudiesOverviev.C)
 
 * gives systematic uncertainty on cut variation with different sets of cuts.
 * input: CutSelection.log + uncorected file, corrected file
-
 
 # Compilation of the final results for each collision system, energy and detector
 
 _ProduceFinalResultsV2.C_
 
 * gives corrected yield of each mesons with systematic uncertainties.
+
+
 
