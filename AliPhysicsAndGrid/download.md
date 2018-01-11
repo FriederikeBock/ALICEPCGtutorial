@@ -69,7 +69,7 @@ This macro can read in bins/runs of a JetJet MC and plots the NTrials and XSecti
 
 ### Download LEGO train output (analysis)
 
-Over the past few years we also implemented quite some shell scripts to download the data from the grid in particular for the lego train outputs, they can be found in [**AnalysisSoftware/DownloadAndDataPrep**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/DownloadAndDataPrep/). They are usually data set & analysis method specific and take care of the correct download and merging of the corresponding lego train outputs. As such they are in a lot of cases very specific and might need a bit more adjustments when adapting for a new data set. At the same time they also allow very specific modifications (i.e. adjusting the download and merging of specific run-lists only). Furthermore, also the download of partially unmerged runs is slightly easier and the number of downloads can be a bit optimized by for instance always downloading the full _root\_archive.zip_ and only deleting the corresponding files in the end.
+Over the past few years we also implemented quite some shell scripts to download the data from the grid in particular for the lego train outputs, they can be found in [AnalysisSoftware/DownloadAndDataPrep](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/DownloadAndDataPrep/). They are usually data set & analysis method specific and take care of the correct download and merging of the corresponding lego train outputs. As such they are in a lot of cases very specific and might need a bit more adjustments when adapting for a new data set. At the same time they also allow very specific modifications (i.e. adjusting the download and merging of specific run-lists only). Furthermore, also the download of partially unmerged runs is slightly easier and the number of downloads can be a bit optimized by for instance always downloading the full _root\_archive.zip_ and only deleting the corresponding files in the end.
 The download scripts are named according to the following scheme:
 * GetGamma\[Calo,Conv,ConvCalo,CaloMerged\]FilesFromGridAndMergeThem\_\[$COLLSYS/$ENERGY/$PERIODNAME\].sh
   i.e `GetGammaCaloFilesFromGridAndMergeThem_PbPbLHC10h.sh` or `GetGammaConvCaloFilesFromGridAndMergeThem_pPbRun2_5TeV.sh`
@@ -155,7 +155,7 @@ Then the script checks if the train runs exist and downloads the files as specif
 ```
 
 For the new pPb data-set (16q,r,s,t) multiple reconstructions are available. Thus, in order to correctly download the run-wise output for MC, the arguments `fast _FAST _fast`, `woSDD _CENT_woSDD _cent_woSDD` or `wSDD _CENT_wSDD _cent` had to be added to the shell script call. The first one defining the runlist-name addition, the second defining the data additional name and the third the MC additional name. 
-Afterwards the files are merged according to certain runlists defined in [**AnalysisSoftware/DownloadAndDataPrep/runlists**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/DownloadAndDataPrep/runlists)
+Afterwards the files are merged according to certain runlists defined in [AnalysisSoftware/DownloadAndDataPrep/runlists](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/DownloadAndDataPrep/runlists)
 ```
  MergeAccordingToSpecificRunlist fileLHC17f2a_fix.txt $OUTPUTDIR_LHC17f2a_fix $NSlashes3 GammaCalo All runlists/runNumbersLHC17f2a_fix_$3_all.txt
 ```

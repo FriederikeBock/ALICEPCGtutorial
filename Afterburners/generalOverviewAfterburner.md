@@ -2,9 +2,9 @@
 
 The analysis of the neutral mesons and direct photons, which is done after the pure grid analysis is organized in different macros, where we tried to have one macro per analysis step. Thus we split the steps of signal extraction, out-of-bunch pileup calculation, correction, cocktail processing, double ratio calculation, cut comparsion and systematics calculation into different macros. However, as the most of the macros need input from a previous step and it would be cumbersome to change the macro calls each time with the appropriate file. Most of steps, which need no manual intervention or optimization are handled by our steering scripts:
 
-* _start\_FullMesonAnalysis\_TaskV3.sh_ - handling the $$\pi^0$$ & $$\eta$$  in the $$\gamma\gamma$$-decay channel and the merged analysis as well as direct photon analysis
-* _start\_FullMesonAnalysisDalitz\_TaskV2.sh_ - handling the $$\pi^0$$ & $$\eta$$  in the $$\gamma e^+e-$$-decay channel 
-* _start\_FullOmegaMesonAnalysis.sh_ - handling the $$\eta$$ and $$\omega$$ analysis in the $$\pi^0 \pi^+ \pi^-$$ and $$\pi^0 \gamma$$ channel
+* **_start\_FullMesonAnalysis\_TaskV3.sh_** - handling the $$\pi^0$$ & $$\eta$$  in the $$\gamma\gamma$$-decay channel and the merged analysis as well as direct photon analysis
+* **_start\_FullMesonAnalysisDalitz\_TaskV2.sh_** - handling the $$\pi^0$$ & $$\eta$$  in the $$\gamma e^+e-$$-decay channel 
+* **_start\_FullOmegaMesonAnalysis.sh_** - handling the $$\eta$$ and $$\omega$$ analysis in the $$\pi^0 \pi^+ \pi^-$$ and $$\pi^0 \gamma$$ channel
 
 They are stored in the main directory of the [PCG-Afterburner directory](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware). A visualisation of the paths for the neutral meson analysis in the $$\gamma\gamma$$-channel and the direct photon analysis can be found below using the _start\_FullMesonAnalysis\_TaskV3.sh_. It explains the main path of the analysis in the standard setup.
 
@@ -65,7 +65,7 @@ In general the repository is ordered as follows:
   These folder should contain all systematic errors in a text format which have been used for publication or preliminary creation. They will soon be sorted a bit better and reorganized to ease the understanding of these inputs.
 
 * [**TaskFlow**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskFlow): 
-  This folder contains all necessary macros to perform the direct photon flow analysis, for further details please ask **Mike Sas**
+  This folder contains all necessary macros to perform the direct photon flow analysis, for further details please ask [**Mike Sas**](mailto:msas@nikhef.nl)
 
 * [**TaskQA**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskQA): 
   This is the dedicated folder for the post-processing macro of the analysis-level QA, they are explained in detail in the section [**Quality Assurance and Energy Calibration of Calorimeters**](https://friederikebock.gitbooks.io/pcgtutorial/content/QA/overview.md). In order to ease the processing also examples for the configuration files are given in [**TaskQA/ExampleConfigurations**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskQA/ExampleConfigurations).

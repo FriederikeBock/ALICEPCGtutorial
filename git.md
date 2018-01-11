@@ -36,10 +36,12 @@ Write a commit message and make the commit itself via:
 
 Checkout the master branch and rebase to the latest version
 > git checkout master
+
 > git pull --rebase
 
 Checkout your branch again and rebase it to the latest master version
 > git checkout UserBranch
+
 > git rebase master
 
 If everything works with the rebase, then push the changes.

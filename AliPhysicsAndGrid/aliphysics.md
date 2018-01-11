@@ -88,6 +88,25 @@ alias token='alien-token-init YOURUSERNAME'
 alias tb='root -l ~/alice/tbrowser.C'
 ```
 
-Then, you just need to type '_ali_' in the command line and you are in the ALICE software environment. 
-Using '_alipc_' you can re-build the whole software chain and using '_alic_' or '_alirootc_' you can trigger rebuild of AliPhysics and AliRoot respectively, no matter in which directory you currently are in the shell.
-Also, you can easily enter a TBrowser by just typing '_tb_'.
+Then, you just need to type 
+
+>ali 
+
+in the command line and you are in the ALICE software environment. 
+Using 
+
+>alipc
+
+you can re-build the whole software chain and using 
+
+>alic 
+
+or 
+
+>alirootc
+
+you can trigger rebuild of AliPhysics and AliRoot respectively, no matter in which directory you currently are in the shell.
+Also, you can easily enter a TBrowser by just typing 
+>tb
+
+.
