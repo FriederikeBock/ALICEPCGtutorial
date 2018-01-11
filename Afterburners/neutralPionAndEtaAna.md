@@ -150,13 +150,19 @@ It has to be carefully checked that the 'wings' in all $$p_T$$ bins at higher $$
 	TString optionBGSmoothingVar2       = "BackSmoothing11";
 ```
 Examples of optimized fits and the corresponding final correction factors can be found in the following plots or in the latest PCM analysis notes on pp 8Tev, pPb 5TeV or Pb-Pb 2.76TeV.
+
+* worst DCA meson category (2* category 3 photons)
 ![](/assets/Pi0_Data_DCAProjections_Cat_1.jpg)
+* best DCA meson categories (at least 1 photon with ITS info)
 ![](/assets/Pi0_Data_DCAProjections_GoodCat.jpg)
-![](/assets/Pi0_Data_CorrectionFactorVsCatHist.jpg)
-![](/assets/Pi0_Data_CorrectionFactorTotal.jpg)
-![](/assets/Pi0_Data_DCAProjections_Cat_1.jpg)
+* all cateogries overlayed
 ![](/assets/Pi0_Data_DCAzCategoryComp_8.jpg)
+* $$dca_Z$$ distribution in different invariant mass windows
 ![](/assets/Pi0_Data_DCAzGGBGComp_8.jpg)
+* Calculated out-of-bunch pileup contribution for different categories separately
+![](/assets/Pi0_Data_CorrectionFactorVsCatHist.jpg)
+* correctly weighted out-of-bunch pielup contribution using different estimates
+![](/assets/Pi0_Data_CorrectionFactorTotal.jpg)
 
 # Meson Corrections
 
