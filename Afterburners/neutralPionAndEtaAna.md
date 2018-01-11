@@ -143,6 +143,17 @@ $MESONNAME_[data,MC]_GammaExtractionEffiCheck_RAWDATA_$CUTNUMBER.dat
 $MESONNAME_MC_GammaConvV1CorrectionHistos_$CUTNUMBER.root
 ```
 
+#### !!! Very important: !!!
+
+Check the $CUTNUMBERS/$ENERGY/$SUFFIX/EXTRACTSIGNAL/MONITORING folder to see if the mass peaks are fitted with high quality fits meaning:
+
+* MESON Amplitude converged well for each bin
+* MESON LambdaTail converged within its limits \(this parameter can be fixed for higher pt if it is needed\)
+* MESON Sigma converged also within its limits and has a smooth behaviour as function of pt
+* MESON Mass converged within limits and has a smooth behaviour as function of pt
+
+Also check all the plots in $CUTNUMBERS/$ENERGY/$SUFFIX/EXTRACTSIGNAL/ to check if all the bins have sufficient statistics for both data and MC. Increase the pt bin widths if there is a lack statistics. The number of bins in the invariant mass plots can also be adjusted, make sure there are sufficients points to be fitted in the main signal peak.
+
 ## [_**AnalyseDCATestV1.C**_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/AnalyseDCATestV1.C)
 
 * calculates the fraction of photons from out-of-bunch pileup
@@ -185,8 +196,6 @@ As an example:
 root -b -x- q -l 'TaskV1/CorrectSignalV2.C+("80000113_11111410570a2230000_01631031000000d0/pPb_5.023TeV/Pi0_data_GammaConvV1WithoutCorrection_80000113_11111410570a2230000_01631031000000d0.root","80000113_11111410570a2230000_01631031000000d0/pPb_5.023TeV/Pi0_MC_GammaConvV1CorrectionHistos_80000113_11111410570a2230000_01631031000000d0.root","80000113_11111410570a2230000_01631031000000d0","eps","Pi0","kFALSE","pPb_5.023TeV","","",kFALSE,4)'
 ```
 
-
-
 Important output plots are \(non exhaustive list\):
 
 * MESON\_Acceptance
@@ -200,8 +209,12 @@ Important output plots are \(non exhaustive list\):
 
 Questions to ask yourself while inspecting the histograms:
 
-* 
-
+* Is the acceptance behaving like you expect
+* Is the efficiency bahaving like it should; and is the difference between the Reconstructed and True efficiency reasonable?
+* Is the reconstructed pi0 mass in data and MC close? Judge this also from the ratio plot. 1% offset means roughly 4% error in the corrected yield!!
+* Is the FWHM simulated well in MC and does it behave as expected?
+* Is the RawYield with different integration ranges stable?
+* The corrected yield is only to be checked as last plot, it has no value unless everything else is of high quality!
 
 ## Secondary Corrections for the neutral pion reconstruction
 
