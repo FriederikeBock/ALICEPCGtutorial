@@ -162,7 +162,7 @@ Examples of optimized fits and the corresponding final correction factors can be
 
 ## [**_CorrectSignalV2.C_**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/CorrectSignalV2.C)
 
-* applies the raw yields to all the corrections they need \(the input for this macro is the output from the _ExtractSignalV2.C_ and _AnalyseDCATestV1.C_\). Also in this a .root file and plots are produced
+* applies the raw yields to all the corrections they need \(the input for this macro is the output from the _ExtractSignalV2.C_ and _AnalyseDCADist.C_\). Also in this a .root file and plots are produced
 
 ## Secondary Corrections for the neutral pion reconstruction
 
