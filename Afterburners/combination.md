@@ -28,67 +28,61 @@ It takes the number of measurements and then the links to the systematic files, 
 Then, the single uncertainty sources are listed from the first method with respect to the second method, in how much % of the uncertainty is uncorrelated with respect to the latter method.
 
 ```
-  echo "corrSystems";
-  echo "3" > input.log
-
-  echo "PCM 29 0.3 12.0 SystematicErrorAveragedSinglePCM_Pi0_8TeV_2017_11_03.dat " >> input.log
-  echo "PCMEMC 40 0.8 35.0 FinalResultsTriggersPatched_PCMEMCAL/SystematicErrorAveragedSinglePCMEMC_Pi0_8TeV.dat" >> input.log
-  echo "EMC 35 1.2 18.0 FinalResultsTriggersPatched_EMCAL/SystematicErrorAveragedSingleEMCEMC_Pi0_8TeV.dat" >> input.log
-
-  echo "PCM PCMEMC YieldExtraction 95%" >> input.log
-  echo "PCM PCMEMC PileupDCA 100%" >> input.log
-  echo "PCM PCMEMC Material 50%" >> input.log
-  echo "PCM PCMEMC dEdxE 75%" >> input.log
-  echo "PCM PCMEMC dEdxPi 50%" >> input.log
-  echo "PCM PCMEMC TPCCluster 25%" >> input.log
-  echo "PCM PCMEMC SinglePt 50%" >> input.log
-  echo "PCM PCMEMC Chi2 50%" >> input.log
-  echo "PCM PCMEMC Qt 50%" >> input.log
-  echo "PCM PCMEMC Alpha 25%" >> input.log
-  echo "PCM PCMEMC BG 100%" >> input.log
-  echo "PCM PCMEMC BGEstimate 100%" >> input.log
-
-  echo "PCMEMC PCM YieldExtraction 95%" >> input.log
-  echo "PCMEMC PCM Alpha 25%" >> input.log
-  echo "PCMEMC PCM ConvPhi 100%" >> input.log
-  echo "PCMEMC PCM ClusterMinEnergy 100%" >> input.log
-  echo "PCMEMC PCM ClusterNCells 100%" >> input.log
-  echo "PCMEMC PCM ClusterNonLinearity 100%" >> input.log
-  echo "PCMEMC PCM ClusterTrackMatching 100%" >> input.log
-  echo "PCMEMC PCM ClusterM02 100%" >> input.log
-  echo "PCMEMC PCM CellTiming 100%" >> input.log
-  echo "PCMEMC PCM ClusterMaterialTRD 100%" >> input.log
-  echo "PCMEMC PCM Trigger 100%" >> input.log
-  echo "PCMEMC PCM Efficiency 100%" >> input.log
-  echo "PCMEMC PCM ClusterEnergyScale 100%" >> input.log
-  echo "PCMEMC PCM ClusterTime 100%" >> input.log
-  echo "PCMEMC PCM ClusterizationEnergy 100%" >> input.log
-
-  echo "EMC PCMEMC YieldExtraction 95%" >> input.log
-  echo "EMC PCMEMC OpeningAngle 100%" >> input.log
-  echo "EMC PCMEMC ClusterMinEnergy 50%" >> input.log
-  echo "EMC PCMEMC ClusterNCells 50%" >> input.log
-  echo "EMC PCMEMC ClusterNonLinearity 50%" >> input.log
-  echo "EMC PCMEMC ClusterTrackMatchingCalo 75%" >> input.log
-  echo "EMC PCMEMC ClusterM02 50%" >> input.log
-  echo "EMC PCMEMC CellTiming 50%" >> input.log
-  echo "EMC PCMEMC Efficiency 50%" >> input.log
-  echo "EMC PCMEMC ClusterEnergyScale 50%" >> input.log
-  echo "EMC PCMEMC ClusterTime 50%" >> input.log
-  echo "EMC PCMEMC ClusterizationEnergy 50%" >> input.log
-
-  echo "PCMEMC EMC YieldExtraction 95%" >> input.log
-  echo "PCMEMC EMC Material 100%" >> input.log
-  echo "PCMEMC EMC dEdxE 100%" >> input.log
-  echo "PCMEMC EMC dEdxPi 100%" >> input.log
-  echo "PCMEMC EMC TPCCluster 100%" >> input.log
-  echo "PCMEMC EMC SinglePt 100%" >> input.log
-  echo "PCMEMC EMC Chi2 100%" >> input.log
-  echo "PCMEMC EMC Qt 100%" >> input.log
-  echo "PCMEMC EMC Alpha 100%" >> input.log
-  echo "PCMEMC EMC ConvPhi 100%" >> input.log
-  echo "PCMEMC EMC ClusterMinEnergy 25%" >> input.log
-  echo "PCMEMC EMC Efficiency 50%" >> input.log
+3
+PCM 29 0.3 12.0 SystematicErrorAveragedSinglePCM_Pi0_8TeV_2017_11_03.dat
+PCMEMC 40 0.8 35.0 FinalResultsTriggersPatched_PCMEMCAL/SystematicErrorAveragedSinglePCMEMC_Pi0_8TeV.dat
+EMC 35 1.2 18.0 FinalResultsTriggersPatched_EMCAL/SystematicErrorAveragedSingleEMCEMC_Pi0_8TeV.dat
+PCM PCMEMC YieldExtraction 95%
+PCM PCMEMC PileupDCA 100%
+PCM PCMEMC Material 50%
+PCM PCMEMC dEdxE 75%
+PCM PCMEMC dEdxPi 50%
+PCM PCMEMC TPCCluster 25%
+PCM PCMEMC SinglePt 50%
+PCM PCMEMC Chi2 50%
+PCM PCMEMC Qt 50%
+PCM PCMEMC Alpha 25%
+PCM PCMEMC BG 100%
+PCM PCMEMC BGEstimate 100%
+PCMEMC PCM YieldExtraction 95%
+PCMEMC PCM Alpha 25%
+PCMEMC PCM ConvPhi 100%
+PCMEMC PCM ClusterMinEnergy 100%
+PCMEMC PCM ClusterNCells 100%
+PCMEMC PCM ClusterNonLinearity 100%
+PCMEMC PCM ClusterTrackMatching 100%
+PCMEMC PCM ClusterM02 100%
+PCMEMC PCM CellTiming 100%
+PCMEMC PCM ClusterMaterialTRD 100%
+PCMEMC PCM Trigger 100%
+PCMEMC PCM Efficiency 100%
+PCMEMC PCM ClusterEnergyScale 100%
+PCMEMC PCM ClusterTime 100%
+PCMEMC PCM ClusterizationEnergy 100%
+EMC PCMEMC YieldExtraction 95%
+EMC PCMEMC OpeningAngle 100%
+EMC PCMEMC ClusterMinEnergy 50%
+EMC PCMEMC ClusterNCells 50%
+EMC PCMEMC ClusterNonLinearity 50%
+EMC PCMEMC ClusterTrackMatchingCalo 75%
+EMC PCMEMC ClusterM02 50%
+EMC PCMEMC CellTiming 50%
+EMC PCMEMC Efficiency 50%
+EMC PCMEMC ClusterEnergyScale 50%
+EMC PCMEMC ClusterTime 50%
+EMC PCMEMC ClusterizationEnergy 50%
+PCMEMC EMC YieldExtraction 95%
+PCMEMC EMC Material 100%
+PCMEMC EMC dEdxE 100%
+PCMEMC EMC dEdxPi 100%
+PCMEMC EMC TPCCluster 100%
+PCMEMC EMC SinglePt 100%
+PCMEMC EMC Chi2 100%
+PCMEMC EMC Qt 100%
+PCMEMC EMC Alpha 100%
+PCMEMC EMC ConvPhi 100%
+PCMEMC EMC ClusterMinEnergy 25%
+PCMEMC EMC Efficiency 50%
 ```
 
 The correlation macro automatically reads in all the files and calculates the correlation coefficients for all common bins of the different methods.
