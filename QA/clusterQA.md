@@ -32,7 +32,7 @@ We have a dead cell candidate:
 
 A warm/hot cell candidate:
 
-* if\(\(nCurrentEFrac$$>$$2_mean && nCurrentEFrac_$$>$$_80\) \|\| \(nCurrentEFrac_$$>$$_3_mean && nCurrentEFrac$$>$$20\) \|\| \(nCurrentEFrac$$>$$4_mean && nCurrentEFrac_$$>$$_8\) \|\| \(nCurrentEFrac_$$>$$_5_mean && nCurrentEFrac$$>$$5\)\)
+* if\(\(nCurrentEFrac$$>$$2_mean && nCurrentEFrac_$$>$$_80\) \|\| \(nCurrentEFrac_$$>$$_3\_mean && nCurrentEFrac_$$>$$_20\) \|\| \(nCurrentEFrac_$$>$$_4\_mean && nCurrentEFrac_$$>$$_8\) \|\| \(nCurrentEFrac_$$>$$\_5\_mean && nCurrentEFrac$$>$$5\)\)
 
 Above conditions for dead/warm/hot cell candidate identification are being applied in function _CheckHotAndColdCellsEFracRunwise_ in QA.h! Be careful that a minimum number of events is needed to process the run in this function \(runs with ultra low statistics are excluded as it is impossible to look for hot/dead cells besides the obvious candidates which should then appear in other runs as well\)  
 The resulting dead/warm/hot cells are written to respective _\*.log_ files that can be found in the output folder.
@@ -90,7 +90,7 @@ The next steps 3./4. are needed as by statistical fluctuations some cells can fi
 
 **3. Check Dead-Cells for different runs via ClusterQA\_DeadCellCompareV2.C **
 
-This macro can be run using by enabling the 'doCellQASummary' as last parameter in the QAV2.C, by default this parameter is set to kFALSE.   
+This macro can be run using by enabling the 'doCellQASummary' as last parameter in the QAV2.C, by default this parameter is set to kFALSE.  
 It will then check if the config-file contains the bare minimum of settings to run the ClusterQA\_DeadCellCompareV2.C and proceed with the running if this is the case. Thus you will need to add the following lines to your configuration file:
 
 ```
@@ -115,7 +115,7 @@ If you want to run the macro without starting QAV2.C you have to create a new co
 root -b -l -q -x 'TaskQA/ClusterQA_DeadCellCompareV2.C+("Config_files/configLHC16qt_CellQA_PHOS.txt","pdf")'
 ```
 
-The determination of dead cells is done using the for-loop around _line 364_.   
+The determination of dead cells is done using the for-loop around _line 364_.  
 Different decisions when to consider dead cells:
 
 * if cell is dead cell candidate in consecutive number of runs \(currently set up with 4\), 
@@ -303,7 +303,7 @@ In addition, \*.root files will be generated in _CUTNUMBER/SYSTEM/_ containing a
 **7. Runwise ClusterQA step by analysing output from ClusterQA\_Runwise.C**  
 Carefully check all output from runwise histograms with special focus on data/MC comparison \(Is the MC able to reproduce all QA histograms extracted from data? Does the MC follow the trends seen in data? Are there any suspicious runs or any observations that cannot be explained?...\)
 
-**8. ClusterQA step by analysing output from ClusterQA.C**   
+**8. ClusterQA step by analysing output from ClusterQA.C**  
 Carefully check all output from histograms with special focus on data/MC comparison \(Is the MC able to reproduce all QA histograms extracted from data? Does the MC follow the distributions seen in data? Are there any suspicious observations or is there anything that cannot be explained?...\)
 
 **9. Optional: run ClusterQA**_**Compare \(needs to be configured within macro - not \_yet**_** included in steering macros\)**  
