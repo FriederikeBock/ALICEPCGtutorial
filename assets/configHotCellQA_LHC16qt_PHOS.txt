@@ -1,0 +1,17 @@
+# config for hot cell QA running pPb PHOS run2 5TeV
+mode	5
+energy	pPb_5.023TeV
+addLabelRunlist _dpgTracks
+
+hotCellNSets   1
+hotCellNMCSets 1
+hotCellNTrigger    1
+hotCellDataSetNames LHC16qt    STOP
+hotCellMCSetNames  LHC17f2b STOP
+hotCellAdditionalOutputDirName LHC16qt
+nCaloCells  18000
+# hotCellTriggerNames  INT7    STOP
+hotCellMCCuts  80000513_2444400051013200000_0163103100000010   STOP
+hotCellDataCuts    80000513_2444400051013200000_0163103100000010   STOP
+hotCellThreshNFired   0
+hotCellThreshNTotalFired   60

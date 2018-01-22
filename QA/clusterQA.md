@@ -87,8 +87,30 @@ Run-191248
 
 The next steps 3./4. are needed as by statistical fluctuations some cells can fire more often or less often than usual, therefore we need to apply further conditions for dead/hot cell identification:
 
-**3. Run ClusterQA_DeadCellCompare.C (needs to be configured within macro - not _yet_ included in steering macros)**
-Determination of dead cells using for-loop around _line 280_. 
+**3. Check Dead-Cells for different runs via ClusterQA_DeadCellCompareV2.C **
+This macro can be run using by enabling the 'doCellQASummary' as last parameter in the QAV2.C, by default this parameter is set to kFALSE. 
+It will then check if the config-file contains the bare minimum of settings to run the ClusterQA_DeadCellCompareV2.C and proceed with the running if this is the case. Thus you will need to add the following lines to your configuration file:
+```
+# Settings for dead cell compare macro
+addLabelRunlist _dpgTracks
+deadCellNSets   1
+deadCellNMCSets 1
+deadCellNTrigger    1
+deadCellDataSetNames LHC16qt    STOP
+deadCellMCSetNames  LHC17f2b STOP
+deadCellAdditionalOutputDirName LHC16qt
+nCaloCells  18000
+# deadCellTriggerNames  INT7    STOP
+deadCellMCCuts  80000513_2444400051013200000_0163103100000010   STOP
+deadCellDataCuts    80000513_2444400051013200000_0163103100000010   STOP
+deadCellFractionThesh   0.6
+```
+If you want to run the macro without starting QAV2.C you have to create a new configuration file which contains the full set of parameters needed, like [configDeadCellQA_LHC16qt_PHOS.txt](/assets/configDeadCellQA_LHC16qt_PHOS.txt). In that case it can be started with:
+```
+root -b -l -q -x 'TaskQA/ClusterQA_DeadCellCompareV2.C+("Config_files/configLHC16qt_CellQA_PHOS.txt","pdf")'
+```
+
+The determination of dead cells is done using the for-loop around _line 364_. 
 Different decisions when to consider dead cells:
 * if cell is dead cell candidate in consecutive number of runs (currently set up with 4), 
 * if at least 10 dead cell candidates are found with in the same run range or cell candidate is identified to be dead in a given % of analysed runs, represented by fractionThesh.
@@ -124,8 +146,27 @@ and according to the selection criteria the final list of dead cells:
 11091 in 70.5882% of selected runs dead/cold
 ```
 
-**4. Run ClusterQA_HotCellCompare.C (needs to be configured within macro - not _yet_ included in steering macros)**
-Determination of warm/hot cells using for-loop around line 180 via 'threshNFired' and 'threshNTotalFired' for 3. + 4. produce output log-files which summarize the bad cells to be excluded in OADB from runwise dead/warm/hot cell determination. 
+**4. Check Hot-Cells for different runs via ClusterQA_HotCellCompareV2.C **
+As for the previous step, this macro can be run by enabling the 'doCellQASummary' as last parameter in the QAV2.C.
+It will then check if the config-file contains the bare minimum of settings to run the ClusterQA_HotCellCompareV2.C and proceed with the running if this is the case. Thus you will need to add the following lines to your configuration file:
+```
+# Settings for hot cell compare macro
+hotCellNSets   1
+hotCellNTrigger    1
+hotCellDataSetNames LHC16qt    STOP
+hotCellAdditionalOutputDirName LHC16qt
+# hotCellTriggerNames  INT7    STOP
+hotCellDataCuts    80000513_2444400051013200000_0163103100000010   STOP
+hotCellThreshNFired   0
+hotCellThreshNTotalFired   60
+```
+If you want to run the macro without starting QAV2.C you have to create a new configuration file which contains the full set of parameters needed, like [configHotCellQA_LHC16qt_PHOS.txt](/assets/configHotCellQA_LHC16qt_PHOS.txt).
+The macro can then be started with the following command:
+```
+root -b -l -q -x 'TaskQA/ClusterQA_HotCellCompareV2.C+("Config_files/configHotCellQA_LHC16qt_PHOS.txt","pdf")'
+```
+
+Determination of warm/hot cells using for-loop around line 248 via 'threshNFired' and 'threshNTotalFired' for 3. + 4. produce output log-files which summarize the bad cells to be excluded in OADB from runwise dead/warm/hot cell determination. 
 
 All hot cell candidates are written/summarized in log-files 
 
@@ -166,9 +207,8 @@ and according to the selection criteria the final list of hot cells (sorted by r
 5602 177180
 ```
 
-
-
 After identifying dead/hot cells on runwise level, the general periodwise level CellQA + ClusterQA step follows
+
 
 **5. CellQA step on periodwise level via running of ClusterQA.C**
 identify bad cells on periodwise level by using data and MC information. 

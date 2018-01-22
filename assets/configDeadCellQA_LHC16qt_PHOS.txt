@@ -1,0 +1,16 @@
+# config for dead cell QA running pPb PHOS run2 5TeV
+mode    5
+energy  pPb_5.023TeV
+addLabelRunlist _dpgTracks
+
+deadCellNSets   1
+deadCellNMCSets 1
+deadCellNTrigger    1
+deadCellDataSetNames LHC16qt    STOP
+deadCellMCSetNames  LHC17f2b STOP
+deadCellAdditionalOutputDirName LHC16qt
+nCaloCells  18000
+# deadCellTriggerNames  INT7    STOP
+deadCellMCCuts  80000513_2444400051013200000_0163103100000010   STOP
+deadCellDataCuts    80000513_2444400051013200000_0163103100000010   STOP
+deadCellFractionThesh   0.6
