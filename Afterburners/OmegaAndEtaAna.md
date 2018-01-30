@@ -11,7 +11,7 @@ In case either the data- or MC-file is missing, you can just pass the macro a du
 bash start_FullOmegaAnalysis.sh /Path/To/datafile.root bla eps
 ```
 
-will run the signal extraction macro two times -- once for the $$\omega​$$ and once for the $$\eta​$$ -- but won't run the correction macro afterwards, because it detected that you didn't provide it with a valid MC file. 
+will run the signal extraction macro two times -- once for the $$\omega$$ and once for the $$\eta$$ -- but won't run the correction macro afterwards, because it detected that you didn't provide it with a valid MC file. 
 
 There are several options available for this macro \(which are still work in progress\) that let you e.g. only analyse the $$\omega$$ \(**--omegaOnly**\) or the $$\eta$$ \(**--etaOnly**\). For a full list of available options please use the **-h** flag.
 
