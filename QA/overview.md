@@ -65,6 +65,8 @@ Example configurations for _config.txt_ may be found within _TaskQA/ExampleConfi
 * suffix -> _eps_ (_pdf_,_C_,...)
 
 
+The config file is  the central place to modify your QA. It allows you to specify the used mode, analyzed system, the dataset used and most others settings needed for the different parts of the QA. Please note that you should only **use either spaces or tabs as delimiters, but not a mix of the two**, because this can cause problems during execution of the macro.
+
 **IMPORTANT FOR RUNNING PHOTON QA**
 
 As we are using TTrees for the photon QA, there is a slightly different approach in this case:

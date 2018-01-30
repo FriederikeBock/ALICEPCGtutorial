@@ -31,6 +31,7 @@
 
 ## Neutral Meson and Direct Photon Analysis - Afterburners
 * [Neutral Pion and Eta Analysis](Afterburners/neutralPionAndEtaAna.md)
+* [Omega and Eta Analysis](Afterburners/OmegaAndEtaAna.md)
 * [Merged Cluster Analysis](Afterburners/mergedAnalysis.md)
 * [Systematic Uncertainties](Afterburners/systematics.md)
 * [Combination of Measurements](Afterburners/combination.md)

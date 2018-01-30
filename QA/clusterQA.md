@@ -16,6 +16,7 @@ Important _example_ histograms for the runwise QA and bad cell identification \(
 
 * Cluster eta/phi maps for each run for data and MC - a difference can be clearly seen which **MUST** be corrected in MC \(switch off the given RCUs for MC\)  
   ![](/QA/figures/ClusterQA/hClusterEtaPhi_scaledNEventsAndMean_p0.jpg)  
+
   ![](/QA/figures/ClusterQA/hClusterEtaPhi_scaledNEventsAndMean_p0_MC.jpg)
 
 **2. CellQA step: identify dead and warm/hot cells comparing data and MC information**  
@@ -121,7 +122,9 @@ Different decisions when to consider dead cells:
 * if cell is dead cell candidate in consecutive number of runs \(currently set up with 4\), 
 * if at least 10 dead cell candidates are found with in the same run range or cell candidate is identified to be dead in a given % of analysed runs, represented by fractionThesh.
 
-All results are written/summarized in log-files \(examples\):
+All results are written/summarized in log-files, which will be not located in the cut folder, but in a folder called **ClusterQA_DeadCellCompare**. 
+
+Example **$DATASETNAME-detailed.log**:
 
 ```
 CellID:198,cold/notFiredInRuns:176701,176730,176749,176753,176926,176927,176929,177011,177148,177173,177180,177182,
@@ -139,7 +142,7 @@ CellID:2312,cold/notFiredInRuns:176749,177011,
 CellID:2313,cold/notFiredInRuns:176715,176730,176749,176753,176854,176924,176926,176927,176929,177011,177167,177182,
 ```
 
-and according to the selection criteria the final list of dead cells:
+and according to the selection criteria the final list of dead cells (**$DATASETNAME-final.log**):
 
 ```
 198 in 70.5882% of selected runs dead/cold
@@ -178,7 +181,9 @@ root -b -l -q -x 'TaskQA/ClusterQA_HotCellCompareV2.C+("Config_files/configHotCe
 
 Determination of warm/hot cells using for-loop around line 248 via 'threshNFired' and 'threshNTotalFired' for 3. + 4. produce output log-files which summarize the bad cells to be excluded in OADB from runwise dead/warm/hot cell determination.
 
-All hot cell candidates are written/summarized in log-files
+All hot cell candidates are written/summarized in log-files, which will be not located in the cut folder, but in a folder called **ClusterQA_HotCellCompare**. 
+
+Example **$DATASETNAME-detailed.log**: 
 
 ```
 CellID: 5602, occurred for first time in run: 177180, in total noisy in - 2 - differentRuns, where it occurred in clusters 370.715 times! That is 10.3574 times than the average of neighboring cells!
@@ -189,7 +194,7 @@ CellID: 7104, occurred for first time in run: 176730, in total noisy in - 4 - di
 CellID: 8420, occurred for first time in run: 176730, in total noisy in - 2 - differentRuns, where it occurred in clusters 299.125 times! That is 2.23993 times than the average of neighboring cells!
 ```
 
-and according to the selection criteria the final list of hot cells \(sorted by run or sorted by cell ID\):
+and according to the selection criteria the final list of hot cells \(sorted by run or sorted by cell ID\) in (**$DATASETNAME-final.log**):
 
 \(cell ID / run number\)
 
@@ -220,8 +225,9 @@ and according to the selection criteria the final list of hot cells \(sorted by 
 
 After identifying dead/hot cells on runwise level, the general periodwise level CellQA + ClusterQA step follows
 
-**5. CellQA step on periodwise level via running of ClusterQA.C**  
-identify bad cells on periodwise level by using data and MC information.
+**5. CellQA step on periodwise level via running of ClusterQA.C**
+Identify bad cells on periodwise level by using data and MC information. In order to run QA on a periodwise level, a separate config file will need to be created. As before, example configurations can be found in the TaskQA/ExampleConfigurations folder. Additionally, a merged root file from all good runs in a period will be needed for this step. 
+
 
 > Setting for bad cell identification are defined in QAV2.C \(Double\_t arrQAEnergy\[4\]; Double\_t arrQATime\[4\]; Double\_t arrQAHotCells1D\[4\]; Double\_t arrmin2D\[9\]; Double\_t arrmax2D\[9\];\)
 
@@ -257,7 +263,17 @@ AllCells.size before sort and unique: 64.Finally 37 different cells found!
 2245, 2581, 2665, 2745, 2884, 3659, 3740, 3750, 3755, 3801, 4090, 4228, 4230, 4233, 5767, 5824, 5825, 5833, 7375, 9444, 9445, 9450, 9451, 9880, 9881, 9940, 9941, 10080, 10083, 10085, 10089, 10091, 10095, 10718, 10759, 11044, 11052,
 ```
 
-An overview plot is generated with an overview by which cut a cell has been identified as bad candidate \(the cell IDs are also stored in log-files\):  
+In the event that the program crashes at this step \(gives error message: *ERROR: allCells.size() too big 82442, check cuts! RETURNING…,*\) then one must revise the cuts given in the config file. For reference, below are the cuts and which figure they correspond to. Note that visually, cut values will be represented as dotted lines on the existing plots.
+
+| Config values   | Plot to adjust cuts                      |
+| --------------- | ---------------------------------------- |
+| min2D, max2D    | CellHotCells2D_$DATASETNAME.eps          |
+| setQAEnergy     | CellEnergyVsSigma_$DATASETNAME.eps       |
+| setQATime       | CellTimeVsSigma_$DATASETNAME.eps         |
+| setQAHotCells1D | CellHotCellsRescaled_$DATASETNAME.eps and CellHotCellsTime1D_$DATASETNAME.eps |
+
+An overview plot is generated with an overview by which cut a cell has been identified as bad candidate \(the cell IDs are also stored in log-files\):
+
 ![](/QA/figures/ClusterQA/ReasonsBadCell_LHC12h_0.jpg)
 
 Furthermore, the energy and time distributions are plotted for data and MC:
