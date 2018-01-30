@@ -1,6 +1,6 @@
 Because the $\omega$ and the $\eta$ can both decay into $\pi^+\pi^-\pi^0$, the analysis in this decay channel is organized in a single analysis task: **AliAnalysisTaskNeutralMesonToPiPlPiMiPiZero.cxx**.
 
-Analogue to the neutral pion analysis, there is a single macro that starts the first afterburners needed to process the output files of the task. The **start_FullOmegaMesonAnalysis.sh** macro -- even though the name might be misleading -- takes care of the signal extraction (using **ExtactSignalPiPlPiMiPiZero.cxx**) and its correction (using **CorrectSignalPiPlPiMiPiZero.cxx**) for $\omega\rightarrow\pi^+\pi^-\pi^0$ *and* $\eta\rightarrow\pi^+\pi^-\pi^0$ . 
+Analogue to the neutral pion analysis, there is a single macro that starts the first afterburners needed to process the output files of the task. The **start_FullOmegaMesonAnalysis.sh** macro -- even though the name might be misleading -- takes care of the signal extraction \(using **ExtactSignalPiPlPiMiPiZero.cxx**\) and its correction \(using **CorrectSignalPiPlPiMiPiZero.cxx**\) for $\omega\rightarrow\pi^+\pi^-\pi^0$ *and* $\eta\rightarrow\pi^+\pi^-\pi^0$ . 
 
 ```
   start_FullOmegaAnalysis.sh [-$OPTION] $Data-file.root [$MC-file.root] eps
@@ -13,27 +13,27 @@ bash start_FullOmegaAnalysis.sh /Path/To/datafile.root bla eps
 
 will run the signal extraction macro two times -- once for the $\omega​$ and once for the $\eta​$ -- but won't run the correction macro afterwards, because it detected that you didn't provide it with a valid MC file. 
 
-There are several options available for this macro (which are still work in progress) that let you e.g. only analyse the $\omega$ (**--omegaOnly**) or the $\eta$ (**--etaOnly**). For a full list of available options please use the **-h** flag.
+There are several options available for this macro \(which are still work in progress\) that let you e.g. only analyse the $\omega$ \(**--omegaOnly**\) or the $\eta$ \(**--etaOnly**\). For a full list of available options please use the **-h** flag.
 
 If you start the *start_FullOmegaAnalysis.sh* macro by hand, you will be asked about several things needed for the signal extraction and correction. The questions are similar to the ones asked e.g. by *start_FullMesonAnalysis_TaskV3.sh*, however there are some differences, so we will go through the questions one-by-one in the following chapter.
 
 # start_FullOmegaAnalysis.sh
 
-First we start the macro using (e.g.):
+First we start the macro using \(e.g.\):
 
 ```
 bash start_FullOmegaMesonAnalysis.sh /referenceDirectory/Legotrain-vAN-20171122-7TeV-omegaAnalysis/LHC10_GammaConvNeutralMesonPiPlPiMiPiZero_0_29.root /referenceDirectory/Legotrain-vAN-20171122-7TeV-omegaAnalysis/LHC14j4_GammaConvNeutralMesonPiPlPiMiPiZero_0_29.root eps 
 ```
 
-First, the macro will print the full path of the input files you specified. This comes in handy to track down if you got something wrong while using e.g. relative paths. The first thing you will be asked is to specify the method (mode) used to reconstruct the decay-photons of the $\pi^0$:
+First, the macro will print the full path of the input files you specified. This comes in handy to track down if you got something wrong while using e.g. relative paths. The first thing you will be asked is to specify the method \(mode\) used to reconstruct the decay-photons of the $\pi^0$:
 
 ```
 The data file specified is /data/alice/pp7TeV/Legotrain-vAN-20171122-7TeV-omegaAnalysis/LHC10_GammaConvNeutralMesonPiPlPiMiPiZero_0_29.root
 The MC file specified is /data/alice/pp7TeV/Legotrain-vAN-20171122-7TeV-omegaAnalysis/LHC14j4_GammaConvNeutralMesonPiPlPiMiPiZero_0_29.root
-Which mode are you running? 40 (PCM-PCM *), 41 (PCM-EMCAL *), 42 (PCM-PHOS *), 43 (PCM-DCAL), 44 (EMCAL-EMCAL *), 45 (PHOS-PHOS*), 46 (DCAL-DCAL), 47 (PCM-DALITZ), 48 (EMCAL-DALITZ), 49 (PHOS-DALITZ), 50 (DCAL-DALITZ)
+Which mode are you running? 40 \(PCM-PCM *), 41 \(PCM-EMCAL *\), 42 \(PCM-PHOS *\), 43 \(PCM-DCAL), 44 \(EMCAL-EMCAL *), 45 \(PHOS-PHOS*), 46 \(DCAL-DCAL), 47 \(PCM-DALITZ), 48 \(EMCAL-DALITZ), 49 \(PHOS-DALITZ), 50 \(DCAL-DALITZ\)
 ```
 
-As you may have noticed, the **mode numbers** used for this analyisis **differ from the ones used for the $\gamma\gamma$-analysis**. This was implimented to avoid any conflicts between the two analysis (e.g. between $\eta\rightarrow\gamma\gamma$ and $\eta\rightarrow\pi^+\pi^-\pi^0$).  The modes currently implemented are marked with a '*'. For the sake of completeness, you can find a nicely formated table of the numbering scheme used in this analysis below:
+As you may have noticed, the **mode numbers** used for this analyisis **differ from the ones used for the $\gamma\gamma$-analysis**. This was implimented to avoid any conflicts between the two analysis \(e.g. between $\eta\rightarrow\gamma\gamma$ and $\eta\rightarrow\pi^+\pi^-\pi^0$\).  The modes currently implemented are marked with a '*'. For the sake of completeness, you can find a nicely formated table of the numbering scheme used in this analysis below:
 
 | mode | reconstruction technique |
 | ---- | ------------------------ |
@@ -55,7 +55,7 @@ This information will later be used by the signal extraction macro to check if y
 Do you want to take an already exitsting CutSelection.log-file. Yes/No
 ```
 
-**If you select no**, the macro will write all the cut strings found in the input file in a file called *CutSelection.log* sperated by [ENTER] (using the  [_MakeCutLog.C_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/MakeCutLog.C) macro) and then run the signal extraction (and correction) for each cut string in that file. **If you select yes**, the macro will search for an existing *CutSelection.log* file in the current working directory and run the afterburners for all cut strings contained in that file. This option is therefore useful if you just want to run the afterburners on a particular set of cut strings. 
+**If you select no**, the macro will write all the cut strings found in the input file in a file called *CutSelection.log* sperated by [ENTER] \(using the  [_MakeCutLog.C_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/MakeCutLog.C) macro\) and then run the signal extraction \(and correction\) for each cut string in that file. **If you select yes**, the macro will search for an existing *CutSelection.log* file in the current working directory and run the afterburners for all cut strings contained in that file. This option is therefore useful if you just want to run the afterburners on a particular set of cut strings. 
 
 Let's assume we want to run the afterburners on all the cuts contained in the input file, so we answer with "no". The output should look something like this:
 
@@ -75,7 +75,7 @@ The collision system has been selected to be 7TeV.
 How many p_T bins do you want to use for Omega? 36(7gev), 37(8gev), 38(10gev), 39(12gev), 40 (16gev), 41 (20gev), 42 (25gev)
 ```
 
- After the collision system was selected, you have to specify how many $p_T$-bins should be analysed. This question is a bit misleading, because you are actually specifying up to what index in your $p_T$-bin array stored in ExtractSignalBinning.h you want to do the analysis. The total number of analysed bins would then be $N_{\text{StartBin}}-N_{\text{EndBin}}$. **Important: Make sure that the $p_T$-bin choosen here is not actually greater than the length of the array containing your binning for this analysis (see ExtractSignalBinning.h) !  Also: At the moment only the use of same number of $p_T$ bins for $\omega$ and $\eta$  are supported.** 
+ After the collision system was selected, you have to specify how many $p_T$-bins should be analysed. This question is a bit misleading, because you are actually specifying up to what index in your $p_T$-bin array stored in ExtractSignalBinning.h you want to do the analysis. The total number of analysed bins would then be $N_{\text{StartBin}}-N_{\text{EndBin}}$. **Important: Make sure that the $p_T$-bin choosen here is not actually greater than the length of the array containing your binning for this analysis \(see ExtractSignalBinning.h\) !  Also: At the moment only the use of same number of $p_T$ bins for $\omega$ and $\eta$  are supported.** 
 
 ```
 You have chosen  14  pt bins for Omega
@@ -88,7 +88,7 @@ Please check that you really want to process all cuts, otherwise change the CutS
 Yes
 ```
 
-After choosing the desired fitting function for the $\omega$ / $\eta$ -peak (using **gaussian** is recommended, no testing was done for crystal ball so far), you will be asked if you are sure to process all cuts. After confirming this final question, the afterburners should go to work!
+After choosing the desired fitting function for the $\omega$ / $\eta$ -peak \(using **gaussian** is recommended, no testing was done for crystal ball so far\), you will be asked if you are sure to process all cuts. After confirming this final question, the afterburners should go to work!
 
 # ExtractSignalPiPlPiMiPiZero.C
 
@@ -99,14 +99,14 @@ root -b -x- q -l 'TaskV1/ExtractSignalPiPlPiMiPiZero.C+("$MESONAME","/path/to/in
 
 ```
 
-Example usage (**Data**):
+Example usage \(**Data**\):
 
 ```
 root -b -x- q -l 'TaskV1/ExtractSignalPiPlPiMiPiZero.C+("Omega","/data/alice/pp7TeV/Legotrain-vAN-20171122-7TeV-omegaAnalysis/LHC10_GammaConvNeutralMesonPiPlPiMiPiZero_0_29.root","0_00000113_00200009327000008250400000_0103503800000000_302010708_0d53503000000000","pdf","kFALSE","7TeV","Gaussian","","","",14,kFALSE,40)'
 
 ```
 
-Example usage (**MC**):
+Example usage \(**MC**\):
 
 ```
 root -b -x- q -l  'TaskV1/ExtractSignalPiPlPiMiPiZero.C+("Omega","/data/alice/pp7TeV/Legotrain-vAN-20171122-7TeV-omegaAnalysis/LHC14j4_GammaConvNeutralMesonPiPlPiMiPiZero_0_29.root","0_00000113_00200009327000008250400000_0103503800000000_302010708_0d53503000000000","pdf","kTRUE","7TeV","Gaussian","","","",14,kFALSE,40)'
