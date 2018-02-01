@@ -155,6 +155,16 @@ and according to the selection criteria the final list of dead cells (**$DATASET
 11091 in 70.5882% of selected runs dead/cold
 ```
 
+In addition, there will also be an output file called **$DATASETNAME-Runwise.log**. The information included in this log file will be the $CellID-$RunNumber-$Sigma. Note for all cold cells the sigma value is set to 10. This will later be used for plotting in  **ClusterQA_CellCompareV2.C**. An example of this can be found below.
+
+```
+52-264078-10
+761-264109-10
+1310-264188-10
+```
+
+
+
 **4. Check Hot-Cells for different runs via ClusterQA\_HotCellCompareV2.C **
 
 As for the previous step, this macro can be run by enabling the 'doCellQASummary' as last parameter in the QAV2.C.  
@@ -223,7 +233,19 @@ and according to the selection criteria the final list of hot cells \(sorted by 
 5602 177180
 ```
 
-After identifying dead/hot cells on runwise level, the general periodwise level CellQA + ClusterQA step follows
+Again, there will also be a **$DATASETNAME-Runwise.log** for the hot cells. The only difference from the cold cells is that instead of getting a default value of 10, the cell will have a decimal sigma value. The format still goes as $CellID-$RunNumber-$Sigma. For clarity, an example is included below. 
+
+```
+566-264076-50.7313
+567-264076-55.004
+570-264076-12.5978
+572-264076-11.3802
+573-264076-26.5885
+```
+
+
+
+After identifying dead/hot cells on runwise level, the general periodwise level CellQA + ClusterQA step follows.
 
 **5. CellQA step on periodwise level via running of ClusterQA.C**
 Identify bad cells on periodwise level by using data and MC information. In order to run QA on a periodwise level, a separate config file will need to be created. As before, example configurations can be found in the TaskQA/ExampleConfigurations folder. Additionally, a merged root file from all good runs in a period will be needed for this step. 
@@ -294,8 +316,89 @@ Compare data/MC energy and time distributions for all bad cell candidates found 
 
 Then, merge bad cell candidate list from 5. with lists found in 3. and 4. to be excluded in OADB
 
-**6. Run ClusterQA**_**CellCompare \(needs to be configured within macro - not \_yet**_** included in steering macros\)**  
+**6. Run bash file lookAtCellQa.sh to sort the energy distribution plots. **
+
+This script is simply to make the sorting of bad cells, maybe bad cells, and okay cells based on the energy distribution plots easier for the user. The macro takes 3 parameters, the location of the energy distribution plots, the location of the ok/maybe/bad folders (will be created by the macro), and the suffix (i.e. "pdf"). 
+
+The script will then guide the user through the process of sorting, first by showing examples of good cell plots for the data set so that the user can get a feel on how to sort future plots. Then the user can decide via the keys 1,2,or 3 in order to move these plots into the corresponding ok/maybe/bad folder.
+
+**7. Run ClusterQA_CleanCellLogs.C vis QAV2.C**
+
+This macro will go through the log files in **ClusterQA_HotCellCompare** and **ClusterQA_DeadCellCompare** and check if some of the cells in there were already flagged as bad by the user (in the process described in Step 6). The cleaned logs will be written to *$OriginalFile-Cleaned.log*. The information for which folders are flagged as good (and maybe) by the user are taken from the folders containing the *Cell#_EnergyComparison* files. 
+
+Below is the usage to be added to the config file to enable the **ClusterQA_CleanCellLogs.C**. 
+
+```
+Usage (add to config used by QAV2.C):
+ *
+ * cellCleaningUseMaybe 0 : run the cleaning of log files but ignore a maybe folder
+ * cellCleaningUseMaybe 1 : consider all cells in maybe folder as good aswell
+ * cellCleaningUseMaybe 2 : consider all cells in maybe folder as bad aswell
+ *
+ * Optional:
+ * userGoodCellDirName $PATH
+ * userBadCellDirName $PATH
+ * userMaybeCellDirName $PATH
+ *
+ * if the user doesn't give them explicitly, macro will search in
+ *
+ * $CUTNUMBER/$ENERGY/ClusterQA/$SUFFIX/Cells/Detailed/ok
+ * $CUTNUMBER/$ENERGY/ClusterQA/$SUFFIX/Cells/Detailed/maybe
+ * $CUTNUMBER/$ENERGY/ClusterQA/$SUFFIX/Cells/Detailed/bad
+```
+
+
+
+**8. Run ClusterQA**_**CellCompareV2.C via QAV2.C**  
 to visualize bad cell candidates found in step 5.
+
+This can be run from the steering macro QAV2.C with 'doCellQASummary' (the last parameter in QAV2.C)  set to kTRUE. Additionally the following lines must be added to the the configuration file.  These additions along with corresponding explanations are shown below. 
+
+```
+# Settings needed for Cell Compare Macro
+CellCompareNSets  1
+CellCompareNTrigger 1
+
+# energy flag
+energy  13TeV
+
+# cut number used
+cut  00010113_3885500081041220000_01631031000000d0 STOP
+
+# output directories for the hot/cold cell compare
+hotCellDirName ClusterQA_HotCellCompare/LHC16_EMC STOP
+coldCellDirName ClusterQA_DeadCellCompare/LHC16_EMC STOP
+
+# Data Set Name (should agree with runlist file name)
+DataSetNames LHC16p_pass1 STOP
+
+# Specification of Run Range
+# If set to 1, Cell Compare will output a log file of all bad cells in run range specified.
+# If set to 0, Cell Compare will output a log file of all bad cells.
+# note runEnd must be greater than runStart
+runRange 1
+runStart 264076
+runEnd 264088
+```
+
+In addition to the output plots, which will be described below. This macro also outputs additional log files for every data set. Depending on the value of *runRange* this log file will either contain a list of the bad cells within a range of runs specified by *runStart* and *runEnd* or a list of all the bad cells in a data set. In the case where runRange is set to 1 the log file will be named **BadCells_$DataSetName______****$runStart__$runEnd.log** and in the case where runRange is set to 0 the log file will be named  **BadCells_$DataSetName.log**. An example of the output for either of these log files is shown below. 
+
+```
+322
+325
+518
+522
+523
+525
+```
+
+
+
+From running **ClusterQA_CellCompareV2.C** there will be two types of histograms generated; one runwise plot of Cell ID (for bad cells) vs. run number and another period wise plot of Cell ID (for bad cells) vs. period. Examples of these plot are shown below. 
+
+![](/QA/figures/ClusterQA/BadCellCandidates_Runwise_LHC16p_pass1.jpg)
+
+The above histogram should be used in to aid pattern recognition in order to determine if cells should be masked globally, or within a certain run range. The idea is that using run ranges would increase statistics. Note that here both hot and dead cells are shown in combination and the z axis represents the sigma. 
 
 An overview plot is generated with an full overview in which period a cell has been identified as bad candidate:  
 ![](/QA/figures/ClusterQA/BadCellCandidates_0.jpg)
