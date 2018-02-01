@@ -318,13 +318,13 @@ Then, merge bad cell candidate list from 5. with lists found in 3. and 4. to be 
 
 **6. Run bash file lookAtCellQa.sh to sort the energy distribution plots. **
 
-This script is simply to make the sorting of bad cells, maybe bad cells, and okay cells based on the energy distribution plots easier for the user. The macro takes 3 parameters, the location of the energy distribution plots, the location of the ok/maybe/bad folders (will be created by the macro), and the suffix (i.e. "pdf"). 
+This script is simply to make the sorting of bad cells, maybe bad cells, and okay cells based on the energy distribution plots easier for the user. The macro takes 3 parameters, the location of the energy distribution plots, the location of the ok/maybe/bad folders (will be created by the macro), and the suffix (i.e. "png"). 
 
 The script will then guide the user through the process of sorting, first by showing examples of good cell plots for the data set so that the user can get a feel on how to sort future plots. Then the user can decide via the keys 1,2,or 3 in order to move these plots into the corresponding ok/maybe/bad folder.
 
 **7. Run ClusterQA_CleanCellLogs.C vis QAV2.C**
 
-This macro will go through the log files in **ClusterQA_HotCellCompare** and **ClusterQA_DeadCellCompare** and check if some of the cells in there were already flagged as bad by the user (in the process described in Step 6). The cleaned logs will be written to *$OriginalFile-Cleaned.log*. The information for which folders are flagged as good (and maybe) by the user are taken from the folders containing the *Cell#_EnergyComparison* files. 
+This macro will go through the log files in **ClusterQA_HotCellCompare** and **ClusterQA_DeadCellCompare** and check if some of the cells in there were already flagged as good by the user (in the process described in Step 6) and will delete them. Cells flagged as good will be removed from the log file instead of adding the ones you flagged as bad in Step 6, because we have more confidence in the distributions flagged as good (because the eye is usally better at spotting good things). The cleaned logs will be written to *$OriginalFile-Cleaned.log*. The information for which folders are flagged as good (and maybe) by the user are taken from the folders containing the *Cell#_EnergyComparison* files. 
 
 Below is the usage to be added to the config file to enable the **ClusterQA_CleanCellLogs.C**. 
 
