@@ -1,4 +1,4 @@
-# ClusterQA
+# ClusterQA & CellQA
 
 **This part of the QA must be run for any calorimeter related analysis \(for EMCal/PHOS/DCal and hybrid analyses PCM-EMCal, PCM-PHOS, PCM-DCal\)**
 
@@ -308,9 +308,9 @@ Furthermore, the energy and time distributions are plotted for data and MC:
 
 Real bad cell candidates are immediately visible in comparison to the rest of candidates.
 
-In addition, the energy distribution of each cell candidate is compared between data and MC \(normalized to the number of events\) to help with the judgement if cells are really bad:
+In addition, the energy distribution of each cell candidate is compared between data and MC \(normalized to the number of events\) to help with the judgement if cells are really bad. At the same time the cell time distribution is compared to that of a random good cell:
 
-![](/QA/figures/ClusterQA/Cell10091_EnergyComparison.jpg)
+![](/QA/figures/ClusterQA/Cell9941_EnergyAndTimeComparison.png)
 
 Compare data/MC energy and time distributions for all bad cell candidates found in 5. Also use 8.
 
@@ -347,8 +347,6 @@ Usage (add to config used by QAV2.C):
  * $CUTNUMBER/$ENERGY/ClusterQA/$SUFFIX/Cells/Detailed/bad
 ```
 
-
-
 **8. Run ClusterQA**_**CellCompareV2.C via QAV2.C**  
 to visualize bad cell candidates found in step 5.
 
@@ -375,13 +373,18 @@ DataSetNames LHC16p_pass1 STOP
 # Specification of Run Range
 # If set to 1, Cell Compare will output a log file of all bad cells in run range specified.
 # If set to 0, Cell Compare will output a log file of all bad cells.
-# note runEnd must be greater than runStart
-runRange 1
-runStart 264076
-runEnd 264088
+# note CellCompareRunEnd must be greater than CellCompareRunStart
+CellCompareRunRange 1
+CellCompareRunStart 264076
+CellCompareRunEnd 264088
+# additionally an optional user created file can be handed to the cell compare, which will be taken as bad for the whole run list
+CellCompareManualBadChannels    ManualLHC16p_addDeadCells.txt
+# the CellCompareMinAverageSigma set the minimum of number of sigmas a cell needs to have deviated from the average over the full defined runlist
+# this parameter is optional its default is set to 2.0, it will only be used for the cleaned version of the bad cell logs
+CellCompareMinAverageSigma  1.5
 ```
 
-In addition to the output plots, which will be described below. This macro also outputs additional log files for every data set. Depending on the value of *runRange* this log file will either contain a list of the bad cells within a range of runs specified by *runStart* and *runEnd* or a list of all the bad cells in a data set. In the case where runRange is set to 1 the log file will be named **BadCells_$DataSetName______****$runStart__$runEnd.log** and in the case where runRange is set to 0 the log file will be named  **BadCells_$DataSetName.log**. An example of the output for either of these log files is shown below. 
+In addition to the output plots, which will be described below. This macro also outputs two additional log files for every data set. Depending on the value of *runRange* this log file will either contain a list of the bad cells within a range of runs specified by *runStart* and *runEnd* or a list of all the bad cells in a data set. In the case where runRange is set to 1 the log file will be named **BadCells\[Cleaned\]_$DataSetName______****$runStart__$runEnd.log** and in the case where runRange is set to 0 the log file will be named  **BadCells\[Cleaned\]_$DataSetName.log**. An example of the output for either of these log files is shown below. 
 
 ```
 322
@@ -393,14 +396,14 @@ In addition to the output plots, which will be described below. This macro also 
 ```
 
 
+From running **ClusterQA_CellCompareV2.C** there will be two types of histograms generated; one runwise plot of Cell ID (for bad cells) vs. run number and another period wise plot of Cell ID (for bad cells) vs. period. Examples of these plot are shown below. For the runwise plot with lines indicating the cells which would not fullfil the CellCompareMinAverageSigma-condition is also provided. In the corresponding plot the cells which would not be marked as bad are crossed out with a red dashed-dotted line.
 
-From running **ClusterQA_CellCompareV2.C** there will be two types of histograms generated; one runwise plot of Cell ID (for bad cells) vs. run number and another period wise plot of Cell ID (for bad cells) vs. period. Examples of these plot are shown below. 
-
-![](/QA/figures/ClusterQA/BadCellCandidates_Runwise_LHC16p_pass1.jpg)
+![](/QA/figures/ClusterQA/BadCellCandidates_Runwise_LHC16q.png)
+![](/QA/figures/ClusterQA/BadCellCandidates_Runwise_withLines_LHC16q.png)
 
 The above histogram should be used in to aid pattern recognition in order to determine if cells should be masked globally, or within a certain run range. The idea is that using run ranges would increase statistics. Note that here both hot and dead cells are shown in combination and the z axis represents the sigma. 
 
-An overview plot is generated with an full overview in which period a cell has been identified as bad candidate:  
+An overview plot is generated with an full overview in which period a cell has been identified as bad candidate, if more than one period had been handed to the macro:  
 ![](/QA/figures/ClusterQA/BadCellCandidates_0.jpg)
 
 ## Run ClusterQA
@@ -419,13 +422,13 @@ Running the ClusterQA\(\_Runwise\).C will save the output into the following fol
 
 In addition, \*.root files will be generated in _CUTNUMBER/SYSTEM/_ containing all the histograms as well.
 
-**7. Runwise ClusterQA step by analysing output from ClusterQA\_Runwise.C**  
+**9. Runwise ClusterQA step by analysing output from ClusterQA\_Runwise.C**  
 Carefully check all output from runwise histograms with special focus on data/MC comparison \(Is the MC able to reproduce all QA histograms extracted from data? Does the MC follow the trends seen in data? Are there any suspicious runs or any observations that cannot be explained?...\)
 
-**8. ClusterQA step by analysing output from ClusterQA.C**  
+**10. ClusterQA step by analysing output from ClusterQA.C**  
 Carefully check all output from histograms with special focus on data/MC comparison \(Is the MC able to reproduce all QA histograms extracted from data? Does the MC follow the distributions seen in data? Are there any suspicious observations or is there anything that cannot be explained?...\)
 
-**9. Optional: run ClusterQA**_**Compare \(needs to be configured within macro - not \_yet**_** included in steering macros\)**  
+**10. Optional: run ClusterQA**_**Compare \(needs to be configured within macro - not \_yet**_** included in steering macros\)**  
 to compare different data sets \(MB vs calorimeter trigger for example for a given dataset; needs input from runwiseQA and periodwiseQA\)
 
 Carefully check all output from runwise/full output with special focus on data/MC comparison \(Is the MC able to reproduce all QA histograms extracted from data? Does the MC follow the trends seen in data? Are there any suspicious runs or any observations that cannot be explained?...\) In general, they should be stable vs. run number - however, one of the exceptions is pileup which may vary from run to run -&gt; need to be taken with special care!
