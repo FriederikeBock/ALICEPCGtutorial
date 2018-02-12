@@ -7,7 +7,7 @@ To download files from a data/MC production of ALICE from the GRID, see [Downloa
 
 Test with local software and local files
 
-* process runAnalysisConv.C with useGrid = kFALSE.
+* process runLocal.C with useGrid = kFALSE.
 * make sure you have downloaded valid test files and provided the correct path.
 * make sure that you set up the same tasks and make the same settings as you want to use on the train.
 * also, make sure that you have installed the versions of AliRoot and AliPhysics that you want to use on the train. 
