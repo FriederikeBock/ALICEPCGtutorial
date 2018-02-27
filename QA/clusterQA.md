@@ -4,7 +4,7 @@
 
 ## Identify Bad Cells
 
-For bad cell identification, we need the output from GammaCalo with cellQA output contained \(perferably option '5'\) downloaded runwise.
+For bad cell identification, we need the output from GammaCalo with cellQA output contained \(perferably option '5'\) downloaded runwise \(if you don't know how to download runwise output, look here [Download Output](/AliPhysicsAndGrid/download.md)\).
 
 **1. Run QA\_RunwiseV2.C**  
 with doEventQA = kTRUE and doClusterQA = kTRUE \(doMergedQA for EMCal merged analysis\) with doExtQA == 2! \(important for cell level output\) using data + MC input in order to generate all needed histograms + txt-files for bad cell identification
@@ -20,7 +20,7 @@ Important _example_ histograms for the runwise QA and bad cell identification \(
   ![](/QA/figures/ClusterQA/hClusterEtaPhi_scaledNEventsAndMean_p0_MC.jpg)
 
 **2. CellQA step: identify dead and warm/hot cells comparing data and MC information**  
-Check histograms created in _ExtQA/\*_ and especially _ExtQA/MissingCells/\*_ for dead cells. Dead/warm/hot cell identification by comparing the cells EFrac to mean EFrac of neighboring cells
+Have a look at the histograms created in $CUTSTRING/$ENERGY/$SUFFIX/Runwise/$PERIOD/ExtQA/\*_ and especially .../ExtQA/MissingCells/\*_ for dead cells, so you get a feel for the variables you are looking at. Dead/warm/hot cell identification is done by comparing the cells EFrac to mean EFrac of neighboring cells. EFrac is defined as follows:
 
 > EFrac = cells energy fraction of full cluster energy, summed over all events --&gt; turned out to be a much better discriminator than just looking how often cells fired
 
@@ -41,6 +41,8 @@ The resulting dead/warm/hot cells are written to respective _\*.log_ files that 
 The hot cell candidates are summarized in such plots \(How often does a cell fire per run and how many hot cell candidates are available per run\):  
 ![](/QA/figures/ClusterQA/HotCells_FiredInNRuns_0.jpg)  
 ![](/QA/figures/ClusterQA/HotCells_Runwise_0.jpg)
+
+\(located in $CUTSTRING/$ENERGY/$SUFFIX/Runwise/$PERIOD/HotCells_FiredInNRuns_\)
 
 Example how the HotCellsRunwise looks like:
 
@@ -322,7 +324,7 @@ This script is simply to make the sorting of bad cells, maybe bad cells, and oka
 
 The script will then guide the user through the process of sorting, first by showing examples of good cell plots for the data set so that the user can get a feel on how to sort future plots. Then the user can decide via the keys 1,2,or 3 in order to move these plots into the corresponding ok/maybe/bad folder.
 
-**7. Run ClusterQA_CleanCellLogs.C vis QAV2.C**
+**7. Run ClusterQA_CleanCellLogs.C via QAV2.C**
 
 This macro will go through the log files in **ClusterQA_HotCellCompare** and **ClusterQA_DeadCellCompare** and check if some of the cells in there were already flagged as good by the user (in the process described in Step 6) and will delete them. Cells flagged as good will be removed from the log file instead of adding the ones you flagged as bad in Step 6, because we have more confidence in the distributions flagged as good (because the eye is usally better at spotting good things). The cleaned logs will be written to *$OriginalFile-Cleaned.log*. The information for which folders are flagged as good (and maybe) by the user are taken from the folders containing the *Cell#_EnergyComparison* files. 
 
@@ -405,6 +407,91 @@ The above histogram should be used in to aid pattern recognition in order to det
 
 An overview plot is generated with an full overview in which period a cell has been identified as bad candidate, if more than one period had been handed to the macro:  
 ![](/QA/figures/ClusterQA/BadCellCandidates_0.jpg)
+
+### Summary 
+
+**DISCLAIMER: This is a summary and not a standalone guide. Please always have a look at all the steps described previously, before doing the QA!**
+
+1. Make sure you have the runwise output of your task, aswell as the merged output for periodwise QA available.
+
+2. Run QA_RunwiseV2.C with doEventQA = kTRUE and doClusterQA = kTRUE \(doMergedQA for EMCal merged analysis\) with doExtQA == 2. 
+
+   An example configurations can be found in the ExampleConfigurations folder. E.g. your config file could look like this \( please remember to make sure, that you use only tabs or spaces in your config file! not a mix of both\):
+
+   ```
+   # Example config to run over all PHOS period runwise
+   mode 5
+   cutNr 0
+   nSets 10
+   nData 5
+   energy 7TeV
+   filePath /media/florianjonas/dataslave/data/alice/pp7TeV/Legotrain-vAN-20180122-1-gammacalo/runwiseoutput/20180124
+   fileName GammaCalo_361.root
+   doTrigger kTRUE
+   DataSets LHC10b_pass4 LHC10c_pass4 LHC10d_pass4 LHC10e_pass4 LHC10f_pass4 LHC14j4b LHC14j4c LHC14j4d LHC14j4e LHC14j4f STOP
+   plotDataSets LHC10b LHC10c LHC10d LHC10e LHC10f Pythia6 Pythia6 Pythia6 Pythia6 Pythia6 STOP
+   doHistsForEverySet  kTRUE
+   ```
+
+3. Run the QA on a periodwise level using QAV2.C. The example config file given below, contains the minimum settings needed to run on the periodwise level (in this case only for period LHC10b), aswell as running the hot cell compare macro and the dead cell compare macro. You should probably create one config file per period you are analysing, and run the QAV2 macro for each period seperately to avoid any complications.
+
+   ```
+   mode 5
+   nSets 2
+   cutNr 0
+   energy 7TeV
+
+   # LHC10b period
+   pathDataSets /media/florianjonas/dataslave/data/alice/pp7TeV/Legotrain-vAN-20180122-1-gammacalo/runwiseoutput/20180124/LHC10b_pass4_GammaCalo_361.root /media/florianjonas/dataslave/data/alice/pp7TeV/Legotrain-vAN-20180122-1-gammacalo/runwiseoutput/20180124/LHC14j4b_GammaCalo_361.root STOP
+   DataSetNames LHC10b_pass4 LHC14j4b STOP
+   DataSetNamesPlot LHC10b Pythia6 STOP
+
+   enableCellQACuts 1
+   setQAEnergy 0.08 0.17 0.07 0.19 STOP
+   setQATime -0.15E-7 0.8E-7 0 0.5E-6 STOP
+   setQAHotCells1D 1.1E2 2.2E2 0 1.6 STOP
+   min2D 1 1 1 1 1 0.3 0.3 0.3 0.3 STOP
+   max2D 80 80 80 80 80 80 80 80 80 STOP
+
+   # Settings for dead cell compare macro
+   addLabelRunlist
+   deadCellNSets 1
+   deadCellNMCSets 1
+   deadCellNTrigger 1
+   deadCellDataSetNames LHC10b_pass4 STOP
+   deadCellMCSetNames LHC14j4b STOP
+   deadCellAdditionalOutputDirName LHC10b
+   nCaloCells 18000
+   # deadCellTriggerNames  INT7    STOP
+   deadCellMCCuts 00000113_2444400000013300000_0163803100000010 STOP
+   deadCellDataCuts 00000113_2444400000013300000_0163803100000010 STOP
+   deadCellFractionThesh 0.6
+
+   # Settings for hot cell compare macro
+   hotCellNSets 1
+   hotCellNTrigger 1
+   hotCellDataSetNames LHC10b_pass4 STOP
+   hotCellAdditionalOutputDirName LHC10b_pass4 STOP
+   # hotCellTriggerNames INT7 STOP
+   hotCellDataCuts 00000113_2444400000013300000_0163803100000010 STOP
+   hotCellThreshNFired 0
+   hotCellThreshNTotalFired 60
+
+   ```
+
+   After running over the periodwise output for the first time, you will probably get an ERROR message. This means you have to adjust the cuts in the enableCellQA block in the config file. When the cuts are correct, continue!
+
+4. Run bash file lookAtCellQa.sh to sort the energy distribution plots. This will take some time, but it is worth the effort! Don't get too frustrated.
+
+5. Rerun the QAV2.C macro over the period you just sorted in the previous step, but this time add the lines needed for the **ClusterQA_CleanCellLogs.C** macro. Have a careful look at its output, especially at the cells you flagged as bad, but the macro didn't.
+
+6. Rerun QAV2.C with the settings and the lines in the config file needed to run run **ClusterQA_CellCompareV2.C via QAV2.C** .Redo this step for the different subranges you slected after looking at the overview plots and remember to provide it with a file containing the cells you think should be flagged as bad, even though the compare macros didn't evaluate them as bad in the previous step.
+
+7. You should now have different txt files containing bad cells for different runranges. Remerge the periodwise output according to those runlists and redo the periodwise QA in this range.
+
+8. Repeat for each period
+
+9. You are now done with the first iteration of the QA. Re run the task using this bad channel map and then redo QA to make sure you didn't miss any bad cells in first iteration.
 
 ## Run ClusterQA
 
