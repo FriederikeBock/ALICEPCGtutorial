@@ -23,6 +23,7 @@
 * [ClusterQA](QA/clusterQA.md)
 * [PrimaryTrackQA](QA/primaryQA.md)
 * [Energy Calibration of Calorimeters](QA/ecalib.md)
+* [TPC Spline Creation](QA/TPCcalib.md)
 
 ## Cocktail Running and External Input
 * [Cocktail Framework Overview](Cocktail/cocktailOverview.md)
