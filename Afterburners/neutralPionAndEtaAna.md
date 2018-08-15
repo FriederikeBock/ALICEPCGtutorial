@@ -268,6 +268,30 @@ Pi0\_data\_EffectiveSecCorrPt\_\* & Pi0\_data\_RAWYieldSecPt\_\*
 * Make sure the appropriate functions are used if you need to fix the secondary correction factors, these might depend on   energy, collision system and reconstruction method, please try to adjust it such that you don't interfere with existing exceptions.
 * Repeat the cocktail generation procedure, if the parametrizations are not good enough.
 
+# %%p_T%% weighting 
+
+* the goal is to adjust the pT distribution of MC particles (pi0s and/or eta mesons) to the shape of their distribution in data
+* prerequisites: fully corrected yields (using efficiency correction from unweighted MC. If you have a MC with added signals, reject them for now)
+* the macros [**_ExtractInputForWeights.C_**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SupportingMacros/ExtractInputForWeights.C) and [**_ExtractInputForWeightsPbPb.C_**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SupportingMacros/ExtractInputForWeightsPbPb.C) are used for preparing the weighting: 
+    * fit the pT spectra from data and save the fits in a root file
+    * normalize pT spectra from MC like invariant yields and save them into the same file. You may need to save one histogram for each MC production, (as the shapes of the spectra might be different), and separate histograms for the distributions of regular and added particles (as the latter are produced flat in pT on purpose to enhance the statistics at high pT). If you analyze different centrality classes, you need all fits and histograms for every cent class separately of course.
+    * produce plots to validate the quality of the fits and to see how much the MC distributions actually deviate from data
+* The resulting root file, filled with fits and histograms, has to be given as an argument to the addtask. In case of _AddTask_GammaConvV1_PbPb.C_ 
+    * specify doWeighting = kTRUE, fileNameInputForWeighting, periodName, periodNameAnchor
+    * here you can also check which naming scheme the fits and histograms need to have
+    * you might have to adjust the settings for your data period
+* The acutal calculation of weights is done in AliConvEventCuts::GetWeightForMeson()
+    * here you have to specify your MC productions which should be weighted
+    * the ratio data/MC at a given pT, evaluated/interpolated from the fit-functions/histograms from the specified root file is caluclated
+* Meson pT histograms are filled weighted with this number, for example in AliAnalysisTaskGammaConvV1::ProcessMCParticles() where the function AliConvEventCuts::GetWeightForMeson() is called
+* For running trains, don't forget to upload the root file you produced to alien (alien_cp file:filename.root alien:path/filename.root) and specify the path and filename in your analysis wagon
+* When you have your weighted output, use it to recalculate the efficiency. You can also use the added particles now.  (--> specify macro combining efficiencies and how to use it) Use this efficiency to recalculate corrected yields.
+* Redo step ...
+* If data and MC still don't agree within statistical errors redo steps ...
+
+
+
+
 # Preparing for the systematics running
 
 ## [**_CutStudiesOverview.C_**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/CutStudiesOverviev.C)
