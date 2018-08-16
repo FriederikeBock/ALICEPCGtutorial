@@ -153,41 +153,46 @@ Check the $CUTNUMBERS/$ENERGY/$SUFFIX/EXTRACTSIGNAL/MONITORING folder to see if 
 
 Also check all the plots in $CUTNUMBERS/$ENERGY/$SUFFIX/EXTRACTSIGNAL/ to check if all the bins have sufficient statistics for both data and MC. Increase the pt bin widths if there is a lack statistics. The number of bins in the invariant mass plots can also be adjusted, make sure there are sufficients points to be fitted in the main signal peak.
 
-## [**_AnalyseDCADist.C_**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/AnalyseDCADist.C)
+## [_**AnalyseDCADist.C**_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/AnalyseDCADist.C)
 
-This macro is especially need for the PCM $$\pi^0$$ and $$\eta$$ analyses. In case of the PCM photons the association to the event is not as easy as for the EMCal photons as there is no direct variable which relates a certain PCM photon in terms of time to corresponding event. Especially photons which are reconstructed only based on the TPC tracks can orginate with a certain probabiltity from one of the neighboring bunch crossings. As a rule of thumb one can say that a TPC track coming from a collision 500ns after the triggering one will be displaced by about 1.5 cm in Z in the TPC compared to the ones from the triggering collisions. This is due to the drift time of the electrons of 2.7 cm/$$\mu$$s and the total drift length of about 92 $$\mu$$s. The latter is approximately as long as 1 bunch needs to go round the LHC once. This mean that many tracks from neighboring bunches are actually contained in the TPC and as such also many photons. These tracks can only be rejected as pileup if they are not pointing to the primary vertex within a certain window, which needs to be larger for secondary tracks compared to primary tracks and depends on the primary vertex resoluton for the TPC-only tracks.
-To evaluate the contribution from these out-of-bunch photons to the neutral meson spectra the _AnalyseDCADist.C_-macro has been developed. Here we use the fact that a photon from another bunch-crossing will most likely have a different distribution in the distance of closest approach from the vertex in its Z-coordinate ($$dca_Z$$). This contribution will depend on the photon quality (1: TPC only photon, 2: 1 leg rec with TPC only, 3: both legs based on partial ITS+TPC information) which enters for the neutral meson reconstruction. As such 6 different categories have to be considered for the $$\pi^0 \& \eta$$ analysis. Within this macro the projections out of the dca-trees contained in the GammaConvV1_*.root for the $dca_Z$ of photon candidates in the invariant mass region of the corresponding meson are filled for the different reconstruction qualities and then evaluated using a root internal 'background finding' routine (`TH1::ShowBackground()`). 
+This macro is especially need for the PCM $$\pi^0$$ and $$\eta$$ analyses. In case of the PCM photons the association to the event is not as easy as for the EMCal photons as there is no direct variable which relates a certain PCM photon in terms of time to corresponding event. Especially photons which are reconstructed only based on the TPC tracks can orginate with a certain probabiltity from one of the neighboring bunch crossings. As a rule of thumb one can say that a TPC track coming from a collision 500ns after the triggering one will be displaced by about 1.5 cm in Z in the TPC compared to the ones from the triggering collisions. This is due to the drift time of the electrons of 2.7 cm/$$\mu$$s and the total drift length of about 92 $$\mu$$s. The latter is approximately as long as 1 bunch needs to go round the LHC once. This mean that many tracks from neighboring bunches are actually contained in the TPC and as such also many photons. These tracks can only be rejected as pileup if they are not pointing to the primary vertex within a certain window, which needs to be larger for secondary tracks compared to primary tracks and depends on the primary vertex resoluton for the TPC-only tracks.  
+To evaluate the contribution from these out-of-bunch photons to the neutral meson spectra the _AnalyseDCADist.C_-macro has been developed. Here we use the fact that a photon from another bunch-crossing will most likely have a different distribution in the distance of closest approach from the vertex in its Z-coordinate \($$dca_Z$$\). This contribution will depend on the photon quality \(1: TPC only photon, 2: 1 leg rec with TPC only, 3: both legs based on partial ITS+TPC information\) which enters for the neutral meson reconstruction. As such 6 different categories have to be considered for the $$\pi^0 \& \eta$$ analysis. Within this macro the projections out of the dca-trees contained in the GammaConvV1\_\*.root for the $dca\_Z$ of photon candidates in the invariant mass region of the corresponding meson are filled for the different reconstruction qualities and then evaluated using a root internal 'background finding' routine \(`TH1::ShowBackground()`\).   
 The macro can be executed as follows:
+
 ```
     root -b -x -q -l 'TaskV1/AnalyseDCADist.C+("$MESON","Data-main-file.root","Data-add-file.root","$CUTNUMBER","eps","$ENERGY","",kFALSE,$NPTBINS,0)
 ```
-It has to be run by hand as it most likely will need special adjustments for every energy and maybe even data-taking period. However, it is not necessary to run it for every possible cutvariaion when calculating the systematic uncertainties due to other sources. In this case you can simply copy the output-file of the standard cut ($CUTNUMBER/$ENERGY/$MESON/home/$MESON_Data_GammaConvV1DCATestAnalysed.root) into the directories of the variations ($CUTNUMBERs/$ENERGY/). 
+
+It has to be run by hand as it most likely will need special adjustments for every energy and maybe even data-taking period. However, it is not necessary to run it for every possible cutvariaion when calculating the systematic uncertainties due to other sources. In this case you can simply copy the output-file of the standard cut \($CUTNUMBER/$ENERGY/$MESON/home/$MESON\_Data\_GammaConvV1DCATestAnalysed.root\) into the directories of the variations \($CUTNUMBERs/$ENERGY/\).   
 It has to be carefully checked that the 'wings' in all $$p_T$$ bins at higher $$|dca_Z|$$ or neither underestimated nor overestimated which might need some tweaking of the following parameters in [CommonHeaders/ExtractSignalBinning.h](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/CommonHeaders/ExtractSignalBinning.h):
+
 ```
-	fMaxYFracBGOverIntHist              = 50;
-	nIterBGFit                          = 13;
-	TString optionBGSmoothingStandard   = "BackSmoothing9";
-	TString optionBGSmoothingVar1       = "BackSmoothing7";
-	TString optionBGSmoothingVar2       = "BackSmoothing11";
+    fMaxYFracBGOverIntHist              = 50;
+    nIterBGFit                          = 13;
+    TString optionBGSmoothingStandard   = "BackSmoothing9";
+    TString optionBGSmoothingVar1       = "BackSmoothing7";
+    TString optionBGSmoothingVar2       = "BackSmoothing11";
 ```
+
 Examples of optimized fits and the corresponding final correction factors can be found in the following plots or in the latest PCM analysis notes on pp 8Tev, pPb 5TeV or Pb-Pb 2.76TeV.
 
-* worst DCA meson category (2* category 3 photons)
-![](/assets/Pi0_Data_DCAProjections_Cat_1.jpg)
-* best DCA meson categories (at least 1 photon with ITS info)
-![](/assets/Pi0_Data_DCAProjections_GoodCat.jpg)
+* worst DCA meson category \(2\* category 3 photons\)
+  ![](/assets/Pi0_Data_DCAProjections_Cat_1.jpg)
+* best DCA meson categories \(at least 1 photon with ITS info\)
+  ![](/assets/Pi0_Data_DCAProjections_GoodCat.jpg)
 * all categories overlayed
-![](/assets/Pi0_Data_DCAzCategoryComp_8.jpg)
+  ![](/assets/Pi0_Data_DCAzCategoryComp_8.jpg)
 * $$dca_Z$$ distribution in different invariant mass windows
-![](/assets/Pi0_Data_DCAzGGBGComp_8.jpg)
+  ![](/assets/Pi0_Data_DCAzGGBGComp_8.jpg)
 * Calculated out-of-bunch pileup contribution for different categories separately
-![](/assets/Pi0_Data_CorrectionFactorVsCatHist.jpg)
+  ![](/assets/Pi0_Data_CorrectionFactorVsCatHist.jpg)
 * correctly weighted out-of-bunch pielup contribution using different estimates
-![](/assets/Pi0_Data_CorrectionFactorTotal.jpg)
+  ![](/assets/Pi0_Data_CorrectionFactorTotal.jpg)
 
 # Meson Corrections
 
-## [**_CorrectSignalV2.C_**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/CorrectSignalV2.C)
+## [_**CorrectSignalV2.C**_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/CorrectSignalV2.C)
+
 Applies the corrections to the raw yields; the input for this macro is the output from the _ExtractSignalV2.C_ and _AnalyseDCATestV1.C_. Also in this a .root file and plots are produced in the folder of the respective cutnumber.
 
 The arguments of the function are
@@ -210,11 +215,13 @@ void  CorrectSignalV2(  TString fileNameUnCorrectedFile = "myOutput",
 ```
 
 The main script executes CorrectSignalV2.C automatically but it can be called independently with:
+
 ```
 root -b -x- q -l 'TaskV1/CorrectSignalV2.C+("$FILETOCORRECT","$FILEWITHCORRECTIONS","$CUTNUMBER","$SUFFIX","$MESON","$ISMC","$ENERGY","","",$DALITZ,$MODE)'
 ```
 
 As an example:
+
 ```
 root -b -x- q -l 'TaskV1/CorrectSignalV2.C+("80000113_11111410570a2230000_01631031000000d0/pPb_5.023TeV/Pi0_data_GammaConvV1WithoutCorrection_80000113_11111410570a2230000_01631031000000d0.root","80000113_11111410570a2230000_01631031000000d0/pPb_5.023TeV/Pi0_MC_GammaConvV1CorrectionHistos_80000113_11111410570a2230000_01631031000000d0.root","80000113_11111410570a2230000_01631031000000d0","eps","Pi0","kFALSE","pPb_5.023TeV","","",kFALSE,4)'
 ```
@@ -268,41 +275,39 @@ Pi0\_data\_EffectiveSecCorrPt\_\* & Pi0\_data\_RAWYieldSecPt\_\*
 * Make sure the appropriate functions are used if you need to fix the secondary correction factors, these might depend on   energy, collision system and reconstruction method, please try to adjust it such that you don't interfere with existing exceptions.
 * Repeat the cocktail generation procedure, if the parametrizations are not good enough.
 
-# %%p_T%% weighting 
+# pT weighting
 
-* the goal is to adjust the pT distribution of MC particles (pi0s and/or eta mesons) to the shape of their distribution in data
-* prerequisites: fully corrected yields (using efficiency correction from unweighted MC. If you have a MC with added signals, reject them for now)
-* the macros [**_ExtractInputForWeights.C_**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SupportingMacros/ExtractInputForWeights.C) and [**_ExtractInputForWeightsPbPb.C_**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SupportingMacros/ExtractInputForWeightsPbPb.C) are used for preparing the weighting: 
-    * fit the pT spectra from data and save the fits in a root file
-    * normalize pT spectra from MC like invariant yields and save them into the same file. You may need to save one histogram for each MC production, (as the shapes of the spectra might be different), and separate histograms for the distributions of regular and added particles (as the latter are produced flat in pT on purpose to enhance the statistics at high pT). If you analyze different centrality classes, you need all fits and histograms for every cent class separately of course.
-    * produce plots to validate the quality of the fits and to see how much the MC distributions actually deviate from data
-* The resulting root file, filled with fits and histograms, has to be given as an argument to the addtask. In case of _AddTask_GammaConvV1_PbPb.C_ 
-    * specify doWeighting = kTRUE, fileNameInputForWeighting, periodName, periodNameAnchor
-    * here you can also check which naming scheme the fits and histograms need to have
-    * you might have to adjust the settings for your data period
-* The acutal calculation of weights is done in AliConvEventCuts::GetWeightForMeson()
-    * here you have to specify your MC productions which should be weighted
-    * the ratio data/MC at a given pT, evaluated/interpolated from the fit-functions/histograms from the specified root file is caluclated
-* Meson pT histograms are filled weighted with this number, for example in AliAnalysisTaskGammaConvV1::ProcessMCParticles() where the function AliConvEventCuts::GetWeightForMeson() is called
-* For running trains, don't forget to upload the root file you produced to alien (alien_cp file:filename.root alien:path/filename.root) and specify the path and filename in your analysis wagon
-* When you have your weighted output, use it to recalculate the efficiency. You can also use the added particles now.  (--> specify macro combining efficiencies and how to use it) Use this efficiency to recalculate corrected yields.
+* the goal is to adjust the pT distribution of MC particles \(pi0s and/or eta mesons\) to the shape of their distribution in data
+* prerequisites: fully corrected yields \(using efficiency correction from unweighted MC. If you have a MC with added signals, reject them for now\)
+* the macros [_**ExtractInputForWeights.C**_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SupportingMacros/ExtractInputForWeights.C) and [_**ExtractInputForWeightsPbPb.C**_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SupportingMacros/ExtractInputForWeightsPbPb.C) are used for preparing the weighting: 
+  * fit the pT spectra from data and save the fits in a root file
+  * normalize pT spectra from MC like invariant yields and save them into the same file. You may need to save one histogram for each MC production, \(as the shapes of the spectra might be different\), and separate histograms for the distributions of regular and added particles \(as the latter are produced flat in pT on purpose to enhance the statistics at high pT\). If you analyze different centrality classes, you need all fits and histograms for every cent class separately of course.
+  * produce plots to validate the quality of the fits and to see how much the MC distributions actually deviate from data
+* The resulting root file, filled with fits and histograms, has to be given as an argument to the addtask. In case of _AddTask\_GammaConvV1\_PbPb.C_ 
+  * specify doWeighting = kTRUE, fileNameInputForWeighting, periodName, periodNameAnchor
+  * here you can also check which naming scheme the fits and histograms need to have
+  * you might have to adjust the settings for your data period
+* The acutal calculation of weights is done in AliConvEventCuts::GetWeightForMeson\(\)
+  * here you have to specify your MC productions which should be weighted
+  * the ratio data/MC at a given pT, evaluated/interpolated from the fit-functions/histograms from the specified root file is caluclated
+* Meson pT histograms are filled weighted with this number, for example in AliAnalysisTaskGammaConvV1::ProcessMCParticles\(\) where the function AliConvEventCuts::GetWeightForMeson\(\) is called
+* For running trains, don't forget to upload the root file you produced to alien \(alien\_cp file:filename.root alien:path/filename.root\) and specify the path and filename in your analysis wagon
+* When you have your weighted output, use it to recalculate the efficiency. You can also use the added particles now.  \(--&gt; specify macro combining efficiencies and how to use it\) Use this efficiency to recalculate corrected yields.
 * Redo step ...
 * If data and MC still don't agree within statistical errors redo steps ...
 
-
-
-
 # Preparing for the systematics running
 
-## [**_CutStudiesOverview.C_**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/CutStudiesOverviev.C)
+## [_**CutStudiesOverview.C**_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/TaskV1/CutStudiesOverviev.C)
 
 * gives systematic uncertainty on cut variation with different sets of cuts.
 * input: CutSelection.log + uncorected file, corrected file
-
 
 # Compilation of the final results for each collision system, energy and detector
 
 _ProduceFinalResultsV2.C_
 
 * gives corrected yield of each mesons with systematic uncertainties.
+
+
 
