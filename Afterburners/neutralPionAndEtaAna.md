@@ -275,26 +275,71 @@ Pi0\_data\_EffectiveSecCorrPt\_\* & Pi0\_data\_RAWYieldSecPt\_\*
 * Make sure the appropriate functions are used if you need to fix the secondary correction factors, these might depend on   energy, collision system and reconstruction method, please try to adjust it such that you don't interfere with existing exceptions.
 * Repeat the cocktail generation procedure, if the parametrizations are not good enough.
 
-# pT weighting
+---
+# ** MC $$p_T$$ weighting **
 
-* the goal is to adjust the pT distribution of MC particles \(pi0s and/or eta mesons\) to the shape of their distribution in data
-* prerequisites: fully corrected yields \(using efficiency correction from unweighted MC. If you have a MC with added signals, reject them for now\)
-* the macros [_**ExtractInputForWeights.C**_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SupportingMacros/ExtractInputForWeights.C) and [_**ExtractInputForWeightsPbPb.C**_](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SupportingMacros/ExtractInputForWeightsPbPb.C) are used for preparing the weighting: 
-  * fit the pT spectra from data and save the fits in a root file
-  * normalize pT spectra from MC like invariant yields and save them into the same file. You may need to save one histogram for each MC production, \(as the shapes of the spectra might be different\), and separate histograms for the distributions of regular and added particles \(as the latter are produced flat in pT on purpose to enhance the statistics at high pT\). If you analyze different centrality classes, you need all fits and histograms for every cent class separately of course.
-  * produce plots to validate the quality of the fits and to see how much the MC distributions actually deviate from data
-* The resulting root file, filled with fits and histograms, has to be given as an argument to the addtask. In case of _AddTask\_GammaConvV1\_PbPb.C_ 
-  * specify doWeighting = kTRUE, fileNameInputForWeighting, periodName, periodNameAnchor
-  * here you can also check which naming scheme the fits and histograms need to have
-  * you might have to adjust the settings for your data period
-* The acutal calculation of weights is done in AliConvEventCuts::GetWeightForMeson\(\)
-  * here you have to specify your MC productions which should be weighted
-  * the ratio data/MC at a given pT, evaluated/interpolated from the fit-functions/histograms from the specified root file is caluclated
-* Meson pT histograms are filled weighted with this number, for example in AliAnalysisTaskGammaConvV1::ProcessMCParticles\(\) where the function AliConvEventCuts::GetWeightForMeson\(\) is called
-* For running trains, don't forget to upload the root file you produced to alien \(alien\_cp file:filename.root alien:path/filename.root\) and specify the path and filename in your analysis wagon
-* When you have your weighted output, use it to recalculate the efficiency. You can also use the added particles now.  \(--&gt; specify macro combining efficiencies and how to use it\) Use this efficiency to recalculate corrected yields.
-* Redo step ...
-* If data and MC still don't agree within statistical errors redo steps ...
+
+## **Goal**: 
+Adjust the pT distribution of MC particles (pi0s and/or eta mesons) to the shape of their distribution in data
+
+## **Prerequisite**: 
+Fully corrected yields (using efficiency correction from unweighted MC. If you have a MC with added signals, reject them for now)
+
+## **Description of relevant functions and macros: **
+
+The macros [**_ExtractInputForWeights.C_**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SupportingMacros/ExtractInputForWeights.C) and [**_ExtractInputForWeightsPbPb.C_**](https://gitlab.cern.ch/alice-pcg/AnalysisSoftware/tree/master/SupportingMacros/ExtractInputForWeightsPbPb.C) are used for preparing the weighting. 
+
+* They fit the pT spectra from data and save them in a root file e.g. _MCSpectraInputPbPb.root_
+* They normalize pT spectra from MC like invariant yields and save them in the same root file. You may need to save one histogram for each MC production, (as the shapes of the spectra might be different), and separate histograms for the distributions of regular and added particles (as the latter are produced flat in pT on purpose to enhance the statistics at high pT). If you analyze different centrality classes, you need all fits and histograms for every cent class separately of course.
+* They produce plots to validate the quality of the fits and to see how much the MC distributions actually deviate from data
+
+In _AddTask\_GammaConvV1\_PbPb.C_ 
+
+* the weighting is activated with the flag _doWeighting_ 
+* the name of the file, from which histos and fits should be loaded, is specified in the variable _fileNameInputForWeighting_ (e.g. as _MCSpectraInputPbPb.root_)
+* the names of the histograms and fits within _MCSpectraInputPbPb.root_ are specified, depending on _periodNameAnchor_ and _periodName_
+* _weightPi0_ and _weightEta_ are set to kTRUE to activate the weighting for the respective meson
+* these settings are handed over to the current instance of the class AliConvEventCuts and the histograms are loaded with the function AliConvEventCuts::LoadReweightingHistosMCFromFile()
+
+In _AliAnalysisTaskGammaConvV1.cxx_
+
+* Before filling MC meson $$p_T$$ histograms, e.g. in AliAnalysisTaskGammaConvV1::ProcessMCParticles\(\), the weight at the $$p_T$$ value of the current meson is calculated by calling _AliConvEventCuts::GetWeightForMeson\(\)_
+
+The acutal calculation of weights is done in _AliConvEventCuts::GetWeightForMeson\(\)_
+ 
+* the ratio data/MC at a given pT, evaluated/interpolated from the fit-functions/histograms from _MCSpectraInputPbPb.root_ is caluclated
+* It distinguishes between MCs with added particles (kCaseGen=1) and normal MCs (kCaseGen=2) because IsParticleFromBGEvent has to be called for added particles but must not be called for normal MCs. kCaseGen=3 is used for direct photons
+
+## **Neccessary code modifications** to AliPhysics for a new period/MC:
+
+* add the names of the MCs you want to weight to the function _AliConvEventCuts::GetWeightForMeson()_
+* In the _AddTask_ define the names of the histograms and fits if necessary
+
+## **Analysis steps**:
+
+1. Produce corrected yields, efficiency-corrected using the un-weighted MC(s) without added particles
+2. Fit the data, check the quality of the fit, check the agreement between MC and data
+3. Produce the root file with the required histograms and fits. Upload it to aliensh and specify the path and filename in your analysis wagon
+4. Run the train(s)
+5. When you have your weighted output, use it to recalculate the efficiency. You can also use the added particles now. Use this efficiency to recalculate corrected yields. Compare the new corrected yields to the ones before weighting.
+6. Redo step 2. If the new fit agrees with the data and the weighted Monte Carlo input within the statistical errors the procedure was successful, if this is not the case another iteration is necessary. In the latter case, repeat steps 3., 4., 5. and 6. 
+
+
+### **How to calculate the combined efficiency from added particles and normal MC: **
+
+* You have to give the train output file to _start_FullMesonAnalysis_TaskV3.sh_ in addition to the data and the regular MC file. 
+* To be able to do so, you have to use one of the existing options -mAddSig... or define a new one
+* Here you also make the settings MERGINGMC=1 (so that ExtractSignal is being run for an additional MC file) and ADDEDSIG=1 so that the macro _MergeEffiWithProperWeighting2760GeV.C_ is called.
+* The macro _MergeEffiWithProperWeighting2760GeV.C_ calculates a weighted efficiency, depending on the statistical errors, using the formula below. It produces plots to compare the efficiencies. There you can also check at which p_T the added particle MC efficiency becomes more precise than the efficiency from regular MC. The resulting effiency is automatically saved in the correct file to be used by _CorrectSignalV2.C_ to produce corrected yields.
+
+<img src="/assets/pTweighting.png" width="40%">
+ 
+### ** How to  upload a file to aliensh **
+```
+alien_cp file:filename.root alien:path/filename.root
+```
+
+---
 
 # Preparing for the systematics running
 
