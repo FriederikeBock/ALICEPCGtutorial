@@ -34,6 +34,7 @@
 * [Neutral Pion and Eta Analysis](Afterburners/neutralPionAndEtaAna.md)
 * [Omega and Eta Analysis](Afterburners/OmegaAndEtaAna.md)
 * [Merged Cluster Analysis](Afterburners/mergedAnalysis.md)
+* [Merged Analysis Toy Model for Momentum Resolution](Afterburners/mergedAnalysisToyModel.md)
 * [Systematic Uncertainties](Afterburners/systematics.md)
 * [Combination of Measurements](Afterburners/combination.md)
 * [Useful functions](Afterburners/functions.md)
