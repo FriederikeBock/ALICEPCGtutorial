@@ -386,6 +386,8 @@ CellCompareManualBadChannels    ManualLHC16p_addDeadCells.txt
 CellCompareMinAverageSigma  1.5
 ```
 
+If you are sure you wanna flag certain cells, which you identified as bad in *step 6* and which are not contained in the automatically generated output, please add a list of cells using the variable *CellCompareManualBadChannels* in the configuration file. The corresponding list should be given as text file in which the cells are separated by line feeds. Cells which are listed in that file will be marked as bad for the full range of runs given in the configuration regardless of the input provided from different sources, thus they will appear as green row in the plots. Please remember to repeat *step 6* for each run block you choose to group and only merge the runs of that block into the corresponding file and repeat the manual flagging. As otherwise you might end up accidentally flagging to many cells in certain run blocks.
+
 In addition to the output plots, which will be described below. This macro also outputs two additional log files for every data set. Depending on the value of *runRange* this log file will either contain a list of the bad cells within a range of runs specified by *runStart* and *runEnd* or a list of all the bad cells in a data set. In the case where runRange is set to 1 the log file will be named **BadCells\[Cleaned\]_$DataSetName______****$runStart__$runEnd.log** and in the case where runRange is set to 0 the log file will be named  **BadCells\[Cleaned\]_$DataSetName.log**. An example of the output for either of these log files is shown below. 
 
 ```
