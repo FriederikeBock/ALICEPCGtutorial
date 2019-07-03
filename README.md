@@ -44,6 +44,7 @@ or directly to the convenors and creators of the tutorial
 * Friederike Bock [friederike.bock@cern.ch](mailto:friederike.bock@cern.ch)
 * Nicolas Schmidt [nicolas.schmidt@cern.ch](mailto:nicolas.schmidt@cern.ch)
 * Mike Sas [msas@nikhef.nl](mailto:msas@nikhef.nl)
+* Florian Jonas [florian.jonas@cern.ch](mailto:florian.jonas@cern.ch)
 
 We are happy to help.
 
