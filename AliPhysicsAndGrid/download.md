@@ -8,7 +8,7 @@ Both approaches have their (dis-)advantages, you may decide what is more conveni
 
 ### Download ESD/AODs from the GRID (data / MC production)
 
-The download macro may be found here: [DL-macro](/AliPhysicsAndGrid/GridJobFileListDL.C) (right-click and save as). It can be called with:
+The download macro may be found here: [DL-macro](AliPhysicsAndGrid/GridJobFileListDL.C) (right-click and save as). It can be called with:
 
 > root -x -l -b -q 'GridJobFileListDL.C("list1.txt","pp/LHC12c/pass2","YOURPATH/LocalFiles")'
 
