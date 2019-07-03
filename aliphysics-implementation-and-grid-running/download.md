@@ -6,11 +6,11 @@ There are two \(different\) approaches to download files from the GRID. Using a 
 
 ### Download ESD/AODs from the GRID \(data / MC production\)
 
-The download macro may be found here: [DL-macro](https://github.com/FriederikeBock/ALICEPCGtutorial/tree/866d92aae49d349cc49f13b3ea6cd2877b473c25/AliPhysicsAndGrid/AliPhysicsAndGrid/GridJobFileListDL.C) \(right-click and save as\). It can be called with:
+The download macro may be found here: [DL-macro](../AliPhysicsAndGrid/GridJobFileListDL.C) \(right-click and save as\). It can be called with:
 
 > root -x -l -b -q 'GridJobFileListDL.C\("list1.txt","pp/LHC12c/pass2","YOURPATH/LocalFiles"\)'
 
-It automatically downloads the specified files, saves them in the folder structure needed for running local tests \(-&gt; [Running AnalysisTasks](https://app.gitbook.com/@friederikebock/s/pcgtutorial/~/edit/drafts/-Lir8vsnie9mOToUn9lx/aliphysics-implementation-and-grid-running/runningtasks)\) and unzips the compressed files.
+It automatically downloads the specified files, saves them in the folder structure needed for running local tests \(-&gt; [Running AnalysisTasks](../aliphysics-implementation-and-grid-running/runningtasks.md)\) and unzips the compressed files.
 
 The first argument is the list of files you want to download, an example content of list1.txt:
 
@@ -27,7 +27,7 @@ The first argument is the list of files you want to download, an example content
 /alice/data/2012/LHC12c/000182730/pass2/12000182730037.22/root_archive.zip
 ```
 
-The second argument specifies the relative path where data should be stored \( -&gt; need to be specified in _runLocal.C_ [Running AnalysisTasks](https://github.com/FriederikeBock/ALICEPCGtutorial/tree/866d92aae49d349cc49f13b3ea6cd2877b473c25/AliPhysicsAndGrid/AliPhysicsAndGrid/runningTasks.md)\) and the third argument gives the absolute path on your system.
+The second argument specifies the relative path where data should be stored \( -&gt; need to be specified in _runLocal.C_ [Running AnalysisTasks](../aliphysics-implementation-and-grid-running/runningTasks.md)\) and the third argument gives the absolute path on your system.
 
 There is a possibility to hand over a fourth argument to the function, if you want to download the files from a specific SE \(in case the download is slow due to some unresponsive SEs, for exaple '_ALICE::FZK::SE_'\).
 

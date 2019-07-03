@@ -1,6 +1,6 @@
 # Running AnalysisTasks
 
-You need to have some ALICE data on your disk if you want to run the _Offline_ testing. To download files from a data/MC production of ALICE from the GRID, see [Download Files from GRID](https://github.com/FriederikeBock/ALICEPCGtutorial/tree/866d92aae49d349cc49f13b3ea6cd2877b473c25/AliPhysicsAndGrid/AliPhysicsAndGrid/download.md).
+You need to have some ALICE data on your disk if you want to run the _Offline_ testing. To download files from a data/MC production of ALICE from the GRID, see [Download Files from GRID](../AliPhysicsAndGrid/download.md).
 
 ## Offline
 
@@ -11,11 +11,11 @@ Test with local software and local files
 * make sure that you set up the same tasks and make the same settings as you want to use on the train.
 * also, make sure that you have installed the versions of AliRoot and AliPhysics that you want to use on the train. 
 
-Run the macro [runLocal.C](https://github.com/FriederikeBock/ALICEPCGtutorial/tree/866d92aae49d349cc49f13b3ea6cd2877b473c25/AliPhysicsAndGrid/AliPhysicsAndGrid/runLocal.C) \(right-click and save as\) with
+Run the macro [runLocal.C](../AliPhysicsAndGrid/runLocal.C) \(right-click and save as\) with
 
 > root -x -l -b -q 'runLocal.C\("LHC12c", kFALSE, 0, 9\)'
 
-The additional macros needed are [CreateRootArchiveChain](https://github.com/FriederikeBock/ALICEPCGtutorial/tree/866d92aae49d349cc49f13b3ea6cd2877b473c25/AliPhysicsAndGrid/AliPhysicsAndGrid/CreateRootArchiveChain.C) and [CreateRootArchiveChainAOD](https://github.com/FriederikeBock/ALICEPCGtutorial/tree/866d92aae49d349cc49f13b3ea6cd2877b473c25/AliPhysicsAndGrid/AliPhysicsAndGrid/CreateRootArchiveChainAOD.C) \(right-click and save as both\).
+The additional macros needed are [CreateRootArchiveChain](../AliPhysicsAndGrid/CreateRootArchiveChain.C) and [CreateRootArchiveChainAOD](../AliPhysicsAndGrid/CreateRootArchiveChainAOD.C) \(right-click and save as both\).
 
 The first argument chooses the data set specified in the _runLocal_ macro. The second argument selects between '_offline_' / '_GRID testing_' and the two numbers specify which files should be processed \(in the example the files from folder '0' until folder '9'\).
 
