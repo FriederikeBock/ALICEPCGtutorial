@@ -1,4 +1,4 @@
-# Introduction
+# Welcome
 
 This tutorial is meant as an introduction to the software packages provided by the Photon Conversion Group \(PCG\). As it is still under development as is the software it does not claim completeness. However, it should provide a good start for new-comers and oldies to get started on a new topic. If you wanna help improving this documentation you are very welcome and just need to let us know and [e-mail Friederike](mailto:friederike.bock@cern.ch). She will grant you access to the documentation git as well.
 
