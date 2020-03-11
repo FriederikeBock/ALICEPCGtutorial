@@ -101,7 +101,7 @@ The figure below shows a typical ratio of data to fit with a good description fr
 
 Once all spectra fits that are defined in ,e.g. parametrizationSettings/pp\_5TeV\_standard.dat, are made, the fitting procedure goes towards ratio fits. These are defined in this case in parametrizationSettings/pp\_5TeV\_ratio\_standard.dat. This file is build similar to the non-ratio fit file and plotted figures can be found in the same folder as before. In case of the ratio fits it is important to make sure they cross \(0,0\) and that they flatten out towards high momentum.
 
-In order to check the systematic variations of the cocktail, which are obtained via shifitng of the datapoints based on the systematic uncertainties in either all points up or down, two linear variation as well as polinomial variations as well as variations of the mT scaling factors. These variations can be checked in the plot spectra\_NPionEMCal\_paramAllToCentral.eps where the variations should produce rather symmetrical patterns around unity.
+In order to check the systematic variations of the cocktail, which are obtained via shifting of the datapoints based on the systematic uncertainties in either all points up or down, two linear variation as well as polinomial variations as well as variations of the mT scaling factors. These variations can be checked in the plot spectra\_NPionEMCal\_paramAllToCentral.eps where the variations should produce rather symmetrical patterns around unity. The file parametrizationSettings/listAllUniqueNames_5TeV.txt is used to steer if these variations should be written to the output .root file, which they should not in case of the particles used for the hadronic cocktail.
 
 Once all spectra are parametrized, the macro will save sets of those parametrizations to the output file that will later on be fed into the cocktail. These sets can be setup for example via parametrizationSettings/pp\_5TeV\_EMCal\_cocktail\_settings.dat which is written the following way:
 
@@ -115,7 +115,7 @@ Once all spectra are parametrized, the macro will save sets of those parametriza
 
 Each line, again, represents one particle that should be included in the set. The line starts with the PDG code of the particle \(e.g. 111 for the neutral pion\). The next three entries represent the mT scaling factors for particles that were not parametrized in the previous step. Here, particle 443 is mT scaled with a factor of 0.054 from the neutral pion. The next entries are self explanatory, as we in this case want to use the neutral pion parametrization from the EMC method. For the eta meson, we want to use the eta/pi0 ratio from the combined measurement multiplied with the pi0 EMC parametrization. This provides a very nicely described eta parametrization that keeps the high pT ratio value between pi0 and eta.
 
-The resulting sets of parametrizations are plotted again in the folder parametrizations where also the .root file can be found. This root file is then used in the next step for the cocktail generation.
+The resulting sets of parametrizations are plotted again in the folder parametrizations where also the .root file can be found. This root file is then used in the next step for the cocktail generation. Note that also in the case where only a hadronic cocktail will be generated, the file has to contain a neutral pion parametrization (for technical reasons).  
 
 ## Cocktail generation \(locally and on the grid\)
 
@@ -125,7 +125,7 @@ Slight modifications need to be made where the parametrizations are loaded from 
 
 `gener = AddMCEMCocktailV2(200,0,decayMode,motherSelect,"../parametrizations/pp_5TeV.root","5TeV_PCMEMCal",nParticles,0.,50,10000,0,1,1,0);`
 
-The AliGenerator needs to be set to the right parametrization file, folder, number of particles and pT range \(here 0-50 GeV/c\). The GammaCocktail and HadronicCocktail tasks are already added and can be modified for different rapidity ranges if necessary.
+The AliGenerator needs to be set to the right parametrization file, folder, number of particles and pT range \(here 0-50 GeV/c\). The GammaCocktail and HadronicCocktail tasks are already added and can be modified for different rapidity ranges if necessary. Note that the centrality parameter (which is the 2nd) is meaningless.
 
 The cocktail is then simply run by the following line to generate 50 events:
 
