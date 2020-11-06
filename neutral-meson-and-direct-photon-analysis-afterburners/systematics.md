@@ -144,7 +144,7 @@ void CutStudiesOverview(......,
         * **3**: Uses the root TH1 function Smooth() to smooth the yields of the standard and all variations
         * **4**: Fitting the ratio of the variations with polynom
 
-Please carefully check the additionally created plot <meson>_<data/MC>_Monitor.<eps,pdf,png,..>.
+Please carefully check the additionally created plots "meson"_"data/MC"_Monitor."eps,pdf,png,..."
 
 I recommend to at least look at **doRebin=kTRUE** and **smoothing=2 + doRebin=kTRUE**. This can make your life way easier for the next Step _4. Smoothing_. Also applying **doRebin** will most likely reduce the contamination of statistical uncertainties in your evaluation of the systematic uncertainties.
 
