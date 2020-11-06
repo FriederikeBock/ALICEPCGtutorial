@@ -75,7 +75,7 @@ Remember to not put more than 4 or 5 cut variations in a single configuration, s
 
 ## 2. Running all the cuts
 
-After successfully running all the cut variations on the grid we need run the full meson analysis on all of them.z Please check the following things:
+After successfully running all the cut variations on the grid we need run the full meson analysis on all of them. Please check the following things:
 
 * All the fits converge
 * There is enough statistics available for all pt bins in both data and MC
