@@ -109,6 +109,48 @@ FinaliseSystematicErrorsConvCalo_pPb.C
 
 In this macro we decide which of the cut variations to smooth and which contribute to the total systematic uncertainty.
 
+**Watch out**: Using only one variation for a cut will result in an underestimate of the systematic uncertainties, because we calculate the mean of the highest positive and negative difference per bin which for one variation will divide your uncertainties by 2.
+
+### 3.1 Use the Settings of the _TaskV1/CutStudiesOverview.C_
+
+As an alternative to run _start_FullMesonAnalysis_TaskV3_ to start _CutStudiesOverview_ you can also run _TaskV1/CutStudiesOverview.C_ directly using the following:
+
+```text
+# # Alpha
+echo -e "80000113_00200009327000008250400000_2444451041013200000_0163103100000010\n80000113_00200009327000008250400000_2444451041013200000_0163105100000010\n80000113_00200009327000008250400000_2444451041013200000_0163106100000010" > CutSelectionAlpha.log
+    NameStudy="Alpha"
+    NCuts=`cat CutSelectionAlpha.log | wc -l`
+    root -l -q -b TaskV1/CutStudiesOverview.C+'("CutSelectionAlpha.log","eps","Pi0","kFALSE","","2_pPb_EMC","'$NameStudy'",'$NCuts',0,"","LHC13bc", 3, kFALSE, 0, kFALSE)'
+    root -l -q -b TaskV1/CutStudiesOverview.C+'("CutSelectionAlpha.log","eps","Pi0","kTRUE","","2_pPb_EMC","'$NameStudy'",'$NCuts',0,"","LHC13bc", 3, kFALSE, 0, kFALSE)'
+    root -l -q -b TaskV1/CutStudiesOverview.C+'("CutSelectionAlpha.log","eps","Eta","kFALSE","","2_pPb_EMC","'$NameStudy'",'$NCuts',0,"","LHC13bc", 3, kFALSE, 0, kFALSE)'
+    root -l -q -b TaskV1/CutStudiesOverview.C+'("CutSelectionAlpha.log","eps","Eta","kTRUE","","2_pPb_EMC","'$NameStudy'",'$NCuts',0,"","LHC13bc", 3, kFALSE, 0, kFALSE)'
+```
+
+this Method lets you use the Settings of the _TaskV1/CutStudiesOverview.C_ macro.
+```test
+void CutStudiesOverview(......,
+                        Bool_t doBarlow                         = kFALSE,
+                        Int_t smoothing                         = 0,
+                        Bool_t doRebin                          = kFALSE
+                       ){
+```
+* Bool_t **doBarlow**: enables a Barlow check (not default)
+* Bool_t **doRebin**: enables an automatic rebinning procedure that makes sure that all bins have a reasonable statistical accuracy, obviously this has its limits, and can be finetuned if needed using the variables maxError and maxrebins.
+* Int\_t **smoothing** (this can make the next step _4. Smoothing_ easier or even unnecessary):
+    * **0**: Off (default)
+    * **2**: Uses the root function TH1::Smooth() to smooth the ratio of the variations.
+    * **1, 3, 4**: there are additional _experimental_ options (not recommended)
+        * **1**: Uses two TCM fit to the yields and uses the ratio of those fits for the following uncertainty evaluation
+        * **3**: Uses the root TH1 function Smooth() to smooth the yields of the standard and all variations
+        * **4**: Fitting the ratio of the variations with polynom
+
+Please carefully check the additionally created plots "meson"_"data/MC"_Monitor."eps,pdf,png,..."
+
+I recommend to at least look at **doRebin=kTRUE** and **smoothing=2 + doRebin=kTRUE**. This can make your life way easier for the next Step _4. Smoothing_. Also applying **doRebin** will most likely reduce the contamination of statistical uncertainties in your evaluation of the systematic uncertainties.
+
+
+
+
 ## 4. Smoothing the deviations
 
 Most of the deviations we observe should have a certain trend as function of transverse momentum and should not fluctuate too much bin by bin. For example think of the opening angle cut between the two photons, for any reconstruction method. In this case it would make no sense if you see the following trend:
@@ -128,4 +170,3 @@ For generating the final result we use the following macro:
 ```text
 TaskV1/ProduceFinalResultsPatchedTriggers.C
 ```
-
