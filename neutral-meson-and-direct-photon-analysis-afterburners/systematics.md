@@ -136,7 +136,7 @@ void CutStudiesOverview(......,
 ```
 * Bool_t **doBarlow**: enables a Barlow check (not default)
 * Bool_t **doRebin**: enables an automatic rebinning procedure that makes sure that all bins have a reasonable statistical accuracy, obviously this has its limits, and can be finetuned if needed using the variables maxError and maxrebins.
-* Int_t **smoothing** 8this can make the next step _4. Smoothing_ easier or even unnecessary):
+* Int\_t **smoothing** (this can make the next step _4. Smoothing_ easier or even unnecessary):
     * **0**: Off (default)
     * **2**: Uses the root function TH1::Smooth() to smooth the ratio of the variations.
     * **1, 3, 4**: there are additional _experimental_ options (not recommended)
