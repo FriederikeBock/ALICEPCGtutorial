@@ -54,7 +54,7 @@ Besides the egroup and email contact, the _PCG_ uses mattermost (ALICE-PWGGA). T
 
 **Weekly meetings of the PCG**
 
-Weekly meetings of the PCG take place on vidyo [PCG @ Indico](https://indico.cern.ch/category/4027/). They are usually scheduled for Wednesday, 2am, and open to anybody with interest in the topic. Announcements are sent around via the main egroup
+Weekly meetings of the PCG take place on vidyo [PCG @ Indico](https://indico.cern.ch/category/4027/). They are usually scheduled for Wednesday, 2pm, and open to anybody with interest in the topic. Announcements are sent around via the main egroup
 
 * [alice-pcg@cern.ch](mailto:alice-pcg@cern.ch)
 

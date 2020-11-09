@@ -45,16 +45,17 @@ or directly to the convenors and creators of the tutorial
 * Nicolas Schmidt [nicolas.schmidt@cern.ch](mailto:nicolas.schmidt@cern.ch)
 * Mike Sas [msas@nikhef.nl](mailto:msas@nikhef.nl)
 * Florian Jonas [florian.jonas@cern.ch](mailto:florian.jonas@cern.ch)
+* Meike Danisch [meike.charlotte.danisch@cern.ch](mailto:meike.charlotte.danisch@cern.ch)
 
 We are happy to help.
 
 ## Communication Tools
 
-Besides the egroup and email contact, the _PCG_ uses a [Slack](https://slack.com) group [PCM @ Slack](https://alicepcmgroup.slack.com/). If you want to join the group, you need to have an invitation. Please write an e-mail to one of the creators of the tutorial for this purpose.
+Besides the egroup and email contact, the _PCG_ uses mattermost (ALICE-PWGGA). There are different channels to discuss specific analyses or other topics.
 
 **Weekly meetings of the PCG**
 
-Weekly meetings of the PCG take place on vidyo [PCG @ Indico](https://indico.cern.ch/category/4027/). They are usually scheduled for Thursday, 10am, and open to anybody with interest in the topic. Announcements are sent around via the main egroup
+Weekly meetings of the PCG take place on vidyo [PCG @ Indico](https://indico.cern.ch/category/4027/). They are usually scheduled for Wednesday, 2pm, and open to anybody with interest in the topic. Announcements are sent around via the main egroup
 
 * [alice-pcg@cern.ch](mailto:alice-pcg@cern.ch)
 
