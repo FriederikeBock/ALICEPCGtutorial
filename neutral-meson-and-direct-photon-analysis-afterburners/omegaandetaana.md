@@ -1,4 +1,61 @@
-# Omega and Eta Analysis
+# PiPlPiMiNDM Decay Analysis
+
+Particles like the $$\omega$$, $$\eta$$, $$\eta'$$ and $$D_0$$ decay in a similar way into two oppositly charged pions and a neutral decay meson, that can either be a neutral pion, or in the case of the $$\eta'$$ a $$\eta$$ meson.
+
+These analyses share a common analysis task: **AliAnalysisTaskNeutralMesonToPiPlPiMiPiNeutralMeson.cxx** and can use the same script of the afterburner with different settings for the different mesons and involved NDM.
+
+For the 7 and 13 TeV analysis of the $$\omega$$ meson, this was done using a post-processing chain explained in chapter omegaandetaana.md. Since then, a second version (V2) was created, which is explained in this section:
+
+The entire post-processing from the signal extraction up to the production of the final results is managed be the **start\_FullPiPlPiMiNDMAnalysis.sh** macro. Different parameters can be used to trigger different parts of the analysis chain:
+- **-e** triggers the **e**xtraction of the raw yield in data in *ExtactSignalPiPlPiMiPiZeroV2.C*
+- **-f** triggers the **f**ull analysis, which includes the signal extraction in both data and MC using *ExtactSignalPiPlPiMiNDMV2.C*, as well as the correction of the yield using *CorrectSignalPiPlPiMiNDMV2.C*
+- **-p** triggers the **p**lotting of all monitoring plots using *PiPlPiMiNDMMonitoring.C*
+- **-c** triggers a **c**utstudy, comparing the extracted histograms for the different cutsettings
+- **-s** triggers the calculation of the **s**ystematic uncertainties, however, this script will have to be very much personalized for each analysis
+- **-b** triggers the combination of the spectra from the different NDM reconstruction methods using the **b**lue method
+- **-r** triggers the calculation and plotting of the final **r**esults
+- **-d** activated the **d**ebug mode, in which only one cutstring will be run for code debugging
+- **-0** switches on the analysis of the $$\pi^{0}$$
+- **-h** or simply no argument at all will display a short explaination and a list of the possible arguments
+
+Analysis settings and data paths are specified in CutSelection.csv, included as a template in your Afterburner package. Every row of this table corresponds to one analysis/variation, for which the signal extraction and correction is performed. The systematics and combination are then done based on the entire table. 
+
+The first column states, whether a given row should be analyzed or simply ignored. To have the analysis run over a given row simply put an x or similar as the first entry. The second column is used to cluster different cuts into groups of systematic uncertainties, but this is only needed in for the calculation of the systematic uncertainties, so we will ignore this column for now. The next fields are pretty self explainatory: The analysed energy, meson, data and MC period, as well as the paths to the LEGO train output. Then you have to give the Trainconfig and enter a cutnumber included in the file. The next field asks for a ExtractionCutnumber, which is a five digit number, that similar to the established cutstring sets different parameters for the signal extraction. For details on this, please have a look at the **PiPlPiMiNDM.h** file, in which the different possible parameters are then set, based on the ExtractionCutnumber. The default setting is 00000. The next field asks for the PhotonMode, which you can take from the following table:
+| mode | reconstruction technique |
+| :--- | :--- |
+| 60 | PCM-PCM |
+| 61 | PCM-EMCal |
+| 62 | PCM-PHOS |
+| 63 | PCM-DCal |
+| 64 | EMCal-EMCal |
+| 65 | PHOS-PHOS |
+| 66 | DCal-DCal |
+| 67 | PCM-Dalitz |
+| 68 | EMcal-Dalitz |
+| 69 | PHOS-Dalitz |
+| 70 | DCal-Dalitz |
+
+Finally you can enter a description used for some plotting and comparison purposed (cutstudies), and the **p_T** range, in which the signal is to be extracted. The binning has to be set per energy and meson in **ExtractSignalBinning.h**.
+
+After configuring the analysis parameters and data paths in the CutSelection.csv for you analysis, all you have to do to get your corrected cross-sections and everything else is:
+
+```text
+  start_FullPiPlPiMiPiZeroAnalysis.sh -fp
+```
+
+The following files are part of the NDM post-processing chain:
+- ExtractSignalPiPlPiMiNMDV2.C: Transforms the train output into raw meson yields - applied to both data and MC
+- CorrectSignalPiPlPiMiNMDV2.C: Combines the raw data and MC yields to create a corrected yield and cross-section
+- PiPlPiMiNDM.h: General heavy meson header file including the mass ranges to be set for each meson and energy
+- PiPlPiMiNDMMonitoring.C: Plotting of the signal extraction and correction (inv. mass bins, efficiency, S/B, ...)
+- CutStudiesPiPlPiMiPiZero.C: Compares the output from the signal extraction and correction script for all cutstrings in the CutSelection.csv file
+- SystematicsPiPlPiMiPiZero.C: Calculates the systematic uncertainty for the 5TeV pp and pPb omega analysis - here, every analysis will need its own file
+- CombineSignalPiPlPiMiPiZero.C: Combines the corrected yields/cross sections from different photon reconstruction methods using the BLUE method
+- ProduceFinalResultsPiPlPiMiNDM.C: Plots the cross-sections, RpA and NDM/pi0 ratio
+
+---
+
+# Previous heavy meson analysis workflow:
 
 Because the $$\omega$$ and the $$\eta$$ can both decay into $$\pi^+\pi^-\pi^0$$, the analysis in this decay channel is organized in a single analysis task: **AliAnalysisTaskNeutralMesonToPiPlPiMiPiZero.cxx**.
 

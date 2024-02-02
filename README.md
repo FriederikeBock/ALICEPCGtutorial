@@ -46,6 +46,7 @@ or directly to the convenors and creators of the tutorial
 * Mike Sas [msas@nikhef.nl](mailto:msas@nikhef.nl)
 * Florian Jonas [florian.jonas@cern.ch](mailto:florian.jonas@cern.ch)
 * Meike Danisch [meike.charlotte.danisch@cern.ch](mailto:meike.charlotte.danisch@cern.ch)
+* Nicolas Strangmann [nicolas.strangmann@cern.ch](mailto:nicolas.strangmann@cern.ch)
 
 We are happy to help.
 
