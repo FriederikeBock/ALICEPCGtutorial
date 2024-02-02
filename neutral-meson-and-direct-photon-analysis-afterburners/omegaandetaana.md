@@ -1,10 +1,8 @@
-# PiPlPiMiNDM Decay Analysis
-
-Particles like the $$\omega$$, $$\eta$$, $$\eta'$$ and $$D_0$$ decay in a similar way into two oppositly charged pions and a neutral decay meson, that can either be a neutral pion, or in the case of the $$\eta'$$ a $$\eta$$ meson.
+Particles like the $$\omega$$, $$\eta$$, $$\eta'$$ and $$D_0$$ decay in a similar way into two oppositly charged pions and a neutral decay meson, that can either be a neutral pion, or in the case of the $$\eta'$$ an $$\eta$$ meson.
 
 These analyses share a common analysis task: **AliAnalysisTaskNeutralMesonToPiPlPiMiPiNeutralMeson.cxx** and can use the same script of the afterburner with different settings for the different mesons and involved NDM.
 
-For the 7 and 13 TeV analysis of the $$\omega$$ meson, this was done using a post-processing chain explained in chapter omegaandetaana.md. Since then, a second version (V2) was created, which is explained in this section:
+For the 7 and 13 TeV analysis of the $$\omega$$ meson, this was done using a post-processing chain explained on the bottom of this page. Since then, a second version (V2) was created, which is explained in this section:
 
 The entire post-processing from the signal extraction up to the production of the final results is managed be the **start\_FullPiPlPiMiNDMAnalysis.sh** macro. Different parameters can be used to trigger different parts of the analysis chain:
 - **-e** triggers the **e**xtraction of the raw yield in data in *ExtactSignalPiPlPiMiPiZeroV2.C*
@@ -35,7 +33,7 @@ The first column states, whether a given row should be analyzed or simply ignore
 | 69 | PHOS-Dalitz |
 | 70 | DCal-Dalitz |
 
-Finally you can enter a description used for some plotting and comparison purposed (cutstudies), and the **p_T** range, in which the signal is to be extracted. The binning has to be set per energy and meson in **ExtractSignalBinning.h**.
+Finally you can enter a description used for some plotting and comparison purposed (cutstudies), and the $$p_{T}$$ range, in which the signal is to be extracted. The binning has to be set per energy and meson in **ExtractSignalBinning.h**.
 
 After configuring the analysis parameters and data paths in the CutSelection.csv for you analysis, all you have to do to get your corrected cross-sections and everything else is:
 
@@ -51,7 +49,7 @@ The following files are part of the NDM post-processing chain:
 - CutStudiesPiPlPiMiPiZero.C: Compares the output from the signal extraction and correction script for all cutstrings in the CutSelection.csv file
 - SystematicsPiPlPiMiPiZero.C: Calculates the systematic uncertainty for the 5TeV pp and pPb omega analysis - here, every analysis will need its own file
 - CombineSignalPiPlPiMiPiZero.C: Combines the corrected yields/cross sections from different photon reconstruction methods using the BLUE method
-- ProduceFinalResultsPiPlPiMiNDM.C: Plots the cross-sections, RpA and NDM/pi0 ratio
+- ProduceFinalResultsPiPlPiMiNDM.C: Plots the cross-sections, $$R_{pA}$$ and NDM/$$\pi^{0}$$ ratio
 
 ---
 

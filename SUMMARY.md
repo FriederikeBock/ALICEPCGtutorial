@@ -39,7 +39,7 @@
 ## Neutral Meson and Direct Photon Analysis - Afterburners
 
 * [Neutral Pion and Eta Analysis](neutral-meson-and-direct-photon-analysis-afterburners/neutralpionandetaana.md)
-* [Omega and Eta Analysis](neutral-meson-and-direct-photon-analysis-afterburners/omegaandetaana.md)
+* [Heavy Meson Analysis](neutral-meson-and-direct-photon-analysis-afterburners/omegaandetaana.md)
 * [Merged Cluster Analysis](neutral-meson-and-direct-photon-analysis-afterburners/mergedanalysis.md)
 * [Merged Analysis Toy Model for Momentum Resolution](neutral-meson-and-direct-photon-analysis-afterburners/mergedanalysistoymodel.md)
 * [Systematic Uncertainties](neutral-meson-and-direct-photon-analysis-afterburners/systematics.md)
